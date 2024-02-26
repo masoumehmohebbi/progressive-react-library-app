@@ -1,3 +1,28 @@
+@import url("/fonts.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .textField__input {
+    @apply w-full py-3 px-4 rounded-xl text-green-900 border border-green-100 bg-green-100 hover:border-green-500 focus:border-green-500 focus:bg-green-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-green-200 dark:focus:shadow-green-200;
+  }
+  .btn {
+    @apply px-3 py-1 rounded-xl transition-all duration-300;
+  }
+  .btn--primary {
+    @apply px-4 bg-green-900 text-white hover:bg-green-800 shadow-lg shadow-green-300 dark:shadow-green-200;
+  }
+}
+
+html,
+button,
+body {
+  /* padding: 0;
+  margin: 0; */
+  font-family: "Dana !important";
+  /* min-height: 100vh;
+  user-select: none;
+  background-color: rgb(var(--background-app-rgb)); */
+}
