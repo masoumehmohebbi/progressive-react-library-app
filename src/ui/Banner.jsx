@@ -9,9 +9,15 @@ const Banner = () => {
             را داشته باشید
           </h1>
           <p className="text-xs md:text-lg font-medium text-gray-400 mb-6 md:mb-2">
-            خیلی راحت می تونید لیست کتاب های کتابخانه تون رو پیدا کنید. <br />
-            laborum ut quia sunt similique nisi velit, dolorum possimus!
-            <br /> Deserunt illum adipisci.
+            با رابوک خیلی راحت می تونید مشخصات کتاب های خودتون <br /> رو ذخیره
+            کنید و در صورت لزوم کتاب های خودتون رو پیدا کنید
+            <br />
+            اینجوری یادتون نمی ره که چه کتاب هایی دارید
+            <br />
+            کدوما رو خوندید
+            <br />و کدومارو قراره که بخونید
+            <br />
+            برای شروع وارد شوید
           </p>
         </div>
       </div>
