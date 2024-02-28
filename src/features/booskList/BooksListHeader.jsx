@@ -28,7 +28,7 @@ const BooksListHeader = () => {
         </div>
       </header>
       <div className="grid grid-cols-10 grid-rows-2 sm:grid-rows-1 items-center gap-6 my-6">
-        <div className="w-full order-1 col-span-10 row-span-1 sm:col-span-6">
+        <div className="w-full order-1 sm:order-none col-span-10 row-span-1 sm:col-span-6">
           <TextField />
         </div>
         <Select
