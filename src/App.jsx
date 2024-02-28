@@ -1,11 +1,11 @@
-import Home from "./pages/Home";
+import BooksList from "./pages/BooksList";
 import AppLayout from "./ui/AppLayout";
 import { Routes, Route } from "react-router-dom";
 const App = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<BooksList />} />
       </Route>
     </Routes>
   );
