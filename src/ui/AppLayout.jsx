@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 const AppLayout = () => {
   return (
-    <div className="font-sans bg-slate-100 ">
+    <div>
       <NavBar />
       <div className="md:max-w-screen-lg mx-auto">
         <Banner />
