@@ -133,3 +133,31 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
+
+.badge {
+  white-space: nowrap;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  position: absolute;
+  top: 0;
+  right: -6px;
+  background-color: red;
+  color: #fff;
+}
+
+/* .heart .badge {
+  font-size: 0.9rem;
+  position: absolute;
+  top: 0;
+  right: -6px;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 8px;
+} */

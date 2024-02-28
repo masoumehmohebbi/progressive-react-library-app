@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { IoLibraryOutline } from "react-icons/io5";
 import { BiMenu, BiX } from "react-icons/bi";
-import { HiMiniBookOpen, HiOutlineHeart } from "react-icons/hi2";
+import { HiOutlineHeart } from "react-icons/hi2";
+import { CiLogout } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   let Links = [
@@ -27,12 +29,12 @@ const NavBar = () => {
         </div>
         {Links.map((link) => (
           <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-            <a
-              href={link.link}
+            <Link
+              to={link.link}
               className="text-gray-800 hover:text-gray-400 duration-500"
             >
               {link.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -53,12 +55,13 @@ const NavBar = () => {
 
       {/* Buttons */}
       <div className="flex items-center gap-x-3 ">
-        <button>
+        <button className="relative">
           <HiOutlineHeart className="w-9 h-9 text-red-500" />
+          <span className="badge">0</span>
         </button>
         <button className="font-sans btn btn--primary flex items-center gap-x-1">
+          <CiLogout />
           ورود
-          <HiMiniBookOpen />
         </button>
       </div>
     </nav>
