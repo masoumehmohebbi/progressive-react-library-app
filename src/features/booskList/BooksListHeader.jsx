@@ -2,6 +2,7 @@ import { useState } from "react";
 import Select from "../../ui/Select";
 import TextField from "../../ui/TextField";
 import { HiMiniBookOpen } from "react-icons/hi2";
+import Modal from "../../ui/Modal";
 
 const options = [
   { value: "همه", label: "همه" },
@@ -10,6 +11,7 @@ const options = [
 ];
 const BooksListHeader = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onChange = () => {
     setSelectedOption;
@@ -21,7 +23,10 @@ const BooksListHeader = () => {
         <h1 className="title">کتاب های شما</h1>
 
         <div className="flex justify-end col-span-3 sm:col-span-1 order-2 sm:order-4">
-          <button className="font-sans btn btn--primary flex items-center gap-x-1">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="font-sans btn btn--primary flex items-center gap-x-1"
+          >
             افزودن
             <HiMiniBookOpen />
           </button>
@@ -44,6 +49,10 @@ const BooksListHeader = () => {
           onChange={onChange}
         />
       </div>
+
+      <Modal title="hi" open={isOpen} onClose={() => setIsOpen(false)}>
+        jj
+      </Modal>
     </>
   );
 };
