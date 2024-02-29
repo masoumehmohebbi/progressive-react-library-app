@@ -101,8 +101,7 @@ body {
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
   background-color: #f1f5f9;
-
-  padding-right: 2px;
+  /* padding-right: 2px; */
 }
 
 * {
