@@ -103,10 +103,10 @@ body {
   background-color: #f1f5f9;
 
   /* ----------------------------- style scrollbar ---------------------------- */
-  overflow-y: scroll;
+  /* overflow-y: scroll;
   scrollbar-color: rgb(var(--color-primary-400)) rgb(var(--color-primary-100));
   scrollbar-width: thin;
-  padding-right: 11px;
+  padding-right: 11px; */
 }
 
 * {
