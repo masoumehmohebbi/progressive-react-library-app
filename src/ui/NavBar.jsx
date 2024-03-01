@@ -5,6 +5,7 @@ import { HiOutlineHeart } from "react-icons/hi2";
 import { CiLogout } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 const Links = [
   { name: "خانه", link: "/" },
@@ -15,6 +16,7 @@ const Links = [
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <nav
@@ -27,8 +29,8 @@ const NavBar = () => {
           }`}
         >
           <div className="md:flex hidden items-center gap-x-1 ml-5">
-            <IoLibraryOutline className="w-9 h-9 text-slate-800" />
-            <span className="font-bold text-slate-800">رابوک</span>
+            <IoLibraryOutline className="w-9 h-9 text-secondary-700" />
+            <span className="font-bold text-secondary-700">رابوک</span>
           </div>
           {Links.map((link) => (
             <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
@@ -53,7 +55,7 @@ const NavBar = () => {
             <BiX className="w-9 h-9 text-secondary-0" />
           )}
 
-          <IoLibraryOutline className="w-9 h-9 text-slate-800 md:hidden" />
+          <IoLibraryOutline className="w-8 h-8 m:w-9 sm:h-9 text-secondary-700 md:hidden" />
         </div>
 
         {/* Buttons */}
@@ -62,7 +64,10 @@ const NavBar = () => {
             <HiOutlineHeart className="w-9 h-9 text-red-500" />
             <span className="badge">0</span>
           </button>
-          <button className="font-sans btn btn--primary flex items-center gap-x-1">
+          <button
+            onClick={() => navigate("auth")}
+            className="font-sans btn btn--primary flex items-center gap-x-1"
+          >
             <CiLogout />
             ورود
           </button>
