@@ -26,7 +26,7 @@ const data = [
 ];
 function Stats() {
   return (
-    <div className="my-16 px-5 lg:px-0 sm:my-28 grid grid-cols-12 justify-between gap-4 md:gap-8">
+    <div className="my-16 px-5 lg:px-0 sm:my-28 flex w-full flex-wrap md:grid grid-cols-12 justify-between gap-4 md:gap-8">
       {data &&
         data.map((item) => (
           <Stat

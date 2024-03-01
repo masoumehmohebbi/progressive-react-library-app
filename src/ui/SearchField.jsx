@@ -5,7 +5,7 @@ const SearchField = () => {
         type="search"
         id="default-search"
         // className="block placeholder:text-xl w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-slate-200 focus:ring-blue-500 focus:border-blue-500"
-        className="textField__input ps-10"
+        className="textField__input ps-10 bg-secondary-300 py-2"
         placeholder="جستجو کتاب"
         required
       />

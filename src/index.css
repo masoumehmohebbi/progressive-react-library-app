@@ -88,7 +88,7 @@
     @apply bg-red-500 text-white;
   }
   .title {
-    @apply text-4xl font-extrabold text-slate-800;
+    @apply text-[21px] md:text-4xl font-extrabold text-slate-800;
   }
 }
 
