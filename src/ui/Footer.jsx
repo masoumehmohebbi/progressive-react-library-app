@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-secondary-300 rounded-t-md p-5 mt-28 text-secondary-800">
-      <div className="grid grid-cols-1 gap-y-8 sm:gap-y-0 sm:grid-cols-3 md:grid-cols-4 items-start">
+      <div className="grid grid-cols-1 gap-y-8 sm:gap-y-0 sm:grid-cols-4 items-start">
         <div className="flex items-center gap-x-1 ml-5">
           <IoLibraryOutline className="w-9 h-9 text-secondary-800" />
           <span className="font-bold">رابوک</span>
@@ -27,30 +27,30 @@ const Footer = () => {
           </li>
         </ul>
 
-        <ul className="flex gap-x-5 bg-blue-200 justify-end">
+        <ul className="flex gap-x-5 sm:justify-end">
           <li>
             <a
-              href="https://www.instagram.com/masoume.frontend.js?utm_source=qr&igsh=MTNxdzBpN2k4OHhwMw=="
-              className="rounded-full bg-primary-700 duration-300 hover:bg-secondary-200 h-10 w-10 flex justify-center items-center border-none"
+              href="#"
+              className="rounded-full bg-secondary-400 duration-300 hover:bg-primary-500 h-10 w-10 flex justify-center items-center border-none"
             >
-              <BiLogoInstagram className="text-2xl" />
+              <BiLogoInstagram className="text-2xl text-secondary-800" />
             </a>
           </li>
           <li>
             <a
               href="#"
-              className="rounded-full bg-primary-700 duration-300 hover:bg-secondary-200 h-10 w-10 flex justify-center items-center border-none"
+              className="rounded-full bg-secondary-400 duration-300 hover:bg-primary-500 h-10 w-10 flex justify-center items-center border-none"
             >
-              <BiLogoTwitter className="text-2xl" />
+              <BiLogoTwitter className="text-2xl text-secondary-800" />
             </a>
           </li>
 
           <li>
             <a
               href="#"
-              className="rounded-full bg-primary-700 duration-300 hover:bg-secondary-200 h-10 w-10 flex justify-center items-center border-none"
+              className="rounded-full bg-secondary-400 duration-300 hover:bg-primary-500 h-10 w-10 flex justify-center items-center border-none"
             >
-              <BiLogoTelegram className="text-2xl" />
+              <BiLogoTelegram className="text-2xl text-secondary-800" />
             </a>
           </li>
         </ul>

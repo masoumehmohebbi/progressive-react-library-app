@@ -66,7 +66,7 @@ const NavBar = () => {
           </button>
           <button
             onClick={() => navigate("auth")}
-            className="font-sans btn btn--primary flex items-center gap-x-1"
+            className="font-sans btn text-sm sm:text-base btn--primary flex items-center gap-x-1"
           >
             <CiLogout />
             ورود
