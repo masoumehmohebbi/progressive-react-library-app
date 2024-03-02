@@ -11,7 +11,7 @@ function SendOTPForm() {
       <form className="flex flex-col gap-y-6">
         <TextField name="title" label="نام" type="text" />
         <TextField name="title" label="نام خانوادگی" type="text" />
-        <TextField name="title" label="یوزرنیم" type="text" />
+        <TextField name="title" label="نام کاربری" type="text" />
         <TextField name="title" label="ایمیل" type="text" />
         <TextField name="number" label="کلمه عبور" type="text" />
 

@@ -59,5 +59,6 @@ export default {
     tailwindFormPlugin({
       strategy: "class",
     }),
+    require("@headlessui/tailwindcss")({ prefix: "ui" }),
   ],
 };

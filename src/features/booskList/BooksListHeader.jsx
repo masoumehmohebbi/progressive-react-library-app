@@ -6,6 +6,7 @@ import SearchField from "../../ui/SearchField";
 import TextField from "../../ui/TextField";
 import SelectField from "../../ui/SelectField";
 import Filter from "../../ui/Filter";
+import RadioInput from "../../ui/RadioInput";
 
 const options = [
   { value: "همه", label: "دسته بندی(همه)" },
@@ -83,9 +84,17 @@ const BooksListHeader = () => {
           <TextField name="title" label="عنوان" type="text" />
           <TextField name="author" label="نویسنده" type="text" />
           <SelectField label="دسته بندی" options={categoryOptions} />
-          <SelectField label="قبلا خوانده ای؟" options={readStatusOptions} />
-
           <TextField name="cover" label="عکس" type="file" />
+
+          <div className="flex gap-x-2 m-4 items-center justify-center">
+            <RadioInput
+              label="این کتاب رو خوندم"
+              value="آره"
+              name="READ"
+              id="READ"
+            />
+            <RadioInput label="هنوز نخوندمش" value="نه" name="READ" id="READ" />
+          </div>
 
           <button className="btn btn--primary w-full">ثبت</button>
         </form>
