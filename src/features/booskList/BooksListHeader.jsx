@@ -80,7 +80,7 @@ const BooksListHeader = () => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <form>
+        <form className="space-y-4">
           <TextField name="title" label="عنوان" type="text" />
           <TextField name="author" label="نویسنده" type="text" />
           <SelectField label="دسته بندی" options={categoryOptions} />

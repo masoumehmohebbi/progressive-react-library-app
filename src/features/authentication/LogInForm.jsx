@@ -32,7 +32,7 @@ export const LogInForm = () => {
       <div className="w-full flex gap-x-1 items-center justify-center">
         <span className="text-secondary-600">حساب کاربری ندارید؟</span>
         <button className="text-primary-900 underline underline-offset-[6px]">
-          <Link to="/auth">برای رابوک ثبت نام کنید</Link>
+          <Link to="/auth">در رابوک ثبت نام کنید</Link>
         </button>
       </div>
     </div>
