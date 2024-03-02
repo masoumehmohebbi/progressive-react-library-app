@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import TextField from "../../ui/TextField";
+import GoogleField from "../../ui/GoogleField";
 
 function SendOTPForm() {
   return (
@@ -7,6 +8,8 @@ function SendOTPForm() {
       <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         برای ثبت کتاب های خود ثبت نام کنید
       </h1>
+
+      <GoogleField label="ثبت نام با گوگل" />
 
       <form className="flex flex-col gap-y-6">
         <TextField name="title" label="نام" type="text" />

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import TextField from "../../ui/TextField";
 import SwitchRemmemerMe from "../../ui/SwitchRemmemberMe";
+import GoogleField from "../../ui/GoogleField";
 
 export const LogInForm = () => {
   return (
@@ -8,6 +9,7 @@ export const LogInForm = () => {
       <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         به رابوک خوش آمدید. وارد شوید
       </h1>
+      <GoogleField label="ورود با گوگل" />
       <form className="flex flex-col gap-y-6">
         <TextField
           name="title"
