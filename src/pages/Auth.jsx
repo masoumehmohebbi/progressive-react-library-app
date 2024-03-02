@@ -2,9 +2,9 @@ import AuthContainer from "../features/authentication/AuthContainer";
 
 const Auth = () => {
   return (
-    <div className="h-screen bg-secondary-0">
-      <div className="container xl:max-w-screen-xl">
-        <div className="flex justify-center pt-10">
+    <div className="sm:py-5">
+      <div>
+        <div className="flex justify-center">
           <AuthContainer />
         </div>
       </div>

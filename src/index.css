@@ -97,7 +97,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Dana";
-  min-height: 100vh;
+  /* min-height: 100vh; */
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
   background-color: #f1f5f9;
