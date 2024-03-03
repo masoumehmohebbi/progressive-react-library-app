@@ -73,24 +73,17 @@
     @apply border border-rose-700 text-rose-700;
   }
   .badge {
-    @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
+    @apply whitespace-nowrap text-secondary-0 text-sm bg-red-500 rounded-2xl font-semibold absolute top-0 right-[-6px] px-2 py-0.5;
   }
-  .badge--primary {
-    @apply bg-primary-900 text-white;
-  }
-  .badge--secondary {
-    @apply bg-secondary-200 text-secondary-600;
-  }
-  .badge--success {
-    @apply bg-green-500 text-white;
-  }
-  .badge--danger {
-    @apply bg-red-500 text-white;
-  }
+
   .title {
     @apply text-[21px] md:text-4xl font-extrabold text-slate-800;
   }
 }
+
+/* .badge {
+  padding: 0.1rem 0.5rem;
+} */
 
 html,
 body {
@@ -133,20 +126,6 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
-}
-
-.badge {
-  white-space: nowrap;
-  padding: 0.1rem 0.5rem;
-  border-radius: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-
-  position: absolute;
-  top: 0;
-  right: -6px;
-  background-color: red;
-  color: #fff;
 }
 
 /* .heart .badge {

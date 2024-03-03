@@ -61,10 +61,8 @@ const NavBar = () => {
         {/* Buttons */}
         <div className="flex items-center gap-x-3 ">
           <button className="relative" onClick={() => setIsModalOpen(true)}>
-            <HiOutlineHeart className="w-[34px] h-[34px] sm:w-9 sm:h-9 text-red-500" />
-            <span className="badge absolute top-0 right-[-6px] badge--danger">
-              0
-            </span>
+            <HiOutlineHeart className="w-[35px] h-[35px] sm:w-9 sm:h-9 text-red-500" />
+            <span className="badge">0</span>
           </button>
           <button
             onClick={() => navigate("auth")}
