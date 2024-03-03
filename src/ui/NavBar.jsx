@@ -50,9 +50,9 @@ const NavBar = () => {
           className="text-3xl  right-2 flex items-center gap-x-3  cursor-pointer md:hidden"
         >
           {!open ? (
-            <BiMenu className="w-9 h-9 text-secondary-0" />
+            <BiMenu className="w-9 h-9 text-secondary-700" />
           ) : (
-            <BiX className="w-9 h-9 text-secondary-0" />
+            <BiX className="w-9 h-9 text-secondary-700" />
           )}
 
           <IoLibraryOutline className="w-8 h-8 m:w-9 sm:h-9 text-secondary-700 md:hidden" />
