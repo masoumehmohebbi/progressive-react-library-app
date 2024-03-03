@@ -73,7 +73,7 @@
     @apply border border-rose-700 text-rose-700;
   }
   .badge {
-    @apply whitespace-nowrap text-secondary-0 text-sm bg-red-500 rounded-2xl font-semibold absolute top-0 right-[-6px] px-2 py-0.5;
+    @apply whitespace-nowrap text-secondary-0 text-xs sm:text-sm bg-red-500 rounded-2xl font-semibold absolute top-0 right-[-6px] py-[2.7px] px-[7.5px] sm:px-2 sm:py-0.5;
   }
 
   .title {

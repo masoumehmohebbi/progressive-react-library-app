@@ -61,12 +61,12 @@ const NavBar = () => {
         {/* Buttons */}
         <div className="flex items-center gap-x-3 ">
           <button className="relative" onClick={() => setIsModalOpen(true)}>
-            <HiOutlineHeart className="w-[35px] h-[35px] sm:w-9 sm:h-9 text-red-500" />
+            <HiOutlineHeart className="w-9 h-9 text-red-500" />
             <span className="badge">0</span>
           </button>
           <button
             onClick={() => navigate("auth")}
-            className="font-sans btn text-sm sm:text-base btn--primary flex items-center gap-x-1"
+            className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
           >
             <CiLogout />
             ورود
