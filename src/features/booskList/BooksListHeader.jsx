@@ -1,43 +1,43 @@
-import { useState } from "react";
-import Select from "../../ui/Select";
-import { HiMiniBookOpen } from "react-icons/hi2";
-import Modal from "../../ui/Modal";
-import SearchField from "../../ui/SearchField";
-import TextField from "../../ui/TextField";
-import SelectField from "../../ui/SelectField";
-import Filter from "../../ui/Filter";
-import RadioInput from "../../ui/RadioInput";
+import { useState } from 'react';
+import Select from '../../ui/Select';
+import { HiMiniBookOpen } from 'react-icons/hi2';
+import Modal from '../../ui/Modal';
+import SearchField from '../../ui/SearchField';
+import TextField from '../../ui/TextField';
+import SelectField from '../../ui/SelectField';
+import Filter from '../../ui/Filter';
+import RadioInput from '../../ui/RadioInput';
 
 const options = [
-  { value: "همه", label: "دسته بندی(همه)" },
-  { value: "خوانده شده", label: "خوانده شده" },
-  { value: "خوانده نشده", label: "خوانده نشده" },
+  { value: 'همه', label: 'دسته بندی(همه)' },
+  { value: 'خوانده شده', label: 'خوانده شده' },
+  { value: 'خوانده نشده', label: 'خوانده نشده' },
 ];
 const categoryOptions = [
-  { value: "رمان", label: "رمان" },
-  { value: "شعر", label: "شعر" },
-  { value: "روانشناسی", label: "روانشناسی" },
-  { value: "انگیزشی", label: "انگیزشی" },
-  { value: "دیگر", label: "دیگر" },
+  { value: 'رمان', label: 'رمان' },
+  { value: 'شعر', label: 'شعر' },
+  { value: 'روانشناسی', label: 'روانشناسی' },
+  { value: 'انگیزشی', label: 'انگیزشی' },
+  { value: 'دیگر', label: 'دیگر' },
 ];
 
 const readStatusOptions = [
-  { value: "true", label: "آره" },
-  { value: "false", label: "نه" },
+  { value: 'true', label: 'آره' },
+  { value: 'false', label: 'نه' },
 ];
 
 const statusOptions = [
   {
-    label: "همه",
-    value: "ALL",
+    label: 'همه',
+    value: 'ALL',
   },
   {
-    label: "خوانده‌ها",
-    value: "OPEN",
+    label: 'خوانده‌ها',
+    value: 'OPEN',
   },
   {
-    label: "نخوانده‌ها",
-    value: "CLOSED",
+    label: 'نخوانده‌ها',
+    value: 'CLOSED',
   },
 ];
 const BooksListHeader = () => {
@@ -69,17 +69,14 @@ const BooksListHeader = () => {
         </div>
         <Filter filterField="status" options={statusOptions} />
         <Select
+          value="category"
           options={categoryOptions}
           value={selectedOption}
           onChange={onChange}
         />
       </div>
 
-      <Modal
-        title="کتاب خود را ثبت کنید"
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+      <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
         <form className="space-y-4">
           <TextField name="title" label="عنوان" type="text" />
           <TextField name="author" label="نویسنده" type="text" />
@@ -87,12 +84,7 @@ const BooksListHeader = () => {
           <TextField name="cover" label="عکس" type="file" />
 
           <div className="flex gap-x-2 m-4 items-center justify-center">
-            <RadioInput
-              label="این کتاب رو خوندم"
-              value="آره"
-              name="READ"
-              id="READ"
-            />
+            <RadioInput label="این کتاب رو خوندم" value="آره" name="READ" id="READ" />
             <RadioInput label="هنوز نخوندمش" value="نه" name="READ" id="READ" />
           </div>
 

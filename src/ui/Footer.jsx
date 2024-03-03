@@ -1,6 +1,6 @@
-import { BiLogoInstagram, BiLogoTelegram, BiLogoTwitter } from "react-icons/bi";
-import { IoLibraryOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { BiLogoInstagram, BiLogoTelegram, BiLogoTwitter } from 'react-icons/bi';
+import { IoLibraryOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
