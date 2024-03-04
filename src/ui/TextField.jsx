@@ -1,12 +1,12 @@
-function TextField({
+const TextField = ({
   label,
+  type,
   name,
-  type = 'text',
-  required,
   register,
-  errors,
+  required,
   validationSchema,
-}) {
+  errors,
+}) => {
   return (
     <div>
       <label className="mb-2 block text-secondary-700" htmlFor={name}>
@@ -25,5 +25,5 @@ function TextField({
       )}
     </div>
   );
-}
+};
 export default TextField;

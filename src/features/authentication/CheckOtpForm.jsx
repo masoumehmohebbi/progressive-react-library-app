@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
-import OTPInput from "react-otp-input";
-import { HiArrowRight } from "react-icons/hi";
-import { CiEdit } from "react-icons/ci";
+import { useEffect, useState } from 'react';
+import OTPInput from 'react-otp-input';
+import { HiArrowRight } from 'react-icons/hi';
+import { CiEdit } from 'react-icons/ci';
+import { useMutation } from '@tanstack/react-query';
+import { checkOtp } from '../../services/authService';
+import Loading from '../../ui/Loading';
 
 const RESEND_TIME = 90;
 
 function CheckOTPForm({ onBack, onReSendOtp, otpResponse }) {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
   const [time, setTime] = useState(RESEND_TIME);
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: checkOtp,
+  });
+
+  const checkOtpHandler = () => {};
 
   useEffect(() => {
     const timer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
@@ -37,7 +46,7 @@ function CheckOTPForm({ onBack, onReSendOtp, otpResponse }) {
           <button onClick={onReSendOtp}>ارسال مجدد کد تایید</button>
         )}
       </div>
-      <form className="space-y-10">
+      <form className="space-y-10" onSubmit={checkOtpHandler}>
         <p className="font-bold text-secondary-800">کد تایید را وارد کنید</p>
         <OTPInput
           value={otp}
@@ -47,15 +56,19 @@ function CheckOTPForm({ onBack, onReSendOtp, otpResponse }) {
           renderInput={(props) => <input type="number" {...props} />}
           containerStyle="flex flex-row-reverse gap-x-2  justify-center"
           inputStyle={{
-            width: "2.5rem",
-            padding: "0.5rem 0.2rem",
-            border: "1px solid rgb(var(--color-primary-400))",
-            borderRadius: "0.5rem",
+            width: '2.5rem',
+            padding: '0.5rem 0.2rem',
+            border: '1px solid rgb(var(--color-primary-400))',
+            borderRadius: '0.5rem',
           }}
         />
-        <button type="submit" className="btn btn--primary w-full">
-          تایید
-        </button>
+        {isPending ? (
+          <Loading />
+        ) : (
+          <button type="submit" className="btn btn--primary w-full">
+            تایید
+          </button>
+        )}
       </form>
     </div>
   );

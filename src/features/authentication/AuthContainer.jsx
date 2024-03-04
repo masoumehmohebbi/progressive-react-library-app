@@ -7,23 +7,24 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 const AuthContainer = () => {
-  const [step, setStep] = useState(1);
-  const { handleSubmit, register } = useForm();
+  const [step, setStep] = useState(2);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   const { isPending: isSendingOtp, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
 
   const sendOtpHandler = async (data) => {
-    // console.log(data);
     try {
-      const d = await mutateAsync(data);
-
-      console.log(d);
+      await mutateAsync(data);
       setStep(2);
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message);
+      // toast.error(error?.response?.data?.message);
     }
   };
 
@@ -32,13 +33,14 @@ const AuthContainer = () => {
       case 1:
         return (
           <SendOTPForm
+            errors={errors}
             register={register}
             isSendingOtp={isSendingOtp}
             onSubmit={handleSubmit(sendOtpHandler)}
           />
         );
       case 2:
-        return <CheckOTPForm />;
+        return <CheckOTPForm onBack={() => setStep((s) => s - 1)} />;
 
       default:
         return null;

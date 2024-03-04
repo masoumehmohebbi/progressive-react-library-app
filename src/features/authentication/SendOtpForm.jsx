@@ -6,7 +6,7 @@ import Loading from '../../ui/Loading';
 function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
   return (
     <div className="w-full sm:max-w-md lg:max-w-xl bg-secondary-0 sm:border p-5 sm:p-8 rounded-xl shadow-md">
-      <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
+      <h1 className="title flex justify-center w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         برای ثبت کتاب های خود ثبت نام کنید
       </h1>
 
@@ -31,6 +31,9 @@ function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
           name="last_name"
           label="نام خانوادگی"
           type="text"
+          validationSchema={{
+            required: 'نام خانوادگی ضروری است',
+          }}
         />
         <TextField
           required
@@ -39,6 +42,9 @@ function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
           name="username"
           label="نام کاربری"
           type="text"
+          validationSchema={{
+            required: 'نام کاربری ضروری است',
+          }}
         />
         <TextField
           required
@@ -62,6 +68,14 @@ function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
           name="password"
           label="کلمه عبور"
           type="text"
+          validationSchema={{
+            required: 'رمز ضروری است',
+            pattern: {
+              value:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
+              message: 'رمز باید حداقل 8 رقم و شامل حروف کوچک و بزرگ و عدد و نماد باشد',
+            },
+          }}
         />
         {isSendingOtp ? (
           <Loading />
