@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import TextField from '../../ui/TextField';
 import GoogleField from '../../ui/GoogleField';
+import Loading from '../../ui/Loading';
 
-function SendOTPForm({ onSubmit, register, errors }) {
+function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
   return (
     <div className="w-full sm:max-w-md lg:max-w-xl bg-secondary-0 sm:border p-5 sm:p-8 rounded-xl shadow-md">
       <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
@@ -62,10 +63,13 @@ function SendOTPForm({ onSubmit, register, errors }) {
           label="کلمه عبور"
           type="text"
         />
-
-        <button type="submit" className="btn btn--primary">
-          بعدی
-        </button>
+        {isSendingOtp ? (
+          <Loading />
+        ) : (
+          <button type="submit" className="btn btn--primary">
+            بعدی
+          </button>
+        )}
       </form>
       <div className="w-full h-[1px] bg-secondary-200 rounded my-9 "></div>
       <div className="w-full flex gap-x-1 items-center justify-center">

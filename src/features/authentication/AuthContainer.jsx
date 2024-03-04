@@ -10,7 +10,7 @@ const AuthContainer = () => {
   const [step, setStep] = useState(1);
   const { handleSubmit, register } = useForm();
 
-  const { mutateAsync } = useMutation({
+  const { isPending: isSendingOtp, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
 
@@ -31,7 +31,11 @@ const AuthContainer = () => {
     switch (step) {
       case 1:
         return (
-          <SendOTPForm register={register} onSubmit={handleSubmit(sendOtpHandler)} />
+          <SendOTPForm
+            register={register}
+            isSendingOtp={isSendingOtp}
+            onSubmit={handleSubmit(sendOtpHandler)}
+          />
         );
       case 2:
         return <CheckOTPForm />;
