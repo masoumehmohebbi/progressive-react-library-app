@@ -6,11 +6,13 @@ import LogIn from './pages/LogIn';
 import ScrollToTop from './ui/ScrollToTop';
 import { AboutUs } from './pages/AboutUs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <>
+      <Toaster />
       <QueryClientProvider client={queryClient}>
         <ScrollToTop />
         <Routes>
