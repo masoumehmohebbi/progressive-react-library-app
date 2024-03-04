@@ -1,7 +1,7 @@
 import http from './httpService';
 
-export function getOtp() {
-  return http.post('/auth/signup');
+export function getOtp(data) {
+  return http.post('/auth/signup/', data);
 }
 
 export function checkOtp(data) {
