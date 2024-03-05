@@ -5,5 +5,9 @@ export function getOtp(data) {
 }
 
 export function checkOtp(data) {
-  return http.post(`/auth/verify-email/${data}`);
+  return http.post('/auth/verify-email/', data);
+}
+
+export function getTokens(data) {
+  return http.post('auth/signin', data);
 }

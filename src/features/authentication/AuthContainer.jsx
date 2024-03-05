@@ -11,6 +11,7 @@ const AuthContainer = () => {
   const {
     handleSubmit,
     register,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -20,7 +21,8 @@ const AuthContainer = () => {
 
   const sendOtpHandler = async (data) => {
     try {
-      await mutateAsync(data);
+      const dt = await mutateAsync(data);
+      console.log(dt);
       setStep(2);
     } catch (error) {
       console.log(error);
@@ -40,7 +42,12 @@ const AuthContainer = () => {
           />
         );
       case 2:
-        return <CheckOTPForm onBack={() => setStep((s) => s - 1)} />;
+        return (
+          <CheckOTPForm
+            username={getValues('username')}
+            onBack={() => setStep((s) => s - 1)}
+          />
+        );
 
       default:
         return null;
