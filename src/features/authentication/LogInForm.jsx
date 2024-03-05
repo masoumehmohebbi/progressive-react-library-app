@@ -19,17 +19,14 @@ export const LogInForm = () => {
   });
 
   const logInHandler = async (data) => {
-    console.log(getValues('username') ? getValues('username') : getValues('email'));
     try {
-      const l = await mutateAsync({
+      await mutateAsync({
         username_or_email:
           data.username === getValues('username')
             ? getValues('username')
             : getValues('email'),
         password: getValues('password'),
       });
-
-      console.log(l);
 
       toast.success('اطلاعات شما تایید شد‍‍‍، به  رابوک خوش آمدید', {
         icon: '👏',
