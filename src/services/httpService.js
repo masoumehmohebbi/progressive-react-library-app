@@ -4,6 +4,7 @@ const BASE_URL = 'https://library-api-t70g.onrender.com';
 
 const app = axios.create({
   baseURL: BASE_URL,
+  withCredentials: true,
 });
 
 const http = {

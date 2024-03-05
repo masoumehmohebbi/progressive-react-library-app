@@ -3,16 +3,49 @@ import TextField from '../../ui/TextField';
 import SwitchRemmemerMe from '../../ui/SwitchRemmemberMe';
 import GoogleField from '../../ui/GoogleField';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { getTokens } from '../../services/authService';
+import Loading from '../../ui/Loading';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 export const LogInForm = () => {
-  const { errors, register } = useForm();
+  const { errors, register, getValues, handleSubmit } = useForm();
+
+  const navigate = useNavigate();
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: getTokens,
+  });
+
+  const logInHandler = async (data) => {
+    console.log(getValues('username') ? getValues('username') : getValues('email'));
+    try {
+      const l = await mutateAsync({
+        username_or_email:
+          data.username === getValues('username')
+            ? getValues('username')
+            : getValues('email'),
+        password: getValues('password'),
+      });
+
+      console.log(l);
+
+      toast.success('اطلاعات شما تایید شد‍‍‍، به  رابوک خوش آمدید', {
+        icon: '👏',
+      });
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-full mx-auto sm:my-5 sm:max-w-md lg:max-w-xl bg-secondary-0 sm:border p-5 sm:p-8 rounded-xl shadow-md">
       <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         به رابوک خوش آمدید. وارد شوید
       </h1>
       <GoogleField label="ورود با گوگل" />
-      <form className="flex flex-col gap-y-6">
+      <form className="flex flex-col gap-y-6" onSubmit={handleSubmit(logInHandler)}>
         <TextField
           required
           errors={errors}
@@ -46,9 +79,13 @@ export const LogInForm = () => {
           <SwitchRemmemerMe />
         </div>
 
-        <button type="submit" className="btn btn--primary">
-          ورود
-        </button>
+        {isPending ? (
+          <Loading />
+        ) : (
+          <button type="submit" className="btn btn--primary">
+            ورود
+          </button>
+        )}
       </form>
       <div className="w-full h-[1px] bg-secondary-200 rounded my-9 "></div>
 

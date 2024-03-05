@@ -9,5 +9,5 @@ export function checkOtp(data) {
 }
 
 export function getTokens(data) {
-  return http.post('auth/signin', data);
+  return http.post('auth/signin/', data);
 }

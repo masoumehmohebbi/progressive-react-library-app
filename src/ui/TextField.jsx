@@ -14,8 +14,9 @@ const TextField = ({
         {required && <span className="text-error">*</span>}
       </label>
       <input
+        dir="ltr"
         id={name}
-        className="textField__input"
+        className="textField__input text-right"
         type={type}
         autoComplete="off"
         {...register(name, validationSchema)}

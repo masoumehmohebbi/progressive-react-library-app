@@ -24,6 +24,7 @@ const AuthContainer = () => {
       const dt = await mutateAsync(data);
       console.log(dt);
       setStep(2);
+      toast.success('کد با موفقیت برای ' + getValues('email') + ' ارسال شد');
     } catch (error) {
       console.log(error);
       // toast.error(error?.response?.data?.message);

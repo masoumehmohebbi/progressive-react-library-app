@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { IoLibraryOutline } from "react-icons/io5";
-import { BiMenu, BiX } from "react-icons/bi";
-import { HiOutlineHeart } from "react-icons/hi2";
-import { CiLogout } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import Modal from "./Modal";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { IoLibraryOutline } from 'react-icons/io5';
+import { BiMenu, BiX } from 'react-icons/bi';
+import { HiOutlineHeart } from 'react-icons/hi2';
+import { CiLogout } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
+import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
 
 const Links = [
-  { name: "خانه", link: "/" },
-  { name: "کتاب‌ها", link: "/" },
-  { name: "جستجو", link: "/" },
-  { name: "افزودن کتاب", link: "/" },
+  { name: 'خانه', link: '/' },
+  { name: 'کتاب‌ها', link: '/' },
+  { name: 'جستجو', link: '/' },
+  { name: 'افزودن کتاب', link: '/' },
 ];
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ const NavBar = () => {
       >
         <ul
           className={`gap-x-6 fixed top-0 bg-secondary-200 text-secondary-0 md:bg-transparent h-screen md:h-auto md:col-span-5 flex md:ml-1 flex-col items-start md:items-center px-5 md:px-0 md:flex-row pt-20 md:pt-0 md:static md:z-auto z-[-1] left-0 w-full md:w-fit transition-all duration-500 ease-in ${
-            open ? "right-0" : "rtl:right-[-1000px] ltr:left-[-1000px]"
+            open ? 'right-0' : 'rtl:right-[-1000px] ltr:left-[-1000px]'
           }`}
         >
           <div className="md:flex hidden items-center gap-x-1 ml-5">
@@ -65,7 +65,7 @@ const NavBar = () => {
             <span className="badge">0</span>
           </button>
           <button
-            onClick={() => navigate("auth")}
+            onClick={() => navigate('/login')}
             className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
           >
             <CiLogout />
