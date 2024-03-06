@@ -9,6 +9,9 @@ import Loading from '../../ui/Loading';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+
 export const LogInForm = () => {
   const { errors, register, getValues, handleSubmit } = useForm();
 
@@ -42,6 +45,16 @@ export const LogInForm = () => {
         به رابوک خوش آمدید. وارد شوید
       </h1>
       <GoogleField label="ورود با گوگل" />
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          const credentialResponseDecode = jwt_decode(credentialResponse.credential);
+          console.log(credentialResponseDecode);
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
+
       <form className="flex flex-col gap-y-6" onSubmit={handleSubmit(logInHandler)}>
         <TextField
           required
@@ -85,7 +98,6 @@ export const LogInForm = () => {
         )}
       </form>
       <div className="w-full h-[1px] bg-secondary-200 rounded my-9 "></div>
-
       <div className="w-full flex gap-x-1 items-center justify-center">
         <span className="text-secondary-600">حساب کاربری ندارید؟</span>
         <button className="text-primary-900 underline underline-offset-[6px]">
