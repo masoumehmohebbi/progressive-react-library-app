@@ -45,6 +45,8 @@ const AuthContainer = () => {
       case 2:
         return (
           <CheckOTPForm
+            onReSendOtp={handleSubmit(sendOtpHandler)}
+            otpResponse={'کد با موفقیت برای ' + getValues('email') + ' ارسال شد'}
             username={getValues('username')}
             onBack={() => setStep((s) => s - 1)}
           />

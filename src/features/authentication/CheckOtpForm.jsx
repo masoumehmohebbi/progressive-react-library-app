@@ -45,7 +45,7 @@ function CheckOTPForm({ onBack, onReSendOtp, otpResponse, username }) {
       </button>
       {otpResponse && (
         <p className="flex items-center gap-x-2 my-4">
-          <span> {otpResponse?.message}</span>
+          <span> {otpResponse}</span>
           <button onClick={onBack}>
             <CiEdit className="w-6 h-6 text-primary-900" />
           </button>
