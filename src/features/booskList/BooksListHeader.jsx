@@ -61,12 +61,7 @@ const BooksListHeader = () => {
           <SearchField />
         </div>
         <Filter filterField="status" options={statusOptions} />
-        <Select
-          value="category"
-          options={categoryOptions}
-          value={selectedOption}
-          onChange={onChange}
-        />
+        <Select value="category" options={categoryOptions} onChange={onChange} />
       </div>
 
       <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
@@ -75,7 +70,13 @@ const BooksListHeader = () => {
 
           <TextField name="author" label="نویسنده" type="text" register={register} />
           <SelectField label="دسته بندی" options={categoryOptions} />
-          <TextField name="cover" label="عکس" type="file" register={register} />
+          <TextField
+            name="cover"
+            label="عکس"
+            type="file"
+            register={register}
+            accept="image/*"
+          />
 
           <div className="flex gap-x-2 m-4 items-center justify-center">
             <RadioInput label="این کتاب رو خوندم" value="آره" name="READ" id="READ" />

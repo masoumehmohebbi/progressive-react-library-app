@@ -6,6 +6,7 @@ const TextField = ({
   required,
   validationSchema,
   errors,
+  accept,
 }) => {
   return (
     <div>
@@ -14,6 +15,7 @@ const TextField = ({
         {required && <span className="text-error">*</span>}
       </label>
       <input
+        accept={accept}
         dir="ltr"
         id={name}
         className="textField__input text-right"
