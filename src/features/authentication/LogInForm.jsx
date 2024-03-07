@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export const LogInForm = () => {
   const { errors, register, getValues, handleSubmit } = useForm();
@@ -47,7 +47,7 @@ export const LogInForm = () => {
       <GoogleField label="ورود با گوگل" />
       <GoogleLogin
         onSuccess={(credentialResponse) => {
-          const credentialResponseDecode = jwt_decode(credentialResponse.credential);
+          const credentialResponseDecode = jwtDecode(credentialResponse.credential);
           console.log(credentialResponseDecode);
         }}
         onError={() => {
