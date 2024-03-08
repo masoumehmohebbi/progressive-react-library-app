@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const BASE_URL = 'https://library-api-t70g.onrender.com';
 
@@ -19,12 +22,14 @@ app.interceptors.response.use(
     if (err.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
-        const { data } = await axios.get(`${BASE_URL}/token/refresh/`, {
-          withCredentials: true,
+        // const { data } = await axios.post(`${BASE_URL}/token/refresh/`, {
+        //   withCredentials: true,
+        // });
+        const { data } = await axios.post(`${BASE_URL}/token/refresh/`, {
+          refresh_token: cookies.get('refresh_token'),
         });
-        console.log('hey', data);
-        // cookies.set('refresh_token', data.access);
-        if (data) return app(originalConfig);
+        cookies.set('access_token', data.data.access_token);
+        if (data.data.access_token) return app(originalConfig);
       } catch (error) {
         return Promise.reject(error);
       }
