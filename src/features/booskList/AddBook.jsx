@@ -32,7 +32,15 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     console.log(data);
 
     try {
-      await addBook(data);
+      const d = await addBook({
+        title: 'تست',
+        author: 'تست',
+        image_url: 'تست',
+        category_name: 'تست',
+        is_read: true,
+        is_favorite: true,
+      });
+      console.log(d);
       toast.success('کتاب شما با موفقیت ثبت شد');
     } catch (error) {
       console.log(error);

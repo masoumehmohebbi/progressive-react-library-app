@@ -9,8 +9,8 @@ import Loading from '../../ui/Loading';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+// import { GoogleLogin } from '@react-oauth/google';
+// import { jwtDecode } from 'jwt-decode';
 
 export const LogInForm = () => {
   const { errors, register, getValues, handleSubmit } = useForm();
@@ -45,7 +45,7 @@ export const LogInForm = () => {
         به رابوک خوش آمدید. وارد شوید
       </h1>
       <GoogleField label="ورود با گوگل" />
-      <GoogleLogin
+      {/* <GoogleLogin
         onSuccess={(credentialResponse) => {
           const credentialResponseDecode = jwtDecode(credentialResponse.credential);
           console.log(credentialResponseDecode);
@@ -53,7 +53,7 @@ export const LogInForm = () => {
         onError={() => {
           console.log('Login Failed');
         }}
-      />
+      /> */}
 
       <form className="flex flex-col gap-y-6" onSubmit={handleSubmit(logInHandler)}>
         <TextField
