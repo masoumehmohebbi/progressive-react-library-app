@@ -5,5 +5,5 @@ export function getBooks() {
 }
 
 export function addBook(data) {
-  return http.post('/book/', data);
+  return http.post('/books//', data);
 }

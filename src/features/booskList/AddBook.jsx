@@ -29,7 +29,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
   });
 
   const addBookHandler = async (data) => {
-    console.log(data);
+    // console.log(data);
 
     try {
       const d = await addBook({

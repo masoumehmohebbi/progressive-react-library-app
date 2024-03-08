@@ -23,13 +23,16 @@ export const LogInForm = () => {
 
   const logInHandler = async (data) => {
     try {
-      await mutateAsync({
+      const response = await mutateAsync({
         username_or_email:
           data.username === getValues('username')
             ? getValues('username')
             : getValues('email'),
         password: getValues('password'),
       });
+
+      document.cookie = `refresh_token=${response.data.data.refresh_token}`;
+      document.cookie = `access_token=${response.data.data.access_token}`;
 
       toast.success('اطلاعات شما تایید شد‍‍‍، به  رابوک خوش آمدید', {
         icon: '👏',
