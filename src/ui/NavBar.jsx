@@ -26,7 +26,6 @@ const NavBar = () => {
 
   const { data } = useUser();
   const userProfile = data?.data?.data;
-  console.log(userProfile?.first_name);
   return (
     <>
       <nav
