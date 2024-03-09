@@ -10,7 +10,7 @@ const TextField = ({
   onChange,
 }) => {
   return (
-    <div>
+    <div className="col-span-3">
       <label className="mb-2 block text-secondary-700" htmlFor={name}>
         {label}
         {required && <span className="text-error">*</span>}
