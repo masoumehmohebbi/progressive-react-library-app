@@ -14,10 +14,10 @@ import { RiArrowDownSLine } from 'react-icons/ri';
 import { RiUserLine } from 'react-icons/ri';
 
 const Links = [
-  { name: 'خانه', link: '/' },
-  { name: 'کتاب‌ها', link: '/' },
-  { name: 'جستجو', link: '/' },
-  { name: 'افزودن کتاب', link: '/' },
+  { name: 'خانه', link: '#' },
+  { name: 'کتاب‌ها', link: '#book_lists' },
+  { name: 'جستجو', link: '#book_lists' },
+  { name: 'افزودن کتاب', link: '#book_lists' },
 ];
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -43,12 +43,12 @@ const NavBar = () => {
           </div>
           {Links.map((link) => (
             <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-              <Link
-                to={link.link}
+              <a
+                href={link.link}
                 className="text-secondary-800 hover:text-primary-600 duration-500"
               >
                 {link.name}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
