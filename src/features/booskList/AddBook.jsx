@@ -67,6 +67,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       // const cat = await createCat({ name: getValues('category_name') });
       // console.log(cat);
     } catch (error) {
+      console.log(error);
       Object.keys(error?.response?.data?.error?.error).map((key) => {
         toast.error(error?.response?.data?.error?.error[key]),
           console.log(error?.response?.data?.error?.error[key]);
