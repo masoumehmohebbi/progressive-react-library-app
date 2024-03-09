@@ -8,6 +8,7 @@ import Modal from './Modal';
 import { useNavigate } from 'react-router-dom';
 import useUser from '../features/authentication/useUser';
 import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { RiUserLine } from 'react-icons/ri';
@@ -82,7 +83,7 @@ const NavBar = () => {
               placement="bottom"
               content={
                 <div
-                  className={`transition-all  text-primary-50  left-0 rounded-full p-2 flex
+                  className={`transition-all text-primary-50 left-0 p-2 flex
               flex-col gap-4 `}
                 >
                   <div className="flex flex-col items-center justify-end gap-2">
