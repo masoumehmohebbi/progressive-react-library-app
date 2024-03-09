@@ -3,7 +3,6 @@ import { IoExitOutline, IoLibraryOutline } from 'react-icons/io5';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { HiOutlineHeart } from 'react-icons/hi2';
 import { CiLogout } from 'react-icons/ci';
-import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import { useNavigate } from 'react-router-dom';
 import useUser from '../features/authentication/useUser';
