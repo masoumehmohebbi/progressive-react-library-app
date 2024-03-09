@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { IoLibraryOutline } from 'react-icons/io5';
+import { IoExitOutline, IoLibraryOutline } from 'react-icons/io5';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { HiOutlineHeart } from 'react-icons/hi2';
 import { CiLogout } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import { useNavigate } from 'react-router-dom';
+import useUser from '../features/authentication/useUser';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/themes/light.css';
+import { RiArrowDownSLine } from 'react-icons/ri';
+import { RiUserLine } from 'react-icons/ri';
 
 const Links = [
   { name: 'خانه', link: '/' },
@@ -17,6 +22,10 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { data } = useUser();
+  const userProfile = data?.data?.data;
+  console.log(userProfile?.first_name);
   return (
     <>
       <nav
@@ -64,13 +73,49 @@ const NavBar = () => {
             <HiOutlineHeart className="w-9 h-9 text-red-500" />
             <span className="badge">0</span>
           </button>
-          <button
-            onClick={() => navigate('/login')}
-            className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
-          >
-            <CiLogout />
-            ورود
-          </button>
+
+          {userProfile ? (
+            <Tippy
+              theme="light"
+              interactive={true}
+              trigger="click"
+              placement="bottom"
+              content={
+                <div
+                  className={`transition-all  text-primary-50  left-0 rounded-full p-2 flex
+              flex-col gap-4 `}
+                >
+                  <div className="flex flex-col items-center justify-end gap-2">
+                    <span>
+                      {userProfile?.first_name}
+                      &nbsp;
+                      {userProfile?.last_name}
+                    </span>
+
+                    <span>{userProfile?.email}</span>
+                    <hr className="h-1 border-secondary-200 w-full" />
+                  </div>
+                  <button className="flex items-center gap-1 justify-center">
+                    <IoExitOutline className="text-secondary-600 w-[18px] h-[18px]" />
+                    <span>خروج</span>
+                  </button>
+                </div>
+              }
+            >
+              <button className="flex items-center text-secondary-600 justify-center border border-secondary-400 rounded-2xl p-[6px] shadow-md">
+                <RiUserLine className="w-6 h-6" />
+                <RiArrowDownSLine className="w-5 h-5" />
+              </button>
+            </Tippy>
+          ) : (
+            <button
+              onClick={() => navigate('/login')}
+              className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
+            >
+              <CiLogout />
+              ورود
+            </button>
+          )}
         </div>
       </nav>
 

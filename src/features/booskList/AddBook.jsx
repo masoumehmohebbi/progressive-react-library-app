@@ -8,6 +8,8 @@ import Loading from '../../ui/Loading';
 import { addBook } from '../../services/bookService';
 import { toast } from 'react-hot-toast';
 import useCategories from './useCategories';
+import { createCategory } from '../../services/categoryService';
+import { useState } from 'react';
 
 // const category = [
 //   { value: 'رمان', label: 'رمان' },
@@ -21,10 +23,13 @@ const AddBook = ({ isOpen, setIsOpen }) => {
   const { data } = useCategories();
   const category = data?.data?.data;
 
+  const [img, setImg] = useState('');
+
   const {
     register,
     watch,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -32,20 +37,43 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     mutationFn: addBook,
   });
 
+  const { mutateAsync: createCat } = useMutation({
+    mutationFn: createCategory,
+  });
+
   const addBookHandler = async (data) => {
-    // console.log(data);
+    console.log(data);
 
     try {
-      const d = await addBook(data);
+      const d = await addBook({
+        title: 'string',
+        author: 'string',
+        image_url: img,
+        category_name: 'برنامه نویسی',
+        is_read: true,
+        is_favorite: true,
+      });
       console.log(d);
       toast.success('کتاب شما با موفقیت ثبت شد');
+
+      const cat = await createCat({ name: getValues('category_name') });
+      console.log(cat);
     } catch (error) {
-      console.log(error);
+      // console.log(error?.response?.data?.error?.error);
+
+      Object.keys(error?.response?.data?.error?.error).map((key) => {
+        toast.error(error?.response?.data?.error?.error[key]),
+          console.log(error?.response?.data?.error?.error[key]);
+      });
     }
   };
   return (
     <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
-      <form className="space-y-4" onSubmit={handleSubmit(addBookHandler)}>
+      <form
+        className="space-y-4"
+        onSubmit={handleSubmit(addBookHandler)}
+        encType="multipart/form-data"
+      >
         <TextField
           required
           validationSchema={{
@@ -101,6 +129,11 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           type="file"
           register={register}
           accept=".png, .jpg, .jpeg"
+          onChange={(e) => {
+            setImg(e.target.files[0]);
+            console.log(e.target);
+            console.log(img);
+          }}
         />
         <RadioInputGroup
           errors={errors}

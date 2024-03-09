@@ -15,3 +15,7 @@ export function logoutApi(data) {
   return http.post('/auth/signout/', data);
   // return http.post("/user/logout").then(({ data }) => data.data);
 }
+
+export function getUser() {
+  return http.get('/profile/');
+}

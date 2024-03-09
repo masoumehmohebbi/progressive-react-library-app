@@ -7,6 +7,7 @@ const TextField = ({
   validationSchema,
   errors,
   accept,
+  onChange,
 }) => {
   return (
     <div>
@@ -22,6 +23,7 @@ const TextField = ({
         type={type}
         autoComplete="off"
         {...register(name, validationSchema)}
+        onChange={onChange}
       />
       {errors && errors[name] && (
         <span className="text-error block text-sm mt-2">{errors[name]?.message}</span>
