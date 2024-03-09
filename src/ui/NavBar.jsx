@@ -11,6 +11,10 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { RiUserLine } from 'react-icons/ri';
+import useLogout from '../features/authentication/useLogout';
+import Loading from './Loading';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -25,6 +29,18 @@ const NavBar = () => {
 
   const { data } = useUser();
   const userProfile = data?.data?.data;
+
+  const { isPending, logout } = useLogout();
+
+  const logOutHandler = async () => {
+    console.log(cookies.get('refresh_token'));
+    try {
+      const d = await logout({ refresh_token: cookies.get('refresh_tokenhhrf') });
+      console.log(d);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <nav
@@ -73,6 +89,7 @@ const NavBar = () => {
             <span className="badge">0</span>
           </button>
 
+          {/* Logged-In user profile */}
           {userProfile ? (
             <Tippy
               theme="light"
@@ -94,10 +111,17 @@ const NavBar = () => {
                     <span>{userProfile?.email}</span>
                     <hr className="h-1 border-secondary-200 w-full" />
                   </div>
-                  <button className="flex items-center gap-1 justify-center">
-                    <IoExitOutline className="text-secondary-600 w-[18px] h-[18px]" />
-                    <span>خروج</span>
-                  </button>
+                  {isPending ? (
+                    <Loading />
+                  ) : (
+                    <button
+                      onClick={logOutHandler}
+                      className="flex items-center gap-1 justify-center"
+                    >
+                      <IoExitOutline className="text-secondary-600 w-[18px] h-[18px]" />
+                      <span>خروج</span>
+                    </button>
+                  )}
                 </div>
               }
             >
