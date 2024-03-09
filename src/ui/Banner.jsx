@@ -26,7 +26,7 @@ const Banner = () => {
             <br />
             را داشته باشید
           </h1>
-          <p className="text-xs md:text-lg max-w-md font-medium text-secondary-500 mb-6 md:mb-2">
+          <p className="text-xs md:text-lg max-w-xs sm:max-w-md font-medium text-secondary-500 mb-6 md:mb-2">
             با رابوک خیلی راحت می تونید مشخصات کتاب های خودتون رو ذخیره کنید، کتاب های
             خودتون رو جستجو کنید.
             <br />
@@ -34,14 +34,13 @@ const Banner = () => {
             <br />
             کدوما رو خوندید و کدومارو قراره که بخونید
           </p>
-          <div className="mt-8 text-xs md:text-lg text-secondary-500">
+          <div className="mt-8 text-xs md:text-lg font-semibold text-secondary-500">
             {userProfile ? (
               <p>
-                {' '}
                 {userProfile?.first_name} عزیز! به رابوک خوش آمدید &#128075; شروع کنید
               </p>
             ) : (
-              <span className="flex gap-x-2 font-semibold  items-center">
+              <span className="flex gap-x-2 items-center justify-center sm:justify-start">
                 برای شروع روی دکمه ورود کلیک کنید
                 <button
                   onClick={() => navigate('/login')}
