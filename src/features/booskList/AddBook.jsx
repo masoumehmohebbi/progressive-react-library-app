@@ -7,16 +7,20 @@ import { useMutation } from '@tanstack/react-query';
 import Loading from '../../ui/Loading';
 import { addBook } from '../../services/bookService';
 import { toast } from 'react-hot-toast';
+import useCategories from './useCategories';
 
-const category = [
-  { value: 'رمان', label: 'رمان' },
-  { value: 'شعر', label: 'شعر' },
-  { value: 'روانشناسی', label: 'روانشناسی' },
-  { value: 'انگیزشی', label: 'انگیزشی' },
-  { value: 'دیگر', label: 'دیگر' },
-];
+// const category = [
+//   { value: 'رمان', label: 'رمان' },
+//   { value: 'شعر', label: 'شعر' },
+//   { value: 'روانشناسی', label: 'روانشناسی' },
+//   { value: 'انگیزشی', label: 'انگیزشی' },
+//   { value: 'دیگر', label: 'دیگر' },
+// ];
 
 const AddBook = ({ isOpen, setIsOpen }) => {
+  const { data } = useCategories();
+  const category = data?.data?.data;
+
   const {
     register,
     watch,
@@ -32,14 +36,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     // console.log(data);
 
     try {
-      const d = await addBook({
-        title: 'تست',
-        author: 'تست',
-        image_url: 'تست',
-        category_name: 'تست',
-        is_read: true,
-        is_favorite: true,
-      });
+      const d = await addBook(data);
       console.log(d);
       toast.success('کتاب شما با موفقیت ثبت شد');
     } catch (error) {
@@ -71,13 +68,33 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           type="text"
           register={register}
         />
-        <RHFSelect
+        {/* <RHFSelect
           label="دسته بندی"
           required
           name="category_name"
           register={register}
           options={category}
-        />
+        /> */}
+        <div className="grid grid-cols-2 gap-x-2">
+          <TextField
+            required
+            validationSchema={{
+              required: ' نوشتن دسته بندی ضروری است',
+            }}
+            errors={errors}
+            name="category_name"
+            label="دسته بندی"
+            type="text"
+            register={register}
+          />
+          <RHFSelect
+            label="دسته بندی های موجود"
+            // required
+            name="category_name1"
+            register={register}
+            options={category}
+          />
+        </div>
         <TextField
           name="image_url"
           label="عکس"
@@ -85,11 +102,6 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           register={register}
           accept=".png, .jpg, .jpeg"
         />
-
-        {/* <div className="flex gap-x-2 m-4 items-center justify-center">
-          <RadioInput label="این کتاب رو خوندم" value="آره" name="READ" id="READ" />
-          <RadioInput label="هنوز نخوندمش" value="نه" name="READ" id="READ" />
-        </div> */}
         <RadioInputGroup
           errors={errors}
           watch={watch}
@@ -102,6 +114,21 @@ const AddBook = ({ isOpen, setIsOpen }) => {
             options: [
               { value: 'true', label: 'این کتاب رو خوندم' },
               { value: 'false', label: 'هنوز نخوندمش' },
+            ],
+          }}
+        />
+        <RadioInputGroup
+          errors={errors}
+          watch={watch}
+          register={register}
+          configs={{
+            name: 'is_favorite',
+            validationSchema: {
+              required: 'انتخاب علاقه مندی ضروری است',
+            },
+            options: [
+              { value: 'true', label: 'اضافه به علاقه مندی ها' },
+              { value: 'false', label: 'مورد علاقه م نیست' },
             ],
           }}
         />
