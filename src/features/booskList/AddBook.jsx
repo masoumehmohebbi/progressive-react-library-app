@@ -42,16 +42,23 @@ const AddBook = ({ isOpen, setIsOpen }) => {
   });
 
   const addBookHandler = async (data) => {
-    console.log(data);
+    console.log({
+      title: getValues('title'),
+      author: getValues('author'),
+      image_url: img,
+      category_name: 'برنامه نویسی',
+      is_read: getValues('is_read'),
+      is_favorite: getValues('is_favorite'),
+    });
 
     try {
       const d = await addBook({
-        title: 'string',
-        author: 'string',
+        title: getValues('title'),
+        author: getValues('author'),
         image_url: img,
         category_name: 'برنامه نویسی',
-        is_read: true,
-        is_favorite: true,
+        is_read: getValues('is_read'),
+        is_favorite: getValues('is_favorite'),
       });
       console.log(d);
       toast.success('کتاب شما با موفقیت ثبت شد');
@@ -129,7 +136,6 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           accept=".png, .jpg, .jpeg"
           onChange={(e) => {
             setImg(e.target.files[0]);
-            console.log(e.target);
             console.log(img);
           }}
         />

@@ -3,10 +3,13 @@ import NavBar from './NavBar';
 import Banner from './Banner';
 import Footer from './Footer';
 import useUser from '../features/authentication/useUser';
+// import Cookies from 'universal-cookie';
+// const cookies = new Cookies();
 
 const AppLayout = () => {
   const { data } = useUser();
   const userProfile = data?.data?.data;
+
   return (
     <div>
       <NavBar />
