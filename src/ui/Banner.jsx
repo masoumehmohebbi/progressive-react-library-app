@@ -1,4 +1,13 @@
+import { CiLogout } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
+import useUser from '../features/authentication/useUser';
+
 const Banner = () => {
+  const navigate = useNavigate();
+
+  const { data } = useUser();
+  const userProfile = data?.data?.data;
+
   return (
     <section className="md:flex flex-row-reverse mt-12 md:mt-16 justify-between px-3 lg:px-0">
       <div className="w-[80%] md:w-[46%] max-w-screen-sm  mx-auto relative">
@@ -17,17 +26,33 @@ const Banner = () => {
             <br />
             را داشته باشید
           </h1>
-          <p className="text-xs md:text-lg font-medium text-secondary-500 mb-6 md:mb-2">
-            با رابوک خیلی راحت می تونید مشخصات کتاب های خودتون <br /> رو ذخیره
-            کنید و در صورت لزوم کتاب های خودتون رو پیدا کنید
+          <p className="text-xs md:text-lg max-w-md font-medium text-secondary-500 mb-6 md:mb-2">
+            با رابوک خیلی راحت می تونید مشخصات کتاب های خودتون رو ذخیره کنید، کتاب های
+            خودتون رو جستجو کنید.
             <br />
-            اینجوری یادتون نمی ره که چه کتاب هایی دارید
+            حتی یادتون نمی ره که چه کتاب هایی دارید&#128521;
             <br />
-            کدوما رو خوندید
-            <br />و کدومارو قراره که بخونید
-            <br />
-            برای شروع وارد شوید
+            کدوما رو خوندید و کدومارو قراره که بخونید
           </p>
+          <div className="mt-8 text-xs md:text-lg text-secondary-500">
+            {userProfile ? (
+              <p>
+                {' '}
+                {userProfile?.first_name} عزیز! به رابوک خوش آمدید &#128075; شروع کنید
+              </p>
+            ) : (
+              <span className="flex gap-x-2 font-semibold  items-center">
+                برای شروع روی دکمه ورود کلیک کنید
+                <button
+                  onClick={() => navigate('/login')}
+                  className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
+                >
+                  <CiLogout />
+                  ورود
+                </button>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </section>
