@@ -15,6 +15,7 @@ import useLogout from '../features/authentication/useLogout';
 import Loading from './Loading';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
+import { useQueryClient } from '@tanstack/react-query';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -31,12 +32,14 @@ const NavBar = () => {
   const userProfile = data?.data?.data;
 
   const { isPending, logout } = useLogout();
+  const queryClient = useQueryClient();
 
   const logOutHandler = async () => {
-    console.log(cookies.get('refresh_token'));
     try {
-      const d = await logout({ refresh_token: cookies.get('refresh_tokenhhrf') });
-      console.log(d);
+      await logout({ refresh_token: cookies.get('refresh_token') });
+      cookies.remove('access_token');
+      cookies.remove('refresh_token');
+      queryClient.removeQueries();
     } catch (error) {
       console.log(error);
     }
