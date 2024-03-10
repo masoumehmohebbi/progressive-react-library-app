@@ -67,6 +67,7 @@ export const AboutUs = () => {
               </h3>
             </div>
           </div>
+          <hr className="py-4" />
           <div className="text-center mt-19">
             <h1 className="text-2xl font-bold">توسعه دهنده ها</h1>
             <div className="grid grid-cols-1 md:flex md:justify-center gap-5 pt-9">
@@ -77,11 +78,13 @@ export const AboutUs = () => {
                 >
                   <div className="flex gap-x-2 items-center">
                     <img
-                      className="w-20 h-20 bg-primary-700 rounded-full"
+                      className="w-[4.3rem] sm:w-20 h-[4.3rem] sm:h-20 bg-primary-700 rounded-full"
                       src={dev.src}
                       alt={dev.name}
                     />
-                    <h2 className="text-2xl font-bold text-primary-900">{dev.name}</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-primary-900">
+                      {dev.name}
+                    </h2>
                   </div>
                   <p className="mt-2 text-secondary-500">{dev.field}</p>
                   <div className="flex items-center justify-center gap-4 mt-4">
