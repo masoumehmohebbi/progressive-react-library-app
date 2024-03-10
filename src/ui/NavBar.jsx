@@ -96,7 +96,7 @@ const NavBar = () => {
         <div className="flex items-center gap-x-3 ">
           <button className="relative" onClick={() => setIsModalOpen(true)}>
             <HiOutlineHeart className="w-9 h-9 text-red-500" />
-            <span className="badge">0</span>
+            <span className="badge">{filteredBooks?.length}</span>
           </button>
 
           {/* Logged-In user profile */}
@@ -157,7 +157,25 @@ const NavBar = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        nothing khkhkh
+        <div className="grid grid-cols-3">
+          {filteredBooks ? (
+            filteredBooks?.map((book) => (
+              <div className="flex flex-col shadow-md p-3" key={book.id}>
+                <div className="h-[10rem]">
+                  <img
+                    className="h-full w-full object-cover bg-cover"
+                    src={book.image_url}
+                    alt={book.title}
+                  />
+                </div>
+                <h1>{book.title}</h1>
+                <p>{book.author}</p>
+              </div>
+            ))
+          ) : (
+            <h2>هنوز هیچ کتابی به علاقه مندی ها اضافه نشده.</h2>
+          )}
+        </div>
       </Modal>
     </>
   );

@@ -68,7 +68,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       toast.success(' دسته بندی جدید با موفقیت اضافه شد');
 
       queryClient.invalidateQueries({
-        queryKey: ['get-all-category'],
+        queryKey: ['get-all-category', 'get-all-books'],
       });
     } catch (error) {
       console.log(error);

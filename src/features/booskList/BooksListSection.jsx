@@ -11,7 +11,7 @@ const BooksListSection = () => {
         allBooks?.map((book) => (
           <div
             key={book.id}
-            className="p-3 rounded-md border cursor-pointer hover:shadow-lg shadow-md shadow-primary-300 flex flex-col items-center"
+            className="p-3 gap-y-2 rounded-md border cursor-pointer hover:shadow-lg shadow-md shadow-primary-300 flex flex-col items-center"
           >
             <img
               className="w-full h-[15rem] bg-cover object-cover"
