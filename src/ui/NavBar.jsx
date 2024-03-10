@@ -38,7 +38,6 @@ const NavBar = () => {
   // hey look at here :)
   const { data: fetchBooks } = useFetchBooks();
   const filteredBooks = fetchBooks?.filter((book) => book.is_favorite === true);
-  console.log(filteredBooks);
 
   const logOutHandler = async () => {
     try {
@@ -157,7 +156,7 @@ const NavBar = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3">
           {filteredBooks ? (
             filteredBooks?.map((book) => (
               <div className="flex flex-col shadow-md p-3" key={book.id}>

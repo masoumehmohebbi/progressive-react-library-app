@@ -1,15 +1,18 @@
 import useFetchBooks from './useFetchBooks';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const BooksListSection = () => {
   const { data: allBooks } = useFetchBooks();
+  const navigate = useNavigate();
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
       {allBooks ? (
         allBooks?.map((book) => (
           <div
+            onClick={() => navigate(`/book/${book.id}`)}
             key={book.id}
             className="p-3 gap-y-2 rounded-md border cursor-pointer hover:shadow-lg shadow-md shadow-primary-300 flex flex-col items-center"
           >

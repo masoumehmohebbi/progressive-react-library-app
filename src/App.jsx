@@ -7,6 +7,9 @@ import { AboutUs } from './pages/AboutUs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
+import BookDetails from './features/booskList/BookDetails';
+import Layout from './features/booskList/Layout';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -16,11 +19,15 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <ScrollToTop />
         <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/login" element={<LogIn />} />
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
           </Route>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/login" element={<LogIn />} />
+          <Route element={<Layout />}>
+            <Route path="/book/:id" element={<BookDetails />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
           <Route path="/about-us/contact" element={<AboutUs />} />
         </Routes>
       </QueryClientProvider>
