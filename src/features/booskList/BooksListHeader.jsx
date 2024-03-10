@@ -5,6 +5,7 @@ import SearchField from '../../ui/SearchField';
 import Filter from '../../ui/Filter';
 import AddBook from './AddBook';
 import useCategories from './useCategories';
+import { useForm } from 'react-hook-form';
 
 const categoryOptions = [
   { value: 'همه', label: 'دسته بندی(همه)' },
@@ -39,6 +40,8 @@ const BooksListHeader = () => {
   const { data } = useCategories();
   const category = data?.data?.data;
 
+  // [{ id: 0, name: 'همه' }, ...category];
+  // console.log([{ id: 0, name: 'همه' }, ...category]);
   return (
     <>
       <header className="px-2 flex justify-between">
