@@ -75,13 +75,8 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       (item) => item.name === getValues('category_name'),
     );
     console.log(filteredCat[0]?.id);
-
-    try {
-      const d = await removeCategory(filteredCat[0]?.id);
-      console.log(d);
-    } catch (error) {
-      console.log(error);
-    }
+    const d = await removeCategory(filteredCat[0]?.id);
+    console.log(d);
   };
   return (
     <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>

@@ -7,15 +7,18 @@ export default function useRemoveCategory() {
 
   const { mutate: removeCategory, isPending: isDeleting } = useMutation({
     mutationFn: removeCategoryApi,
-    onSuccess: (data) => {
-      toast.success(data.message);
+    onSuccess: () => {
+      //   toast.success(data.message);
+      toast.success(' یک دسته بندی جدید با موفقیت حذف شد');
 
       queryClient.invalidateQueries({
         queryKey: ['get-all-category'],
       });
     },
-    // toast.error(err?.response?.data?.message)
-    onError: (err) => console.log(err),
+    onError: (err) => {
+      toast.error(err?.response?.data?.error);
+      console.log(err);
+    },
   });
 
   return { removeCategory, isDeleting };
