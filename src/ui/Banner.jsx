@@ -5,9 +5,8 @@ import useUser from '../features/authentication/useUser';
 const Banner = () => {
   const navigate = useNavigate();
 
-  const { data, refetch } = useUser();
+  const { data } = useUser();
   const userProfile = data?.data?.data;
-  refetch();
 
   return (
     <section className="md:flex flex-row-reverse mt-12 md:mt-16 justify-between px-3 lg:px-0">

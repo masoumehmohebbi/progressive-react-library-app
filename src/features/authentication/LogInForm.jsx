@@ -39,6 +39,7 @@ export const LogInForm = () => {
       });
       navigate('/');
     } catch (error) {
+      toast.error('نام کاربری / ایمیل یا پسورد نا معتبر است');
       console.log(error);
     }
   };

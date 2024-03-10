@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoExitOutline, IoLibraryOutline } from 'react-icons/io5';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { HiOutlineHeart } from 'react-icons/hi2';
@@ -35,7 +35,6 @@ const NavBar = () => {
   const { isPending, logout } = useLogout();
   const queryClient = useQueryClient();
 
-  // hey look at here :)
   const { data: fetchBooks } = useFetchBooks();
   const filteredBooks = fetchBooks?.filter((book) => book.is_favorite === true);
 

@@ -10,6 +10,8 @@ import { toast } from 'react-hot-toast';
 import useCategories from './useCategories';
 import { createCategory } from '../../services/categoryService';
 import { useState } from 'react';
+import { HiTrash } from 'react-icons/hi';
+import useRemoveCategory from './useRemoveCategory';
 
 const AddBook = ({ isOpen, setIsOpen }) => {
   const [bookCover, setBookCover] = useState('');
@@ -30,19 +32,13 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     mutationFn: addBook,
   });
 
-  const { mutateAsync: createCat } = useMutation({
+  const { mutateAsync: createCat, isPending: isAddingCategory } = useMutation({
     mutationFn: createCategory,
   });
 
+  const { removeCategory, isDeleting } = useRemoveCategory();
+
   const addBookHandler = async () => {
-    // console.log({
-    //   title: getValues('title'),
-    //   author: getValues('author'),
-    //   image_url: bookCover,
-    //   category_name: getValues('category_name'),
-    //   is_read: getValues('is_read'),
-    //   is_favorite: getValues('is_favorite'),
-    // });
     try {
       const formData = new FormData();
       formData.append('title', getValues('title'));
@@ -74,6 +70,19 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       console.log(error);
     }
   };
+  const removeCategoryHandler = async () => {
+    const filteredCat = category?.filter(
+      (item) => item.name === getValues('category_name'),
+    );
+    console.log(filteredCat[0]?.id);
+
+    try {
+      const d = await removeCategory(filteredCat[0]?.id);
+      console.log(d);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
       <form className="space-y-4" onSubmit={handleSubmit(addBookHandler)}>
@@ -100,7 +109,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           register={register}
         />
 
-        <div className="grid grid-cols-7 items-end justify-center gap-x-2">
+        <div className="grid grid-cols-8 items-end justify-center gap-x-2">
           <TextField
             errors={errors}
             name="category_choose"
@@ -108,10 +117,25 @@ const AddBook = ({ isOpen, setIsOpen }) => {
             type="text"
             register={register}
           />
-          <div className="flex col-span-1 items-center gap-x-2 justify-center mb-2">
-            <button onClick={addCategoryHandler} className="btn btn--primary">
-              +
-            </button>
+          <div className="flex col-span-2 items-center gap-x-2 justify-center mb-2">
+            {isAddingCategory ? (
+              <Loading width="42" />
+            ) : (
+              <button onClick={addCategoryHandler} className="btn btn--primary">
+                +
+              </button>
+            )}
+
+            {isDeleting ? (
+              <Loading width="42" />
+            ) : (
+              <button
+                onClick={removeCategoryHandler}
+                className="btn btn--danger py-[9px] px-[10px] shadow-lg"
+              >
+                <HiTrash className="w-5 h-5" />
+              </button>
+            )}
           </div>
           <RHFSelect
             label="انتخاب دسته بندی"

@@ -7,3 +7,7 @@ export function createCategory(data) {
 export function getCategories() {
   return http.get('/category/');
 }
+
+export function removeCategoryApi(id) {
+  return http.delete(`/category/${id}/`).then(({ data }) => data.data);
+}
