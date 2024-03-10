@@ -4,6 +4,7 @@ import { HiMiniBookOpen } from 'react-icons/hi2';
 import SearchField from '../../ui/SearchField';
 import Filter from '../../ui/Filter';
 import AddBook from './AddBook';
+import useCategories from './useCategories';
 
 const categoryOptions = [
   { value: 'همه', label: 'دسته بندی(همه)' },
@@ -35,6 +36,8 @@ const BooksListHeader = () => {
   const onChange = () => {
     setSelectedOption;
   };
+  const { data } = useCategories();
+  const category = data?.data?.data;
 
   return (
     <>
@@ -56,7 +59,7 @@ const BooksListHeader = () => {
           <SearchField />
         </div>
         <Filter filterField="status" options={statusOptions} />
-        <Select value="category" options={categoryOptions} onChange={onChange} />
+        <Select value="category" options={category} onChange={onChange} />
       </div>
       <AddBook isOpen={isOpen} setIsOpen={setIsOpen} categoryOptions={categoryOptions} />
     </>

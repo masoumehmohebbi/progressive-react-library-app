@@ -16,6 +16,7 @@ import Loading from './Loading';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 import { useQueryClient } from '@tanstack/react-query';
+import useFetchBooks from '../features/booskList/useFetchBooks';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -33,6 +34,11 @@ const NavBar = () => {
 
   const { isPending, logout } = useLogout();
   const queryClient = useQueryClient();
+
+  // hey look at here :)
+  const { data: fetchBooks } = useFetchBooks();
+  const filteredBooks = fetchBooks?.filter((book) => book.is_favorite === true);
+  console.log(filteredBooks);
 
   const logOutHandler = async () => {
     try {
