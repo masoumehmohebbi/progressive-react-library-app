@@ -18,7 +18,7 @@ const BooksListSection = () => {
           >
             <img
               className="w-full h-[15rem] bg-cover object-cover"
-              src={book.image_url}
+              src={book.image_url ? book.image_url : '/images/book-default.png'}
               alt={book.title}
             />
             <h1 className="font-bold text-lg">{book.title}</h1>

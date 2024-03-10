@@ -49,6 +49,10 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       formData.append('is_favorite', getValues('is_favorite'));
 
       await mutateAddBook(formData);
+
+      queryClient.invalidateQueries({
+        queryKey: ['get-all-books'],
+      });
       toast.success('کتاب شما با موفقیت ثبت شد');
     } catch (error) {
       const err = error?.response?.data?.error?.error;
