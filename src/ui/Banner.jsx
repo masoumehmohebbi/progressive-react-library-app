@@ -15,7 +15,7 @@ const Banner = () => {
         <div className="aspect-w-4 aspect-h-4">
           <img
             alt="وبسایت آموزش برنامه نویسی |فرانت هوکس"
-            src="/library.png"
+            src="/images/library.png"
             className="object-cover object-center w-full h-full md:absolute inset-0"
           />
         </div>

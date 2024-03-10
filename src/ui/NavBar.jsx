@@ -95,7 +95,7 @@ const NavBar = () => {
         <div className="flex items-center gap-x-3 ">
           <button className="relative" onClick={() => setIsModalOpen(true)}>
             <HiOutlineHeart className="w-9 h-9 text-red-500" />
-            <span className="badge">{filteredBooks?.length}</span>
+            <span className="badge">{filteredBooks ? filteredBooks?.length : 0}</span>
           </button>
 
           {/* Logged-In user profile */}
