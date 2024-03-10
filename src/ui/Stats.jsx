@@ -1,30 +1,35 @@
-import Stat from "./Stat";
-import { BiCollection } from "react-icons/bi";
+import useFetchBooks from '../features/booskList/useFetchBooks';
+import Stat from './Stat';
+import { BiCollection } from 'react-icons/bi';
 
-const data = [
-  {
-    id: 1,
-    icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-white" />,
-    title: "100 ",
-    subTitle: " کل کتاب‌ها ",
-    bgColor: "green",
-  },
-  {
-    id: 2,
-    icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-white" />,
-    title: "60",
-    subTitle: "خوانده شده‌ها",
-    bgColor: "yellow",
-  },
-  {
-    id: 3,
-    icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-white" />,
-    title: "40",
-    subTitle: "خوانده نشده‌ها",
-    bgColor: "blue",
-  },
-];
 function Stats() {
+  const { data: totalBooks } = useFetchBooks();
+  const readBooks = totalBooks?.filter((book) => book.is_read === true);
+  const unReadBooks = totalBooks?.filter((book) => book.is_read === false);
+
+  const data = [
+    {
+      id: 1,
+      icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-secondary-0" />,
+      title: totalBooks?.length,
+      subTitle: 'کل کتاب‌ها',
+      bgColor: 'green',
+    },
+    {
+      id: 2,
+      icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-secondary-0" />,
+      title: readBooks?.length,
+      subTitle: 'خوانده شده‌ها',
+      bgColor: 'yellow',
+    },
+    {
+      id: 3,
+      icon: <BiCollection className="w-7 sm:w-11 h-7 sm:h-11 text-secondary-0" />,
+      title: unReadBooks?.length,
+      subTitle: 'خوانده نشده‌ها',
+      bgColor: 'blue',
+    },
+  ];
   return (
     <div className="my-16 px-5 lg:px-0 sm:my-28 flex w-full flex-wrap md:grid grid-cols-12 justify-between gap-4 md:gap-8">
       {data &&
