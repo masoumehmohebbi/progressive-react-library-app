@@ -71,6 +71,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
         queryKey: ['get-all-category'],
       });
     } catch (error) {
+      toast.error(error?.response?.data?.error?.name);
       console.log(error);
     }
   };
