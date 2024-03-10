@@ -1,3 +1,4 @@
+import { HiHeart, HiOutlineEye } from 'react-icons/hi';
 import useFetchBooks from './useFetchBooks';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
@@ -30,6 +31,10 @@ const BooksListSection = () => {
               ) : (
                 <IoIosCloseCircleOutline className="text-error" />
               )}
+            </div>
+            <div className="flex justify-between items-center w-full pt-4">
+              <HiOutlineEye className="w-5 h-5 drop-shadow-md text-primary-900" />
+              <HiHeart className="w-5 h-5 drop-shadow-md text-secondary-400" />
             </div>
           </div>
         ))
