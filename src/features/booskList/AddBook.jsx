@@ -11,20 +11,12 @@ import useCategories from './useCategories';
 import { createCategory } from '../../services/categoryService';
 import { useState } from 'react';
 
-// const category = [
-//   { value: 'رمان', label: 'رمان' },
-//   { value: 'شعر', label: 'شعر' },
-//   { value: 'روانشناسی', label: 'روانشناسی' },
-//   { value: 'انگیزشی', label: 'انگیزشی' },
-//   { value: 'دیگر', label: 'دیگر' },
-// ];
-
 const AddBook = ({ isOpen, setIsOpen }) => {
+  const [bookCover, setBookCover] = useState('');
+
   const { data } = useCategories();
   const category = data?.data?.data;
   const queryClient = useQueryClient();
-
-  const [img, setImg] = useState('');
 
   const {
     register,
@@ -34,7 +26,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     formState: { errors },
   } = useForm();
 
-  const { isPending } = useMutation({
+  const { isPending, mutateAsync: mutateAddBook } = useMutation({
     mutationFn: addBook,
   });
 
@@ -43,42 +35,36 @@ const AddBook = ({ isOpen, setIsOpen }) => {
   });
 
   const addBookHandler = async () => {
-    console.log({
-      title: getValues('title'),
-      author: getValues('author'),
-      image_url: img,
-      category_name: getValues('category_name'),
-      is_read: getValues('is_read'),
-      is_favorite: getValues('is_favorite'),
-    });
+    // console.log({
+    //   title: getValues('title'),
+    //   author: getValues('author'),
+    //   image_url: bookCover,
+    //   category_name: getValues('category_name'),
+    //   is_read: getValues('is_read'),
+    //   is_favorite: getValues('is_favorite'),
+    // });
     try {
       const formData = new FormData();
       formData.append('title', getValues('title'));
       formData.append('author', getValues('author'));
-      formData.append('image_url', img);
+      formData.append('image_url', bookCover);
       formData.append('category_name', getValues('category_name'));
       formData.append('is_read', getValues('is_read'));
       formData.append('is_favorite', getValues('is_favorite'));
 
-      const d = await addBook(formData);
-      console.log(d);
+      await mutateAddBook(formData);
       toast.success('کتاب شما با موفقیت ثبت شد');
-
-      // const cat = await createCat({ name: getValues('category_name') });
-      // console.log(cat);
     } catch (error) {
-      console.log(error);
-      Object.keys(error?.response?.data?.error?.error).map((key) => {
-        toast.error(error?.response?.data?.error?.error[key]),
-          console.log(error?.response?.data?.error?.error[key]);
+      const err = error?.response?.data?.error?.error;
+      Object.keys(err).map((key) => {
+        toast.error(err[key]), console.log(err[key]);
       });
     }
   };
 
   const addCategoryHandler = async () => {
     try {
-      const cat = await createCat({ name: getValues('category_name1') });
-      console.log(cat);
+      await createCat({ name: getValues('category_choose') });
       toast.success(' دسته بندی جدید با موفقیت اضافه شد');
 
       queryClient.invalidateQueries({
@@ -90,11 +76,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
   };
   return (
     <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
-      <form
-        className="space-y-4"
-        onSubmit={handleSubmit(addBookHandler)}
-        encType="multipart/form-data"
-      >
+      <form className="space-y-4" onSubmit={handleSubmit(addBookHandler)}>
         <TextField
           required
           validationSchema={{
@@ -117,21 +99,11 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           type="text"
           register={register}
         />
-        {/* <RHFSelect
-          label="دسته بندی"
-          required
-          name="category_name"
-          register={register}
-          options={category}
-        /> */}
+
         <div className="grid grid-cols-7 items-end justify-center gap-x-2">
           <TextField
-            // required
-            // validationSchema={{
-            //   required: ' نوشتن دسته بندی ضروری است',
-            // }}
             errors={errors}
-            name="category_name1"
+            name="category_choose"
             label="دسته بندی"
             type="text"
             register={register}
@@ -142,7 +114,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
             </button>
           </div>
           <RHFSelect
-            label=" انتخاب دسته بندی "
+            label="انتخاب دسته بندی"
             required
             validationSchema={{
               required: ' انتخاب دسته بندی ضروری است',
@@ -160,8 +132,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
           register={register}
           accept=".png, .jpg, .jpeg"
           onChange={(e) => {
-            setImg(e.target.files[0]);
-            console.log(img);
+            setBookCover(e.target.files[0]);
           }}
         />
         <RadioInputGroup

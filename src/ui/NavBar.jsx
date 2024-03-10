@@ -39,6 +39,7 @@ const NavBar = () => {
       await logout({ refresh_token: cookies.get('refresh_token') });
       cookies.remove('access_token');
       cookies.remove('refresh_token');
+
       queryClient.removeQueries();
     } catch (error) {
       console.log(error);
