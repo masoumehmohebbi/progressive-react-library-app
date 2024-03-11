@@ -1,11 +1,11 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   function handleClick(value) {
-    searchParams.set(filterField, value);
+    searchParams.set(`/books/` + filterField, value);
     setSearchParams(searchParams);
   }
 
@@ -23,8 +23,8 @@ function Filter({ filterField, options }) {
               className={`whitespace-nowrap rounded-md px-4 py-1 font-bold transition-all duration-300
              ${
                isActive
-                 ? "!bg-primary-900 text-white"
-                 : "bg-secondary-200 text-secondary-800"
+                 ? '!bg-primary-900 text-white'
+                 : 'bg-secondary-200 text-secondary-800'
              } 
               `}
             >

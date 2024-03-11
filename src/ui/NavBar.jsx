@@ -45,9 +45,6 @@ const NavBar = () => {
       cookies.remove('refresh_token');
 
       queryClient.removeQueries();
-      queryClient.invalidateQueries({
-        queryKey: ['get-user'],
-      });
     } catch (error) {
       console.log(error);
     }
@@ -165,7 +162,7 @@ const NavBar = () => {
                 <div className="h-[10rem]">
                   <img
                     className="h-full w-full object-cover bg-cover"
-                    src={book.image_url}
+                    src={book.image_url ? book.image_url : '/images/book-default.png'}
                     alt={book.title}
                   />
                 </div>

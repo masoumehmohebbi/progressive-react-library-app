@@ -19,15 +19,15 @@ const categoryOptions = [
 const statusOptions = [
   {
     label: 'همه',
-    value: 'ALL',
+    value: '',
   },
   {
     label: 'خوانده‌ها',
-    value: 'OPEN',
+    value: 'true',
   },
   {
     label: 'نخوانده‌ها',
-    value: 'CLOSED',
+    value: 'false',
   },
 ];
 const BooksListHeader = () => {
@@ -61,7 +61,7 @@ const BooksListHeader = () => {
         <div className="w-full order-1 sm:order-none col-span-10 row-span-1 sm:col-span-5">
           <SearchField />
         </div>
-        <Filter filterField="status" options={statusOptions} />
+        <Filter filterField="is_read" options={statusOptions} />
         <Select value="category" options={category} onChange={onChange} />
       </div>
       <AddBook isOpen={isOpen} setIsOpen={setIsOpen} categoryOptions={categoryOptions} />
