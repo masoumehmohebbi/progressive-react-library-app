@@ -8,11 +8,14 @@ import { getTokens } from '../../services/authService';
 import Loading from '../../ui/Loading';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { HiArrowRight } from 'react-icons/hi';
+import useMoveBack from '../../hooks/useMoveBack';
 
 // import { GoogleLogin } from '@react-oauth/google';
 // import { jwtDecode } from 'jwt-decode';
 
 export const LogInForm = () => {
+  const moveBack = useMoveBack();
   const { errors, register, getValues, handleSubmit } = useForm();
 
   const navigate = useNavigate();
@@ -45,6 +48,9 @@ export const LogInForm = () => {
   };
   return (
     <div className="w-full mx-auto sm:my-5 sm:max-w-md lg:max-w-xl bg-secondary-0 sm:border p-5 sm:p-8 rounded-xl shadow-md">
+      <button className="pb-9" onClick={moveBack}>
+        <HiArrowRight className="w-6 h-6 text-secondary-500" />
+      </button>
       <h1 className="title w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         به رابوک خوش آمدید. وارد شوید
       </h1>

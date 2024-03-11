@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom';
 import TextField from '../../ui/TextField';
 import GoogleField from '../../ui/GoogleField';
 import Loading from '../../ui/Loading';
+import { HiArrowRight } from 'react-icons/hi';
+import useMoveBack from '../../hooks/useMoveBack';
 
 function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
+  const moveBack = useMoveBack();
+
   return (
     <div className="w-full sm:max-w-md lg:max-w-xl bg-secondary-0 sm:border p-5 sm:p-8 rounded-xl shadow-md">
+      <button className="pb-9" onClick={moveBack}>
+        <HiArrowRight className="w-6 h-6 text-secondary-500" />
+      </button>
       <h1 className="title flex justify-center w-full text-center text-2xl sm:text-3xl mb-11 mt-3">
         برای ثبت کتاب های خود ثبت نام کنید
       </h1>

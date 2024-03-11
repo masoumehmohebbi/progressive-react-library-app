@@ -3,10 +3,30 @@ import useFetchBooks from './useFetchBooks';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { editBookApi } from '../../services/bookService';
 
 const BooksListSection = () => {
+  const queryClient = useQueryClient();
   const { data: allBooks } = useFetchBooks();
   const navigate = useNavigate();
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: editBookApi,
+  });
+
+  const favouriteHandler = async (e, id) => {
+    e.stopPropagation();
+
+    try {
+      await mutateAsync({ id: Number(id) }, { is_favorite: false });
+      queryClient.invalidateQueries({
+        queryKey: ['get-all-books'],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mt-4 mb-28 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
@@ -34,7 +54,13 @@ const BooksListSection = () => {
             </div>
             <div className="flex justify-between items-center w-full pt-4">
               <HiOutlineEye className="w-5 h-5 drop-shadow-md text-primary-900" />
-              <HiHeart className="w-5 h-5 drop-shadow-md text-secondary-400" />
+              <button onClick={(e) => favouriteHandler(e, book.id)}>
+                <HiHeart
+                  className={`w-5 h-5 drop-shadow-md ${
+                    book.is_favorite ? 'text-error' : 'text-secondary-400'
+                  }`}
+                />
+              </button>
             </div>
           </div>
         ))
