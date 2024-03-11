@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
 import { FaTelegram } from 'react-icons/fa';
+import { HiArrowRight } from 'react-icons/hi';
+import useMoveBack from '../hooks/useMoveBack';
 
 const developers = [
   {
     id: 1,
     name: 'معصومه محبی',
     field: 'توسعه دهنده فرانت اند',
-    src: '/images/MasoumeMohebbi_Developer.png',
     socialMedia: [
       {
         id: 1,
@@ -22,7 +23,6 @@ const developers = [
     id: 2,
     name: 'علی سیدی',
     field: 'توسعه دهنده ی بک اند',
-    src: '/images/AliSeedi_Developer.png',
     socialMedia: [
       {
         id: 1,
@@ -36,10 +36,14 @@ const developers = [
 ];
 
 export const AboutUs = () => {
+  const moveBack = useMoveBack();
   return (
     <div className="pb-5 text-secondary-800">
       <div className="w-full px-5 mx-auto h-auto flex items-center justify-center">
         <div className="pt-8 pb-24 w-full md:w-11/12">
+          <button onClick={moveBack}>
+            <HiArrowRight className="w-6 h-6 text-secondary-500" />
+          </button>
           <div className="text-centerr">
             <h1 className="text-2xl font-bold text-center">درباره ی رابوک</h1>
             <div className="pt-9 text-right text-secondary-600 w-full lg:max-w-4xl mx-auto">
@@ -76,16 +80,9 @@ export const AboutUs = () => {
                   key={dev.id}
                   className="border md:w-1/3 bg-secondary-0 block sm:justify-between sm:items-center sm:flex md:block border-secondary-50 hover:scale-105 duration-300 p-4 text-center rounded-md shadow-md"
                 >
-                  <div className="flex gap-x-2 items-center">
-                    <img
-                      className="w-[4.3rem] sm:w-20 h-[4.3rem] sm:h-20 bg-primary-700 rounded-full"
-                      src={dev.src}
-                      alt={dev.name}
-                    />
-                    <h2 className="text-xl sm:text-2xl font-bold text-primary-900">
-                      {dev.name}
-                    </h2>
-                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-primary-900">
+                    {dev.name}
+                  </h2>
                   <p className="mt-2 text-secondary-500">{dev.field}</p>
                   <div className="flex items-center justify-center gap-4 mt-4">
                     {dev.socialMedia.map((item) => (
