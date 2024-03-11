@@ -3,10 +3,16 @@ import useBook from './useBook';
 import { HiArrowRight, HiCheck, HiPencil, HiTrash, HiX } from 'react-icons/hi';
 import toLocalDateShort from '../../utils/toLocalDateShort';
 import useMoveBack from '../../hooks/useMoveBack';
+import { useState } from 'react';
+import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import useRemoveBook from './useRemoveBook';
 
 const BookDetails = () => {
   const { isLoading, book } = useBook();
   const moveBack = useMoveBack();
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const { removeBook } = useRemoveBook();
 
   if (isLoading)
     return (
@@ -21,9 +27,9 @@ const BookDetails = () => {
       </button>
       <div className="flex items-start gap-x-2">
         <img
-          className="w-20 sm:w-56 shadow-md rounded-md border border-primary-200"
+          className="w-20 sm:w-56 sm:h-64 object-cover shadow-md rounded-md border border-primary-200"
           src={book.image_url ? book.image_url : '/images/book-default.png'}
-          alt=""
+          alt={book.title}
         />
         <div className="col-span-5 h-fit w-full bg-secondary-0 overflow-x-auto">
           <table>
@@ -61,7 +67,7 @@ const BookDetails = () => {
                 <td>{toLocalDateShort(book.created_at)}</td>
                 <td>
                   <div className="flex text-lg gap-x-3">
-                    <button>
+                    <button onClick={() => setIsDeleteOpen(true)}>
                       <HiTrash className="text-error" />
                     </button>
                     <button>
@@ -74,6 +80,22 @@ const BookDetails = () => {
           </table>
         </div>
       </div>
+      <Modal
+        title={`حذف ${book.title}`}
+        open={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+      >
+        <ConfirmDelete
+          resourceName={book.title}
+          onClose={() => setIsDeleteOpen(false)}
+          onConfirm={() => {
+            removeBook(book.id, {
+              onSuccess: () => setIsDeleteOpen(false),
+            });
+          }}
+          disabled={false}
+        />
+      </Modal>
     </div>
   );
 };

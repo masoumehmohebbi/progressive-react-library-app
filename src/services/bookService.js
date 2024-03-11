@@ -11,3 +11,7 @@ export function getOneBook(id) {
 export function addBook(data) {
   return http.post('/book/', data);
 }
+
+export function removeBookApi(id) {
+  return http.delete(`/book/${id}/`).then(({ data }) => data.data);
+}
