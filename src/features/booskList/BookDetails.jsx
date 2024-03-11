@@ -18,12 +18,12 @@ const BookDetails = () => {
 
   if (isLoading)
     return (
-      <div className="my-36">
+      <div className="h-screen flex items-center justify-center">
         <Loading />
       </div>
     );
   return (
-    <div className="px-5 text-secondary-800 mt-9 mb-28 md:shadow-md md:bg-secondary-0 py-5 rounded-md md:border border-primary-100 max-w-screen-md mx-auto">
+    <div className="px-5 text-secondary-800 md:mt-9 mb-28 md:shadow-md md:bg-secondary-0 py-5 rounded-md md:border border-primary-100 max-w-screen-md mx-auto">
       <button className="pb-9" onClick={moveBack}>
         <HiArrowRight className="w-6 h-6 text-secondary-500" />
       </button>
