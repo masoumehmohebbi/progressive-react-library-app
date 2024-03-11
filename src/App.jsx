@@ -25,9 +25,9 @@ const App = () => {
             <Route path="/" element={<Home />} />
           </Route>
           <Route element={<Layout />}>
-            <Route path="/book/:id" element={<BookDetails />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="/book/:id" element={<BookDetails />} />
           <Route path="/about-us/contact" element={<AboutUs />} />
         </Routes>
       </QueryClientProvider>

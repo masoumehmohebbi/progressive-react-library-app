@@ -39,6 +39,10 @@ const BooksListHeader = () => {
   };
   const { data } = useCategories();
   const category = data?.data?.data;
+  // const transformedCategory = category?.map((item) => ({
+  //   id: item.id,
+  //   name: item.name,
+  // }));
 
   // [{ id: 0, name: 'همه' }, ...category];
   // console.log([{ id: 0, name: 'همه' }, ...category]);

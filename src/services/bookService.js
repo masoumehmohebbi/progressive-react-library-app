@@ -15,3 +15,11 @@ export function addBook(data) {
 export function removeBookApi(id) {
   return http.delete(`/book/${id}/`).then(({ data }) => data.data);
 }
+
+export function editBookApi({ id, newBook }) {
+  return http.patch(`/book/${id}`, newBook).then(({ data }) => data.data);
+}
+
+export function getFilteredBook(data) {
+  return http.get(`/book/${data}`).then(({ data }) => data.data);
+}

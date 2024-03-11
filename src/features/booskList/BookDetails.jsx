@@ -7,12 +7,14 @@ import { useState } from 'react';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import useRemoveBook from './useRemoveBook';
+import useEditBook from './useEditBook';
 
 const BookDetails = () => {
   const { isLoading, book } = useBook();
   const moveBack = useMoveBack();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { removeBook } = useRemoveBook();
+  const { isEditing, editBook } = useEditBook();
 
   if (isLoading)
     return (
@@ -21,64 +23,67 @@ const BookDetails = () => {
       </div>
     );
   return (
-    <div className="px-5 text-secondary-800">
-      <button className="py-9" onClick={moveBack}>
+    <div className="px-5 text-secondary-800 mt-9 mb-28 md:shadow-md md:bg-secondary-0 py-5 rounded-md md:border border-primary-100 max-w-screen-md mx-auto">
+      <button className="pb-9" onClick={moveBack}>
         <HiArrowRight className="w-6 h-6 text-secondary-500" />
       </button>
-      <div className="flex items-start gap-x-2">
+      <div className="flex flex-col gap-y-14 md:gap-y-0 md:flex-row items-center md:items-start gap-x-2 justify-evenly">
         <img
-          className="w-20 sm:w-56 sm:h-64 object-cover shadow-md rounded-md border border-primary-200"
+          className="object-cover rounded-md max-w-60 max-h-80"
           src={book.image_url ? book.image_url : '/images/book-default.png'}
           alt={book.title}
         />
-        <div className="col-span-5 h-fit w-full bg-secondary-0 overflow-x-auto">
-          <table>
-            <thead className="font-bold text-lg">
-              <tr className="title-row">
-                <td>عنوان</td>
-                <td>نویسنده</td>
-                <td>ژانر</td>
-                <td>قبلا خونده م؟</td>
-                <td>مورد علاقمه؟</td>
-                <td>تاریخ اضافه کردن</td>
-                <td>عملیات</td>
-              </tr>
-            </thead>
 
-            <tbody>
-              <tr>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.category}</td>
-                <td>
-                  {book.is_favorite === true ? (
-                    <HiCheck className="text-success text-lg" />
-                  ) : (
-                    <HiX className="text-error text-lg" />
-                  )}
-                </td>
-                <td>
-                  {book.is_read === true ? (
-                    <HiCheck className="text-success text-lg" />
-                  ) : (
-                    <HiX className="text-error text-lg" />
-                  )}
-                </td>
-                <td>{toLocalDateShort(book.created_at)}</td>
-                <td>
-                  <div className="flex text-lg gap-x-3">
-                    <button onClick={() => setIsDeleteOpen(true)}>
-                      <HiTrash className="text-error" />
-                    </button>
-                    <button>
-                      <HiPencil className="text-primary-900" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ul className="flex flex-col gap-y-7">
+          <li className="li-item">
+            <h1>عنوان:</h1>
+            <h2>{book.title}</h2>
+          </li>
+          <li className="li-item">
+            <h1>نویسنده:</h1>
+            <h2>{book.author}</h2>
+          </li>
+          <li className="li-item">
+            <h1>ژانر:</h1>
+            <h2>{book.category}</h2>
+          </li>
+          <li className="li-item">
+            <h1>قبلا خونده م؟</h1>
+            <div>
+              {book.is_favorite === true ? (
+                <HiCheck className="text-success text-lg" />
+              ) : (
+                <HiX className="text-error text-lg" />
+              )}
+            </div>
+          </li>
+          <li className="li-item">
+            <h1>مورد علاقمه؟</h1>
+            <div>
+              {book.is_read === true ? (
+                <HiCheck className="text-success text-lg" />
+              ) : (
+                <HiX className="text-error text-lg" />
+              )}
+            </div>
+          </li>
+          <li className="li-item">
+            <h1>تاریخ:</h1>
+            <h2>{toLocalDateShort(book.created_at)}</h2>
+          </li>
+          <li className="li-item">
+            <h1>عملیات:</h1>
+
+            <div className="flex text-lg sm:text-xl gap-x-5">
+              <button onClick={() => setIsDeleteOpen(true)}>
+                <HiTrash className="text-error" />
+              </button>
+              <button>
+                <HiPencil className="text-primary-900" />
+              </button>
+            </div>
+          </li>
+        </ul>
       </div>
       <Modal
         title={`حذف ${book.title}`}

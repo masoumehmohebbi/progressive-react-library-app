@@ -9,7 +9,7 @@ const BooksListSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
+    <div className="mt-4 mb-28 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
       {allBooks ? (
         allBooks?.map((book) => (
           <div

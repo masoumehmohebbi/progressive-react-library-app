@@ -79,6 +79,13 @@
   .title {
     @apply text-[21px] md:text-4xl font-extrabold text-slate-800;
   }
+
+  .li-item {
+    @apply flex gap-x-16 w-full justify-between items-center border-b-[1px] pb-1;
+  }
+  .li-item h1 {
+    @apply font-black text-lg text-primary-800;
+  }
 }
 
 /* .badge {
