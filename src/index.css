@@ -1,4 +1,4 @@
-@import url("/fonts.css");
+@import url('/fonts.css');
 
 @tailwind base;
 @tailwind components;
@@ -89,7 +89,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Dana";
+  font-family: 'Dana';
   /* min-height: 100vh; */
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
@@ -124,7 +124,7 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield; /* Firefox */
 }
 
@@ -164,4 +164,35 @@ input[type="number"] {
   background-color: var(--secondary);
   border-radius: 14px;
   border: 3px solid var(--primary);
+}
+
+/* TABLE */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table .title-row {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+table td,
+table th {
+  border-bottom: 1px solid rgb(var(--color-secondary-200));
+  text-align: right;
+  white-space: nowrap;
+}
+
+table th {
+  padding: 0.6rem 1rem;
+  color: rgb(var(--color-secondary-600));
+  font-size: 0.9rem;
+}
+
+table td {
+  font-size: 0.85rem;
+  padding: 1rem 1rem;
+  color: rgb(var(--color-secondary-600));
 }

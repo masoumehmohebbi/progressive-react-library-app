@@ -45,6 +45,9 @@ const NavBar = () => {
       cookies.remove('refresh_token');
 
       queryClient.removeQueries();
+      queryClient.invalidateQueries({
+        queryKey: ['get-user'],
+      });
     } catch (error) {
       console.log(error);
     }

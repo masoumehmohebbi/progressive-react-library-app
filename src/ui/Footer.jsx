@@ -1,6 +1,7 @@
 import { BiLogoInstagram, BiLogoTelegram, BiLogoTwitter } from 'react-icons/bi';
 import { IoLibraryOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import { toPersianNumbers } from '../utils/toPersianNumbers';
 
 const Footer = () => {
   return (
@@ -58,7 +59,7 @@ const Footer = () => {
 
       <div className="my-7 bg-secondary-400 h-[1px] w-full rounded-md"></div>
 
-      <h5>رابوک 1402 © </h5>
+      <h5>رابوک {toPersianNumbers(1402)} © </h5>
     </footer>
   );
 };
