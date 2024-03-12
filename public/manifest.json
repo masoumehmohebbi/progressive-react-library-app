@@ -3,7 +3,7 @@
   "name": "Library App PWA",
   "icons": [
     {
-      "src": "/library.png",
+      "src": "/images/library.png",
       "type": "image/png",
       "sizes": "1024x1024"
     }

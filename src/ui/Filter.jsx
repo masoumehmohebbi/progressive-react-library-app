@@ -17,7 +17,7 @@ function Filter({ filterField, options }) {
     queryFn: () => getFilteredBook('?' + filterField + '=' + currentFilter),
     retry: false,
   });
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="order-3 col-span-5 sm:col-span-3 flex items-center gap-x-2 text-xs">

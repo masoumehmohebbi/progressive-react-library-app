@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IoExitOutline, IoLibraryOutline } from 'react-icons/io5';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { HiOutlineHeart } from 'react-icons/hi2';
@@ -29,7 +29,7 @@ const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { data } = useUser();
+  const { data, isLoading } = useUser();
   const userProfile = data?.data?.data;
 
   const { isPending, logout } = useLogout();
@@ -45,6 +45,9 @@ const NavBar = () => {
       cookies.remove('refresh_token');
 
       queryClient.removeQueries();
+      queryClient.invalidateQueries({
+        queryKey: ['get-user'],
+      });
     } catch (error) {
       console.log(error);
     }
@@ -52,8 +55,10 @@ const NavBar = () => {
   return (
     <>
       <nav
-        className="py-3 w-full transiton-all duration-100 ease-out z-20 shadow-menu md:shadow-none backdrop-blur-2xl
-  blur-0 opacity-100 sticky top-0 font-sans items-center px-2 sm:px-3 flex justify-between"
+        className={`py-3 w-full transiton-all duration-100 ease-out z-20 shadow-menu md:shadow-none backdrop-blur-2xl
+  blur-0 opacity-100 sticky top-0 font-sans items-center px-2 sm:px-3 flex justify-between ${
+    isLoading ? 'blur-sm opacity-50' : ''
+  } `}
       >
         <ul
           className={`gap-x-6 fixed top-0 bg-secondary-200 text-secondary-0 md:bg-transparent h-screen md:h-auto md:col-span-5 flex md:ml-1 flex-col items-start md:items-center px-5 md:px-0 md:flex-row pt-20 md:pt-0 md:static md:z-auto z-[-1] left-0 w-full md:w-fit transition-all duration-500 ease-in ${

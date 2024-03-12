@@ -2,9 +2,11 @@ import { Outlet } from 'react-router-dom';
 import NavBar from './NavBar';
 import Banner from './Banner';
 import Footer from './Footer';
+import { useQuery } from '@tanstack/react-query';
 import useUser from '../features/authentication/useUser';
-// import Cookies from 'universal-cookie';
-// const cookies = new Cookies();
+import { getUser, verifyToken } from '../services/authService';
+import { useMutation } from '@tanstack/react-query';
+import Cookies from 'universal-cookie';
 
 const AppLayout = () => {
   const { data } = useUser();

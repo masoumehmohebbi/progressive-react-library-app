@@ -5,7 +5,7 @@ import useUser from '../features/authentication/useUser';
 const Banner = () => {
   const navigate = useNavigate();
 
-  const { data } = useUser();
+  const { data, isLoading } = useUser();
   const userProfile = data?.data?.data;
 
   return (
@@ -35,7 +35,11 @@ const Banner = () => {
               <br />
               کدوما رو خوندید و کدومارو قراره که بخونید
             </p>
-            <div className="mt-8 text-xs md:text-lg font-semibold text-secondary-500">
+            <div
+              className={`mt-8 text-xs md:text-lg font-semibold text-secondary-500  ${
+                isLoading ? 'blur-sm opacity-50' : ''
+              }`}
+            >
               {userProfile ? (
                 <p>
                   {userProfile?.first_name} عزیز! به رابوک خوش آمدید &#128075; شروع کنید

@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function SwitchRemmemerMe() {
   const [enabled, setEnabled] = useState(false);
   // const { enabled, setEnabled } = useRemmemberMe();
-  console.log(enabled);
+  // console.log(enabled);
 
   return (
     <div dir="ltr">

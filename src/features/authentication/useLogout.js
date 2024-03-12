@@ -13,6 +13,10 @@ export default function useLogout() {
       queryClient.removeQueries();
       navigate('/', { replace: true });
     },
+
+    onError: () => {
+      console.log('logOut :(');
+    },
   });
 
   return { isPending, logout };
