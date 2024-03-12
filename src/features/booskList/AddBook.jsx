@@ -54,6 +54,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
         queryKey: ['get-all-books'],
       });
       toast.success('کتاب شما با موفقیت ثبت شد');
+      setIsOpen(false);
     } catch (error) {
       const err = error?.response?.data?.error?.error;
       Object.keys(err).map((key) => {

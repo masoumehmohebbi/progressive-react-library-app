@@ -16,7 +16,12 @@ import useMoveBack from '../../hooks/useMoveBack';
 
 export const LogInForm = () => {
   const moveBack = useMoveBack();
-  const { errors, register, getValues, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
 
@@ -77,6 +82,7 @@ export const LogInForm = () => {
             required: 'نام کاربری ضروری است',
           }}
         />
+
         <TextField
           required
           errors={errors}

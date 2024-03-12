@@ -17,6 +17,8 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 import { useQueryClient } from '@tanstack/react-query';
 import useFetchBooks from '../features/booskList/useFetchBooks';
+import truncateText from '../utils/truncateText';
+import { HiOutlineX } from 'react-icons/hi';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -157,10 +159,17 @@ const NavBar = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3">
+        <div className="grid gap-5 grid-cols-2 text-secondary-700 sm:grid-cols-3">
           {filteredBooks ? (
             filteredBooks?.map((book) => (
-              <div className="flex flex-col shadow-md p-3" key={book.id}>
+              <div
+                onClick={() => navigate(`/book/${book.id}`)}
+                className="flex flex-col items-center justify-center gap-y-2 cursor-pointer bg-secondary-100 shadow-md p-3 "
+                key={book.id}
+              >
+                <button className="w-full">
+                  <HiOutlineX className="w-5 h-5 text-error" />
+                </button>
                 <div className="h-[10rem]">
                   <img
                     className="h-full w-full object-cover bg-cover"
@@ -168,8 +177,8 @@ const NavBar = () => {
                     alt={book.title}
                   />
                 </div>
-                <h1>{book.title}</h1>
-                <p>{book.author}</p>
+                <h1 className="font-semibold">{book.title}</h1>
+                <p>نویسنده: {truncateText(book.author, 4)}</p>
               </div>
             ))
           ) : (

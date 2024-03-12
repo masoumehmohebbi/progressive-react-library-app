@@ -5,6 +5,7 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { editBookApi } from '../../services/bookService';
+import truncateText from '../../utils/truncateText';
 
 const BooksListSection = () => {
   const queryClient = useQueryClient();
@@ -43,7 +44,8 @@ const BooksListSection = () => {
               alt={book.title}
             />
             <h1 className="font-bold text-lg">{book.title}</h1>
-            <p>{book.author}</p>
+            <p>نویسنده: {truncateText(book.author, 9)}</p>
+
             <div className="flex items-center gap-1">
               قبلا خوانده ام:
               {book.is_read ? (

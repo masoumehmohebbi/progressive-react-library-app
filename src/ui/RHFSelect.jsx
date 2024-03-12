@@ -1,4 +1,4 @@
-function RHFSelect({ label, name, register, options, required, children }) {
+function RHFSelect({ label, name, register, options, required, children, errors }) {
   return (
     <div className="col-span-3">
       <label htmlFor={name} className="mb-2 block text-secondary-700">
@@ -19,6 +19,9 @@ function RHFSelect({ label, name, register, options, required, children }) {
         </select>
         {children}
       </div>
+      {errors && errors[name] && (
+        <span className="text-error block text-sm mt-2">{errors[name]?.message}</span>
+      )}
     </div>
   );
 }
