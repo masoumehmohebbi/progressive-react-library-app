@@ -150,7 +150,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
             ) : (
               <button
                 onClick={removeCategoryHandler}
-                className="btn btn--danger border-r-0 border-primary-600 shadow-md bg-secondary-100 py-[9px] px-[10px] rounded-r-none"
+                className="btn btn--danger border-r-0 border-primary-600 shadow-sm bg-secondary-100 py-[9px] px-[10px] rounded-r-none"
               >
                 <HiTrash className="w-5 h-5" />
               </button>

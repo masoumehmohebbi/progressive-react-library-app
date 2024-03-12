@@ -1,8 +1,15 @@
 import { CiLogout } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import useUser from '../features/authentication/useUser';
+import Cookies from 'universal-cookie';
+import { useToken } from '../features/authentication/TokenContext';
+
+const cookies = new Cookies();
 
 const Banner = () => {
+  const { setToken } = useToken();
+  setToken(cookies.get('access_token'));
+
   const navigate = useNavigate();
 
   const { data, isLoading } = useUser();
