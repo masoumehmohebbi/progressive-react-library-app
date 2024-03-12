@@ -1,15 +1,19 @@
-import { ThreeDots } from "react-loader-spinner";
+import { ThreeDots } from 'react-loader-spinner';
 
-function Loading({ width = "75", height = "40" }) {
+function Loading({
+  width = '75',
+  height = '40',
+  color = 'rgb(var(--color-primary-900))',
+}) {
   return (
     <ThreeDots
       height={height}
       width={width}
       radius={9}
-      color="rgb(var(--color-primary-900))"
+      color={color}
       wrapperStyle={{
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
       }}
       visible={true}
     />

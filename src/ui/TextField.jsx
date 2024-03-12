@@ -8,6 +8,8 @@ const TextField = ({
   errors,
   accept,
   onChange,
+  children,
+  addField,
 }) => {
   return (
     <div className="col-span-3">
@@ -15,16 +17,22 @@ const TextField = ({
         {label}
         {required && <span className="text-error">*</span>}
       </label>
-      <input
-        accept={accept}
-        dir="ltr"
-        id={name}
-        className="textField__input text-right"
-        type={type}
-        autoComplete="off"
-        {...register(name, validationSchema)}
-        onChange={onChange}
-      />
+      <div className="flex items-center">
+        <input
+          accept={accept}
+          dir="ltr"
+          id={name}
+          className={`textField__input text-right ${
+            addField === 'true' && ' rounded-l-none'
+          }`}
+          type={type}
+          autoComplete="off"
+          {...register(name, validationSchema)}
+          onChange={onChange}
+        />
+        {children}
+      </div>
+
       {errors && errors[name] && (
         <span className="text-error block text-sm mt-2">{errors[name]?.message}</span>
       )}
