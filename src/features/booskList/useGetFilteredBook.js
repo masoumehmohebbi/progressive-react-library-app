@@ -1,11 +1,21 @@
 import { getFilteredBook } from '../../services/bookService';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 
-const useFilteredBook = ({ key, value }) => {
+const useFilteredBook = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryClient = useQueryClient();
+  const value = searchParams.get('is_read');
+
   const { data, isLoading } = useQuery({
-    queryKey: ['get-filtered-book'],
-    queryFn: () => getFilteredBook(key, '=', value),
+    queryKey: ['get-filtered-book', value],
+    queryFn: () => getFilteredBook('?is_read=' + value),
+
     retry: false,
+
+    onSuccess: () => {
+      queryClient.removeQueries(['get-filtered-book']);
+    },
   });
   const filteredBook = data || {};
 

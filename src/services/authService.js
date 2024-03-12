@@ -12,10 +12,6 @@ export function getTokens(data) {
   return http.post('auth/signin/', data);
 }
 
-export function verifyToken(data) {
-  return http.post('/token/verify/', data);
-}
-
 export function logoutApi(data) {
   return http.post('/auth/signout/', data);
 }

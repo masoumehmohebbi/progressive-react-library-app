@@ -1,8 +1,4 @@
 import { useSearchParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getFilteredBook } from '../services/bookService';
-import Loading from './Loading';
-
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
@@ -11,13 +7,8 @@ function Filter({ filterField, options }) {
     searchParams.set(filterField, value);
     setSearchParams(searchParams);
   }
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['get-filtered-book'],
-    queryFn: () => getFilteredBook('?' + filterField + '=' + currentFilter),
-    retry: false,
-  });
-  // console.log(data);
+  // const { filteredBook, isLoading } = useFilteredBook();
+  // console.log(filteredBook);
 
   return (
     <div className="order-3 col-span-5 sm:col-span-3 flex items-center gap-x-2 text-xs">

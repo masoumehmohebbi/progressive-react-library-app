@@ -6,8 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { editBookApi } from '../../services/bookService';
 import truncateText from '../../utils/truncateText';
+import useFilteredBook from './useGetFilteredBook';
 
 const BooksListSection = () => {
+  const { filteredBook, isLoading } = useFilteredBook();
+  console.log(filteredBook);
+
   const queryClient = useQueryClient();
   const { data: allBooks } = useFetchBooks();
   const navigate = useNavigate();
