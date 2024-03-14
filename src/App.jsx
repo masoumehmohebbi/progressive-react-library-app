@@ -10,13 +10,13 @@ import Home from './pages/Home';
 import BookDetails from './features/booskList/BookDetails';
 import Layout from './features/booskList/Layout';
 import NotFound from './pages/NotFound';
-import { TokenProvider } from './features/authentication/TokenContext';
+import Provider from './ui/Provider';
 
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <>
-      <TokenProvider>
+      <Provider>
         <Toaster />
         <QueryClientProvider client={queryClient}>
           <ScrollToTop />
@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/about-us/contact" element={<AboutUs />} />
           </Routes>
         </QueryClientProvider>
-      </TokenProvider>
+      </Provider>
     </>
   );
 };

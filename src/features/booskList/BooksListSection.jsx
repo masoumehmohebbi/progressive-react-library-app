@@ -7,15 +7,28 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { editBookApi } from '../../services/bookService';
 import truncateText from '../../utils/truncateText';
 import useFilteredBook from './useGetFilteredBook';
+import { useEffect, useState } from 'react';
+import Loading from '../../ui/Loading';
 
 const BooksListSection = () => {
+  const { data: allBooks } = useFetchBooks();
   const { filteredBook, isLoading } = useFilteredBook();
-  console.log(filteredBook);
+
+  const [books, setBooks] = useState(allBooks);
+
+  useEffect(() => {
+    if (filteredBook.length) {
+      setBooks(filteredBook);
+    } else {
+      setBooks(allBooks);
+    }
+  }, [books, filteredBook.length, setBooks, allBooks]);
 
   const queryClient = useQueryClient();
-  const { data: allBooks } = useFetchBooks();
+
   const navigate = useNavigate();
 
+  console.log(allBooks);
   const { isPending, mutateAsync } = useMutation({
     mutationFn: editBookApi,
   });
@@ -35,8 +48,12 @@ const BooksListSection = () => {
 
   return (
     <div className="mt-4 mb-28 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
-      {allBooks ? (
-        allBooks?.map((book) => (
+      {isLoading ? (
+        <div className="col-span-5 mt-16 px-5">
+          <Loading />
+        </div>
+      ) : books ? (
+        books?.map((book) => (
           <div
             onClick={() => navigate(`/book/${book.id}`)}
             key={book.id}
@@ -71,7 +88,9 @@ const BooksListSection = () => {
           </div>
         ))
       ) : (
-        <h1 className="font-extrabold text-lg">شما هنوز هیچ کتابی ثبت نکردید</h1>
+        <h1 className="font-extrabold text-base sm:text-lg w-full mt-16 sm:mb-16 text-center col-span-5 px-5">
+          با کلیک روی افزودن کتاب خود رو ثبت کنید
+        </h1>
       )}
     </div>
   );
