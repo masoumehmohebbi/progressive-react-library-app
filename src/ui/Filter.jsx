@@ -1,15 +1,24 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useFiltered } from '../features/booskList/FilteredBookContext';
 
 function Filter({ filterField, options }) {
+  let location = useLocation();
+  console.log(location.search);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   const { filteredBooks, setFilteredBooks } = useFiltered();
 
   function handleClick(value) {
-    // searchParams.set(filterField, value);
-    // setSearchParams(searchParams);
+    if (value !== '') {
+      searchParams.set(filterField, value);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete(filterField);
+      setSearchParams(searchParams);
+    }
+    if (searchParams.get('page')) searchParams.set('page', 1);
     setFilteredBooks(value);
   }
   // const { filteredBook, isLoading } = useFilteredBook();
@@ -29,7 +38,7 @@ function Filter({ filterField, options }) {
               className={`whitespace-nowrap rounded-md px-4 py-1 font-bold transition-all duration-300
              ${
                isActive
-                 ? '!bg-primary-900 text-white'
+                 ? '!bg-primary-900 text-secondary-0'
                  : 'bg-secondary-200 text-secondary-800'
              } 
               `}

@@ -3,9 +3,9 @@ import { FilteredBooksProvider } from '../features/booskList/FilteredBookContext
 
 const Provider = ({ children }) => {
   return (
-    <FilteredBooksProvider>
-      <TokenProvider>{children}</TokenProvider>
-    </FilteredBooksProvider>
+    <TokenProvider>
+      <FilteredBooksProvider> {children}</FilteredBooksProvider>
+    </TokenProvider>
   );
 };
 

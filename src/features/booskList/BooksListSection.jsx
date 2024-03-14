@@ -7,28 +7,26 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { editBookApi } from '../../services/bookService';
 import truncateText from '../../utils/truncateText';
 import useFilteredBook from './useGetFilteredBook';
-import { useEffect, useState } from 'react';
 import Loading from '../../ui/Loading';
 
 const BooksListSection = () => {
   const { data: allBooks } = useFetchBooks();
   const { filteredBook, isLoading } = useFilteredBook();
 
-  const [books, setBooks] = useState(allBooks);
+  console.log(filteredBook);
 
-  useEffect(() => {
-    if (filteredBook.length) {
-      setBooks(filteredBook);
-    } else {
-      setBooks(allBooks);
-    }
-  }, [books, filteredBook.length, setBooks, allBooks]);
+  // useEffect(() => {
+  //   if (filteredBook.length) {
+  //     setBooks(filteredBook);
+  //   } else {
+  //     setBooks(allBooks);
+  //   }
+  // }, [books, filteredBook.length, setBooks, allBooks]);
 
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
 
-  console.log(allBooks);
   const { isPending, mutateAsync } = useMutation({
     mutationFn: editBookApi,
   });
@@ -52,8 +50,8 @@ const BooksListSection = () => {
         <div className="col-span-5 mt-16 px-5">
           <Loading />
         </div>
-      ) : books ? (
-        books?.map((book) => (
+      ) : filteredBook ? (
+        filteredBook?.map((book) => (
           <div
             onClick={() => navigate(`/book/${book.id}`)}
             key={book.id}

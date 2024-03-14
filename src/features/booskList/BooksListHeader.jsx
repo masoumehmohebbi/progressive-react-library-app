@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import Select from '../../ui/Select';
 import { HiMiniBookOpen } from 'react-icons/hi2';
 import SearchField from '../../ui/SearchField';
 import Filter from '../../ui/Filter';
 import AddBook from './AddBook';
 import useCategories from './useCategories';
-import { useForm } from 'react-hook-form';
+import FilterDropDown from '../../ui/FilterDropDown';
 
 const categoryOptions = [
   { value: 'همه', label: 'دسته بندی(همه)' },
@@ -31,12 +30,7 @@ const statusOptions = [
   },
 ];
 const BooksListHeader = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  const onChange = () => {
-    setSelectedOption;
-  };
   const { data } = useCategories();
   const category = data?.data?.data;
 
@@ -60,7 +54,7 @@ const BooksListHeader = () => {
           <SearchField />
         </div>
         <Filter filterField="is_read" options={statusOptions} />
-        <Select value="category" options={category} onChange={onChange} />
+        <FilterDropDown filterField="category" options={category} />
       </div>
       <AddBook isOpen={isOpen} setIsOpen={setIsOpen} categoryOptions={categoryOptions} />
     </>
