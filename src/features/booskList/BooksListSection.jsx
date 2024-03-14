@@ -10,8 +10,6 @@ import Loading from '../../ui/Loading';
 
 const BooksListSection = () => {
   const { filteredBook, isLoading } = useFilteredBook();
-
-  console.log(filteredBook);
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();

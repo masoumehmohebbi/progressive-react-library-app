@@ -6,15 +6,6 @@ import AddBook from './AddBook';
 import useCategories from './useCategories';
 import FilterDropDown from '../../ui/FilterDropDown';
 
-const categoryOptions = [
-  { value: 'همه', label: 'دسته بندی(همه)' },
-  { value: 'رمان', label: 'رمان' },
-  { value: 'شعر', label: 'شعر' },
-  { value: 'روانشناسی', label: 'روانشناسی' },
-  { value: 'انگیزشی', label: 'انگیزشی' },
-  { value: 'دیگر', label: 'دیگر' },
-];
-
 const statusOptions = [
   {
     label: 'همه',
@@ -56,7 +47,7 @@ const BooksListHeader = () => {
         <Filter filterField="is_read" options={statusOptions} />
         <FilterDropDown filterField="category" options={category} />
       </div>
-      <AddBook isOpen={isOpen} setIsOpen={setIsOpen} categoryOptions={categoryOptions} />
+      <AddBook isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

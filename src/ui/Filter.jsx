@@ -1,9 +1,6 @@
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 function Filter({ filterField, options }) {
-  let location = useLocation();
-  console.log(location.search);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 

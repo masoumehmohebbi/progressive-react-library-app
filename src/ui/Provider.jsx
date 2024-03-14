@@ -1,12 +1,7 @@
 import { TokenProvider } from '../features/authentication/TokenContext';
-import { FilteredBooksProvider } from '../features/booskList/FilteredBookContext';
 
 const Provider = ({ children }) => {
-  return (
-    <TokenProvider>
-      <FilteredBooksProvider> {children}</FilteredBooksProvider>
-    </TokenProvider>
-  );
+  return <TokenProvider>{children}</TokenProvider>;
 };
 
 export default Provider;
