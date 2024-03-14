@@ -1,5 +1,4 @@
 import { useSearchParams, useLocation } from 'react-router-dom';
-import { useFiltered } from '../features/booskList/FilteredBookContext';
 
 function Filter({ filterField, options }) {
   let location = useLocation();
@@ -7,8 +6,6 @@ function Filter({ filterField, options }) {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
-
-  const { filteredBooks, setFilteredBooks } = useFiltered();
 
   function handleClick(value) {
     if (value !== '') {
@@ -19,17 +16,14 @@ function Filter({ filterField, options }) {
       setSearchParams(searchParams);
     }
     if (searchParams.get('page')) searchParams.set('page', 1);
-    setFilteredBooks(value);
   }
-  // const { filteredBook, isLoading } = useFilteredBook();
-  // console.log(filteredBook);
 
   return (
     <div className="order-3 col-span-5 sm:col-span-3 flex items-center gap-x-2 text-xs">
       <span>وضعیت</span>
       <div className="flex items-center gap-x-2 p-1 border border-secondary-100 bg-secondary-300 rounded-lg">
         {options.map(({ value, label }) => {
-          const isActive = value === filteredBooks;
+          const isActive = value === currentFilter;
           return (
             <button
               key={value}

@@ -51,7 +51,7 @@ const BooksListHeader = () => {
       </header>
       <div className="px-2 grid grid-cols-10 mt-11 grid-rows-2 sm:grid-rows-1 max-[570px]:grid-rows-3 items-center gap-6 my-6">
         <div className="w-full order-1 sm:order-none col-span-10 row-span-1 sm:col-span-5">
-          <SearchField />
+          <SearchField filterField="title" />
         </div>
         <Filter filterField="is_read" options={statusOptions} />
         <FilterDropDown filterField="category" options={category} />
