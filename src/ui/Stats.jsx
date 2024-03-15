@@ -1,11 +1,13 @@
-import useFetchBooks from '../features/booskList/useFetchBooks';
+import useFilteredBook from '../features/booskList/useGetFilteredBook';
 import Stat from './Stat';
 import { BiCollection } from 'react-icons/bi';
 
 function Stats() {
-  const { data: totalBooks } = useFetchBooks();
-  const readBooks = totalBooks?.filter((book) => book.is_read === true);
-  const unReadBooks = totalBooks?.filter((book) => book.is_read === false);
+  const { filteredBook: totalBooks } = useFilteredBook();
+  const readBooks =
+    totalBooks?.length > 0 && totalBooks?.filter((book) => book.is_read === true);
+  const unReadBooks =
+    totalBooks?.length > 0 && totalBooks?.filter((book) => book.is_read === false);
 
   const data = [
     {

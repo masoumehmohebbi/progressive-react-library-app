@@ -14,7 +14,7 @@ const BooksListSection = () => {
 
   const navigate = useNavigate();
 
-  const { isPending, mutateAsync } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: editBookApi,
   });
 
@@ -32,7 +32,7 @@ const BooksListSection = () => {
   };
 
   return (
-    <div className="mt-4 mb-28 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
+    <div className="mt-4 px-2 mb-28 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-secondary-700">
       {isLoading ? (
         <div className="col-span-5 mt-16 px-5">
           <Loading />

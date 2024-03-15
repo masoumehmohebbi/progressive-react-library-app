@@ -16,10 +16,10 @@ import Loading from './Loading';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 import { useQueryClient } from '@tanstack/react-query';
-import useFetchBooks from '../features/booskList/useFetchBooks';
 import truncateText from '../utils/truncateText';
 import { HiOutlineX } from 'react-icons/hi';
 import useEditBook from '../features/booskList/useEditBook';
+import useFilteredBook from '../features/booskList/useGetFilteredBook';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -38,9 +38,10 @@ const NavBar = () => {
   const { isPending, logout } = useLogout();
   const queryClient = useQueryClient();
 
-  const { data: fetchBooks } = useFetchBooks();
-  const filteredBooks = fetchBooks?.filter((book) => book.is_favorite === true);
-
+  const { filteredBook: fetchBooks } = useFilteredBook();
+  const filteredBooks =
+    fetchBooks?.length > 0 && fetchBooks?.filter((book) => book.is_favorite === true);
+  console.log(filteredBooks);
   const logOutHandler = async () => {
     try {
       await logout({ refresh_token: cookies.get('refresh_token') });
@@ -180,9 +181,7 @@ function FavoriteBox({
   navigate,
   queryClient,
 }) {
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
-  const { isEditing, editBook } = useEditBook();
+  const { editBook } = useEditBook();
 
   const removeFavorite = (e, id) => {
     const newBook = {

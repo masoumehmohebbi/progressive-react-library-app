@@ -19,7 +19,9 @@ const Banner = () => {
   const userProfile = data?.data?.data;
 
   return (
-    <div className={` ${userProfile ? 'h-fit pb-11' : 'h-[80vh]'}`}>
+    <div
+      className={` ${userProfile ? 'h-fit pb-11' : 'h-[85vh] sm:h-screen md:h-[80vh]'}`}
+    >
       <section className="md:flex flex-row-reverse  mt-12 md:mt-16 justify-between px-3 lg:px-0">
         <div className="w-[80%] md:w-[46%] max-w-screen-sm  mx-auto relative">
           <div className="aspect-w-4 aspect-h-4">

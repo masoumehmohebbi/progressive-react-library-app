@@ -1,4 +1,3 @@
-import Modal from '../../ui/Modal';
 import TextField from '../../ui/TextField';
 import RadioInputGroup from '../../ui/RadioInputGroup';
 import { useForm } from 'react-hook-form';
@@ -14,7 +13,7 @@ import { HiTrash } from 'react-icons/hi';
 import useRemoveCategory from './useRemoveCategory';
 import useEditBook from './useEditBook';
 
-const AddBook = ({ isOpen, setIsOpen, bookToEdit = {}, onClose }) => {
+const AddBook = ({ bookToEdit = {}, onClose }) => {
   let editValues = {};
   const { id } = bookToEdit;
   const isEditSession = Boolean(id);
@@ -30,8 +29,10 @@ const AddBook = ({ isOpen, setIsOpen, bookToEdit = {}, onClose }) => {
       is_read,
     };
   }
-
+  // const formDataCover = new FormData();
+  // formDataCover.append('image_url', editValues?.image_url);
   const [bookCover, setBookCover] = useState('');
+
   const { data } = useCategories();
   const category = data?.data?.data;
   const queryClient = useQueryClient();
@@ -53,9 +54,9 @@ const AddBook = ({ isOpen, setIsOpen, bookToEdit = {}, onClose }) => {
 
   const { removeCategory, isDeleting } = useRemoveCategory();
 
-  const { isEditing, editBook } = useEditBook();
+  const { editBook } = useEditBook();
 
-  const addBookHandler = async (data) => {
+  const addBookHandler = async () => {
     try {
       const formData = new FormData();
       formData.append('title', getValues('title'));
@@ -76,6 +77,10 @@ const AddBook = ({ isOpen, setIsOpen, bookToEdit = {}, onClose }) => {
               queryClient.invalidateQueries({
                 queryKey: ['get-filtered-book'],
               });
+              queryClient.invalidateQueries({
+                queryKey: ['get-one-book'],
+              });
+
               reset();
               onClose();
             },
@@ -87,6 +92,7 @@ const AddBook = ({ isOpen, setIsOpen, bookToEdit = {}, onClose }) => {
         queryClient.invalidateQueries({
           queryKey: ['get-filtered-book'],
         });
+
         toast.success('کتاب شما با موفقیت ثبت شد');
         onClose();
         reset();
