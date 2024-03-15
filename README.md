@@ -50,10 +50,10 @@ Spotify is a web music player. Styling is with Tailwind-css. The state managment
 
 
 
-<h2>✨ Contribution </h2>
+<h2>🤝 Contribution </h2>
 <a href="https://github.com/aliseyedi01/Django-Bookshelf-API" >BackEnd 🐍</a>
 
-<h2>✨ Development setup</h2>
+<h2>🛠 Development setup</h2>
 <p>1. First, you need to clone the project:</p>
 
 ```
