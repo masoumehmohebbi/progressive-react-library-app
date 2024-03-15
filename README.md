@@ -1,6 +1,6 @@
 
 # Progressive library app 🏛️💻📖
-Spotify is a web music player. Styling is with Tailwind-css. The state managment is tanstack-query. And the form validation is with react-hook-form. Backend is django and mongoDB.
+The library-App is for registering books. Which makes it easier to manage your books to know what books you have read, what books you are going to read, how many books you have and even search your books.
 
 
 <h2>🏗️ Built with</h2>
