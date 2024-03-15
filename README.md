@@ -16,16 +16,14 @@ Spotify is a web music player. Styling is with Tailwind-css. The state managment
    
    <h2>✨Used Packages</h2>
    <ul>
-      <li>i18next ➡ Multi languages</li>
       <li>axios</li>
+      <li>React-hook-form ➡ Verify Form</li>
+      <li>React-select ➡ Select Option</li>
       <li>Tippy ➡ Nice Tooltip</li>
-      <li>react-h5-audio-player ➡ Music Player</li>
       <li>react-hot-toast ➡ Pretty Toast</li>
       <li>react-lazy-load-image-component</li>
       <li>react-loader-spinner</li>
       <li>react-otp-input</li>
-      <li>swiper ➡ Beautiful Slider</li>
-      <li>shamsi-date-converter</li>
       <li>universal-cookie</li>
    </ul>
 
