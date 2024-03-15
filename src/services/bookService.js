@@ -17,7 +17,7 @@ export function removeBookApi(id) {
 }
 
 export function editBookApi({ id, newBook }) {
-  return http.patch(`/book/${id}/`, newBook).then(({ data }) => data.data);
+  return http.patch(`/book/${id}/`, newBook);
 }
 
 export function getFilteredBook(data) {

@@ -20,9 +20,6 @@ import useFetchBooks from '../features/booskList/useFetchBooks';
 import truncateText from '../utils/truncateText';
 import { HiOutlineX } from 'react-icons/hi';
 import useEditBook from '../features/booskList/useEditBook';
-import { useMutation } from '@tanstack/react-query';
-import { editBookApi } from '../services/bookService';
-import { useForm } from 'react-hook-form';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -74,7 +71,11 @@ const NavBar = () => {
             <span className="font-bold text-secondary-700">رابوک</span>
           </div>
           {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
+            <li
+              key={link.name}
+              onClick={() => setOpen(false)}
+              className="md:ml-8 text-xl md:my-0 my-7"
+            >
               <a
                 href={link.link}
                 className="text-secondary-800 hover:text-primary-600 duration-500"
@@ -183,26 +184,21 @@ function FavoriteBox({
 
   const { isEditing, editBook } = useEditBook();
 
-  const removeFavorite = (e, id, book) => {
-    const formdata = new FormData();
-    formdata.append('is_favorite', 'false');
-    const newProject = {
-      ...book,
-      is_favorite: 'false',
+  const removeFavorite = (e, id) => {
+    const newBook = {
+      is_favorite: false,
     };
     e.stopPropagation();
-    console.log(book);
-    editBook({ id: 93 });
 
-    // const newBook = Object.assign({}, book, { is_favorite: false });
-
-    // const formData = new FormData();
-    // formData.append('title', book.title),
-    //   formData.append('author', book.author),
-    //   formData.append('image_url', ''),
-    //   formData.append('category_name', book.category_name),
-    //   formData.append('is_read', book.is_read),
-    //   formData.append('is_favorite', !book.is_favorite),
+    editBook(
+      { id, newBook },
+      {
+        onSuccess: () => {
+          queryClient.removeQueries();
+          setIsModalOpen(false);
+        },
+      },
+    );
   };
 
   return (
@@ -212,23 +208,16 @@ function FavoriteBox({
       onClose={() => setIsModalOpen(false)}
     >
       <div className="grid gap-5 grid-cols-2 text-secondary-700 sm:grid-cols-3">
-        {filteredBooks ? (
+        {filteredBooks?.length > 0 ? (
           filteredBooks?.map((book) => (
             <div
               onClick={() => navigate(`/book/${book.id}`)}
               className="flex flex-col items-center justify-center gap-y-2 cursor-pointer bg-secondary-100 shadow-md p-3 "
               key={book.id}
             >
-              {isEditing ? (
-                <Loading />
-              ) : (
-                <button
-                  className="w-full"
-                  onClick={(e) => removeFavorite(e, book.id, book)}
-                >
-                  <HiOutlineX className="w-5 h-5 text-error" />
-                </button>
-              )}
+              <button className="w-full" onClick={(e) => removeFavorite(e, book.id)}>
+                <HiOutlineX className="w-5 h-5 text-error" />
+              </button>
 
               <div className="h-[10rem]">
                 <img
@@ -242,7 +231,9 @@ function FavoriteBox({
             </div>
           ))
         ) : (
-          <h2>هنوز هیچ کتابی به علاقه مندی ها اضافه نشده.</h2>
+          <h2 className="font-semibold text-center w-full col-span-3 my-3">
+            کتابی یافت نشد
+          </h2>
         )}
       </div>
     </Modal>
