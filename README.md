@@ -1,5 +1,5 @@
 
-# React Spotify App 🟢⏯
+# Progressive library app 🏛️📰💻📖
 Spotify is a web music player. Styling is with Tailwind-css. The state managment is tanstack-query. And the form validation is with react-hook-form. Backend is django and mongoDB.
 
 <figure>
@@ -34,21 +34,24 @@ Spotify is a web music player. Styling is with Tailwind-css. The state managment
    </ul>
 
    
-<h2>✨ Links </h2>
+
+<h2>⛓ Links </h2>
 <ul>
    <li>
-      <a href="https://react-spotify-app-red.vercel.app/">See Deployed Project</a>
+      <a href="https://progressive-library-app.netlify.app/">See Deployed Project</a>
    </li>
    <li>
-      <a href="https://github.com/masoumehmohebbi/react-spotify-app">GitHub repository</a>
+      <a href="https://github.com/masoumehmohebbi/progressive-react-library-app">GitHub repository</a>
    </li>
    <li>
       <a href="https://github.com/masoumehmohebbi/?tab=repositories">My other projects</a>
    </li>
 </ul>
 
+
+
 <h2>✨ Contribution </h2>
-<a href="https://github.com/afsharsharifi/SpotifyAPIClone" >BackEnd 🐍</a>
+<a href="https://github.com/aliseyedi01/Django-Bookshelf-API" >BackEnd 🐍</a>
 
 <h2>✨ Development setup</h2>
 <p>1. First, you need to clone the project:</p>
@@ -70,17 +73,3 @@ npm run dev
 ```
 
    
-<h2>⛓ Links </h2>
-<ul>
-   <li>
-      <a href="https://react-spotify-app-red.vercel.app/">See Deployed Project</a>
-   </li>
-   <li>
-      <a href="https://github.com/masoumehmohebbi/masoumehmohebbi/styled-components-credit-card-banking">GitHub repository</a>
-   </li>
-   <li>
-      <a href="https://github.com/masoumehmohebbi/?tab=repositories">My other projects</a>
-   </li>
-</ul>
-
-
