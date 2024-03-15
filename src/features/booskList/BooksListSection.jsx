@@ -50,7 +50,7 @@ const BooksListSection = () => {
                 src={book.image_url ? book.image_url : '/images/book-default.png'}
                 alt={book.title}
               />
-              <h1 className="font-bold text-lg">{book.title}</h1>
+              <h1 className="font-bold text-lg">{truncateText(book.title, 9)}</h1>
               <p>نویسنده: {truncateText(book.author, 9)}</p>
 
               <div className="flex items-center gap-1">

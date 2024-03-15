@@ -5,6 +5,7 @@ import Filter from '../../ui/Filter';
 import AddBook from './AddBook';
 import useCategories from './useCategories';
 import FilterDropDown from '../../ui/FilterDropDown';
+import Modal from '../../ui/Modal';
 
 const statusOptions = [
   {
@@ -53,7 +54,9 @@ const BooksListHeader = () => {
         <Filter filterField="is_read" options={statusOptions} />
         <FilterDropDown filterField="category" options={array} />
       </div>
-      <AddBook isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
+        <AddBook onClose={() => setIsOpen(false)} setIsOpen={setIsOpen} />
+      </Modal>
     </>
   );
 };

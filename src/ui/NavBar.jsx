@@ -226,14 +226,12 @@ function FavoriteBox({
                   alt={book.title}
                 />
               </div>
-              <h1 className="font-semibold">{book.title}</h1>
+              <h1 className="font-semibold">{truncateText(book.title, 4)}</h1>
               <p>نویسنده: {truncateText(book.author, 4)}</p>
             </div>
           ))
         ) : (
-          <h2 className="font-semibold text-center w-full col-span-3 my-3">
-            کتابی یافت نشد
-          </h2>
+          <h2 className="font-semibold text-center col-span-3 my-3">کتابی یافت نشد</h2>
         )}
       </div>
     </Modal>

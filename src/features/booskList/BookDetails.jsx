@@ -7,14 +7,15 @@ import { useState } from 'react';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import useRemoveBook from './useRemoveBook';
-import useEditBook from './useEditBook';
+import AddBook from './AddBook';
 
 const BookDetails = () => {
   const { isLoading, book } = useBook();
   const moveBack = useMoveBack();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { removeBook } = useRemoveBook();
-  const { isEditing, editBook } = useEditBook();
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   if (isLoading)
     return (
@@ -68,7 +69,7 @@ const BookDetails = () => {
             </div>
           </li>
           <li className="li-item">
-            <h1>تاریخ:</h1>
+            <h1>تاریخ ثبت:</h1>
             <h2>{toLocalDateShort(book.created_at)}</h2>
           </li>
           <li className="li-item">
@@ -78,7 +79,7 @@ const BookDetails = () => {
               <button onClick={() => setIsDeleteOpen(true)}>
                 <HiTrash className="text-error" />
               </button>
-              <button>
+              <button onClick={() => setIsEditOpen(true)}>
                 <HiPencil className="text-primary-900" />
               </button>
             </div>
@@ -99,6 +100,19 @@ const BookDetails = () => {
             });
           }}
           disabled={false}
+        />
+      </Modal>
+
+      {/* Update Book */}
+      <Modal
+        title={`ویرایش ${book.title}`}
+        open={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+      >
+        <AddBook
+          bookToEdit={book}
+          onClose={() => setIsEditOpen(false)}
+          setIsOpen={setIsEditOpen}
         />
       </Modal>
     </div>
