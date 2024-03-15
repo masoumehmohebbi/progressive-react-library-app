@@ -3,7 +3,7 @@
 Spotify is a web music player. Styling is with Tailwind-css. The state managment is tanstack-query. And the form validation is with react-hook-form. Backend is django and mongoDB.
 
 
-<h2>✨Built with</h2>
+<h2>🏗️ Built with</h2>
    <ul>
       <li>Programming Language ┈➤ JavaScript</li>
       <li>JavaScript Library? ┈➤ ReactJs</i>
@@ -14,7 +14,7 @@ Spotify is a web music player. Styling is with Tailwind-css. The state managment
       
    </ul>
    
-   <h2>✨Used Packages</h2>
+   <h2>📦 Used Packages</h2>
    <ul>
       <li>axios</li>
       <li>React-hook-form ➡ Verify Form</li>
