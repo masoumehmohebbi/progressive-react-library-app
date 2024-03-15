@@ -27,7 +27,7 @@ const AuthContainer = () => {
       toast.success('کد با موفقیت برای ' + getValues('email') + ' ارسال شد');
     } catch (error) {
       console.log(error);
-      // toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.error);
     }
   };
 
