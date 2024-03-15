@@ -11,11 +11,14 @@ export default function useEditBook() {
       toast.success('کتاب شما با موفقیت تغییر یافت');
 
       queryClient.invalidateQueries({
-        queryKey: ['get-all-books'],
+        queryKey: ['get-filtered-book'],
       });
     },
 
-    onError: (err) => toast.error(err?.response?.data?.error),
+    onError: (err) => {
+      console.log(err);
+      toast.error(err?.response?.data?.error);
+    },
   });
 
   return { isEditing, editBook };

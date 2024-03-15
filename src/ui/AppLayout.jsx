@@ -4,11 +4,16 @@ import Banner from './Banner';
 import Footer from './Footer';
 import Cookies from 'universal-cookie';
 import { useToken } from '../features/authentication/TokenContext';
+import { useEffect } from 'react';
 const cookies = new Cookies();
 
 const AppLayout = () => {
   const { token, setToken } = useToken();
-  setToken(cookies.get('access_token'));
+  // setToken(cookies.get('access_token'));
+
+  useEffect(() => {
+    setToken(cookies.get('access_token'));
+  }, [setToken, token]);
 
   return (
     <div>

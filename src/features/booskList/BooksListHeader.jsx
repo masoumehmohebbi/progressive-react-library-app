@@ -25,6 +25,12 @@ const BooksListHeader = () => {
   const { data } = useCategories();
   const category = data?.data?.data;
 
+  let array = [];
+  category?.map((i) => array.push(i));
+  const newObj = { id: -1, name: 'همه' };
+  array = [...array, newObj];
+  array.sort((a, b) => a.id - b.id);
+
   return (
     <>
       <header className="px-2 flex justify-between">
@@ -45,7 +51,7 @@ const BooksListHeader = () => {
           <SearchField filterField="title" />
         </div>
         <Filter filterField="is_read" options={statusOptions} />
-        <FilterDropDown filterField="category" options={category} />
+        <FilterDropDown filterField="category" options={array} />
       </div>
       <AddBook isOpen={isOpen} setIsOpen={setIsOpen} />
     </>

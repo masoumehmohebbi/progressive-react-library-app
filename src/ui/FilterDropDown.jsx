@@ -8,6 +8,11 @@ const FilterDropDown = ({ options, filterField }) => {
   function handleChange(e) {
     searchParams.set(filterField, e.target.value);
     setSearchParams(searchParams);
+
+    if (e.target.value === 'همه') {
+      searchParams.delete(filterField);
+      setSearchParams(searchParams);
+    }
   }
 
   return <Select options={options} value={value} onChange={handleChange} />;

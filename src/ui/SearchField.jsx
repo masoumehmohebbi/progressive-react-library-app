@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 const SearchField = ({ filterField }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const value = searchParams.get(filterField) || '';
 
   function handleChange(e) {
     searchParams.set(filterField, e.target.value);
@@ -16,6 +17,7 @@ const SearchField = ({ filterField }) => {
   return (
     <div className="relative">
       <input
+        value={value}
         onChange={handleChange}
         type="search"
         id="default-search"

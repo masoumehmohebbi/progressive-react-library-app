@@ -25,6 +25,7 @@ const AddBook = ({ isOpen, setIsOpen }) => {
     watch,
     handleSubmit,
     getValues,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -55,6 +56,8 @@ const AddBook = ({ isOpen, setIsOpen }) => {
       });
       toast.success('کتاب شما با موفقیت ثبت شد');
       setIsOpen(false);
+
+      reset();
     } catch (error) {
       const err = error?.response?.data?.error?.error;
       Object.keys(err).map((key) => {

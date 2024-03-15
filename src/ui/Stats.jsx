@@ -35,7 +35,7 @@ function Stats() {
       {data &&
         data.map((item) => (
           <Stat
-            key="item.id"
+            key={item.id}
             color={item.bgColor}
             title={item.title}
             value={item.subTitle}

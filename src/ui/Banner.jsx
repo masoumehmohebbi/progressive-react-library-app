@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import useUser from '../features/authentication/useUser';
 import Cookies from 'universal-cookie';
 import { useToken } from '../features/authentication/TokenContext';
+import { useEffect } from 'react';
 
 const cookies = new Cookies();
 
 const Banner = () => {
-  const { setToken } = useToken();
-  setToken(cookies.get('access_token'));
+  const { token, setToken } = useToken();
+  useEffect(() => {
+    setToken(cookies.get('access_token'));
+  }, [setToken, token]);
 
   const navigate = useNavigate();
 
