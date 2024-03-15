@@ -51,7 +51,7 @@ The library-App is for registering books. Which makes it easier to manage your b
 <p>1. First, you need to clone the project:</p>
 
 ```
-git clone https://github.com/masoumehmohebbi/react-spotify-app
+git clone https://github.com/masoumehmohebbi/progressive-react-library-app
 ```
 
 <p>2. Then, install required packages:</p>
