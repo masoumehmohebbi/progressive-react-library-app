@@ -4,7 +4,7 @@ The library-App is for registering books. Which makes it easier to manage your b
 
 
 <figure>
-  <img src="https://github.com/masoumehmohebbi//progressive-react-library-app/blob/main/library-app.jpeg"/>
+  <img src="https://github.com/masoumehmohebbi//progressive-react-library-app/blob/main/library-app.jpeg" />
 </figure>
 
 <h2>🏗️ Built with</h2>
