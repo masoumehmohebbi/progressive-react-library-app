@@ -1,9 +1,21 @@
-import useFilteredBook from '../features/booskList/useGetFilteredBook';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Stat from './Stat';
 import { BiCollection } from 'react-icons/bi';
+import { getBooks } from '../services/bookService';
 
 function Stats() {
-  const { filteredBook: totalBooks } = useFilteredBook();
+  // const { filteredBook: totalBooks } = useFilteredBook();
+  const queryClient = useQueryClient();
+  const { data: totalBooks } = useQuery({
+    queryKey: ['get-filtered-book'],
+    queryFn: () => getBooks(),
+    retry: false,
+
+    onSuccess: () => {
+      queryClient.removeQueries(['get-filtered-book']);
+    },
+  });
+
   const readBooks =
     totalBooks?.length > 0 && totalBooks?.filter((book) => book.is_read === true);
   const unReadBooks =
