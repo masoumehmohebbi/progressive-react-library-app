@@ -67,7 +67,6 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
       formData.append('is_favorite', getValues('is_favorite'));
 
       const newBook = formData;
-      console.log(newBook);
       if (isEditSession) {
         editBook(
           { id, newBook },

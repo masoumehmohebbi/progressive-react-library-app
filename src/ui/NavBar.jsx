@@ -41,7 +41,7 @@ const NavBar = () => {
   const { filteredBook: fetchBooks } = useFilteredBook();
   const filteredBooks =
     fetchBooks?.length > 0 && fetchBooks?.filter((book) => book.is_favorite === true);
-  console.log(filteredBooks);
+
   const logOutHandler = async () => {
     try {
       await logout({ refresh_token: cookies.get('refresh_token') });
