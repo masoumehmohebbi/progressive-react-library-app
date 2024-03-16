@@ -1,7 +1,7 @@
-import { HiHeart, HiOutlineEye } from 'react-icons/hi';
+import { HiHeart, HiOutlineEye, HiOutlineHeart } from 'react-icons/hi';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { editBookApi, getBooks } from '../../services/bookService';
 import truncateText from '../../utils/truncateText';
@@ -49,7 +49,7 @@ const BooksListSection = () => {
                 className="p-3 gap-y-2 rounded-md border cursor-pointer hover:shadow-lg shadow-md shadow-primary-300 flex flex-col items-center"
               >
                 <img
-                  className="w-full h-[15rem] bg-cover object-cover"
+                  className="w-full h-[15rem] bg-cover object-contain"
                   src={book.image_url ? book.image_url : '/images/book-default.png'}
                   alt={book.title}
                 />
@@ -67,11 +67,11 @@ const BooksListSection = () => {
                 <div className="flex justify-between items-center w-full pt-4">
                   <HiOutlineEye className="w-5 h-5 drop-shadow-md text-primary-900" />
                   <button onClick={(e) => favouriteHandler(e, book.id)}>
-                    <HiHeart
-                      className={`w-5 h-5 drop-shadow-md ${
-                        book.is_favorite ? 'text-error' : 'text-secondary-400'
-                      }`}
-                    />
+                    {book.is_favorite ? (
+                      <HiHeart className="w-5 h-5 drop-shadow-md text-error" />
+                    ) : (
+                      <HiOutlineHeart className="w-5 h-5 drop-shadow-md text-error" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -95,6 +95,16 @@ const BooksListSection = () => {
 export default BooksListSection;
 
 function Pagination() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleClick(i) {
+    setPage(i);
+    searchParams.set('page', i);
+    searchParams.set('limit', limit);
+    setSearchParams(searchParams);
+    if (searchParams.get('page')) searchParams.set('page', 1);
+  }
+
   const { page, setPage, limit } = usePage();
   const queryClient = useQueryClient();
   const { data: booksWithoutLimit } = useQuery({
@@ -115,7 +125,7 @@ function Pagination() {
         <button
           className="transition-all duration-300 ease-in-out btn text-primary-900 disabled:cursor-not-allowed disabled:btn--primary"
           key={i}
-          onClick={() => setPage(i)}
+          onClick={() => handleClick(i)}
           disabled={i === page}
         >
           {toPersianNumbers(i)}
@@ -126,10 +136,14 @@ function Pagination() {
   };
   const nextPage = () => {
     setPage((prevPage) => prevPage + 1);
+    searchParams.set('page', page + 1);
+    setSearchParams(searchParams);
   };
 
   const prevPage = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
+    searchParams.set('page', page - 1);
+    setSearchParams(searchParams);
   };
   return (
     <div dir="ltr" className="text-center h-10 flex justify-center gap-x-3 mb-3">

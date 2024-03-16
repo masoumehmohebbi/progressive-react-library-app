@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const PageContext = createContext();
 
 export function PageProvider({ children }) {
-  const limit = 3;
+  const limit = 5;
   const [page, setPage] = useState(1);
 
   return (

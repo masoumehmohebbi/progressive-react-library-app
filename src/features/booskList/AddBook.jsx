@@ -128,7 +128,6 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
   };
 
   return (
-    // <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
     <form className="space-y-4" onSubmit={handleSubmit(addBookHandler)}>
       <TextField
         required
@@ -254,7 +253,6 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
         </button>
       )}
     </form>
-    // </Modal>
   );
 };
 

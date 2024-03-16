@@ -21,9 +21,10 @@ export function editBookApi({ id, newBook }) {
   return http.patch(`/book/${id}/`, newBook);
 }
 
-export function getFilteredBook(data, page = 1, limit) {
+export function getFilteredBook(data) {
   // console.log(page, limit);
-  return http
-    .get(`/book/?page=${page}&limit=${limit}${data}`)
-    .then(({ data }) => data.data);
+  return http.get(`/book/${data}`).then(({ data }) => data.data);
 }
+// return http
+// .get(`/book/${data}&page=${page}&limit=${limit}`)
+// .then(({ data }) => data.data);
