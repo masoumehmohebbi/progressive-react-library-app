@@ -2,7 +2,7 @@
 # Progressive library app 🏛️💻📖
 The library-App is for registering books. Which makes it easier to manage your books to know what books you have read, what books you are going to read, how many books you have and even search your books.
 
-![library-app](https://github.com/masoumehmohebbi/progressive-react-library-app/assets/88876100/9364dfe5-8de2-459c-9898-8eb2cc0145ab)
+![library-app](https://github.com/masoumehmohebbi/progressive-react-library-app/assets/88876100/08d0857b-f27b-492f-a099-6681e5849346)
 
 <h2>🏗️ Built with</h2>
    <ul>
