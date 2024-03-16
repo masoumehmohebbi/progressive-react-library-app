@@ -3,11 +3,12 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { editBookApi, getBooks, getFilteredBook } from '../../services/bookService';
+import { editBookApi, getBooks } from '../../services/bookService';
 import truncateText from '../../utils/truncateText';
 import useFilteredBook from './useGetFilteredBook';
 import Loading from '../../ui/Loading';
 import { usePage } from './PageContext';
+import { toPersianNumbers } from '../../utils/toPersianNumbers';
 
 const BooksListSection = () => {
   const { filteredBook, isLoading } = useFilteredBook();
@@ -94,9 +95,6 @@ const BooksListSection = () => {
 export default BooksListSection;
 
 function Pagination() {
-  let location = useLocation();
-  const value = location.search;
-  const { filteredBook } = useFilteredBook();
   const { page, setPage, limit } = usePage();
   const queryClient = useQueryClient();
   const { data: booksWithoutLimit } = useQuery({
@@ -109,19 +107,18 @@ function Pagination() {
     },
   });
   const totalPages = Math.ceil((booksWithoutLimit?.length || 0) / limit);
-  console.log(booksWithoutLimit?.length, limit);
 
   const getPageButtons = () => {
     const buttons = [];
     for (let i = 1; i <= totalPages; i++) {
       buttons.push(
         <button
-          className="btn btn--primary disabled:cursor-not-allowed disabled:text-primary-500"
+          className="transition-all duration-300 ease-in-out btn text-primary-900 disabled:cursor-not-allowed disabled:btn--primary"
           key={i}
           onClick={() => setPage(i)}
           disabled={i === page}
         >
-          {i}
+          {toPersianNumbers(i)}
         </button>,
       );
     }
@@ -135,7 +132,7 @@ function Pagination() {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
   return (
-    <div dir="ltr" className="text-center flex justify-center gap-x-2 pb-3">
+    <div dir="ltr" className="text-center h-10 flex justify-center gap-x-3 mb-3">
       <button
         className="btn text-primary-900 disabled:cursor-not-allowed disabled:text-primary-500"
         onClick={prevPage}
