@@ -86,10 +86,13 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
           },
         );
       } else {
-        await mutateAddBook(formData);
-
-        queryClient.invalidateQueries({
-          queryKey: ['get-filtered-book'],
+        await mutateAddBook(formData, {
+          onSuccess: () => {
+            queryClient.removeQueries();
+            queryClient.invalidateQueries({
+              queryKey: ['get-filtered-book'],
+            });
+          },
         });
 
         toast.success('کتاب شما با موفقیت ثبت شد');
