@@ -117,7 +117,10 @@ function Pagination() {
     retry: false,
 
     onSuccess: () => {
-      queryClient.removeQueries(['get-filtered-book']);
+      // queryClient.removeQueries(['get-filtered-book']);
+      queryClient.invalidateQueries({
+        queryKey: ['get-filtered-book'],
+      });
     },
   });
   const totalPages = Math.ceil((booksWithoutLimit?.length || 0) / limit);

@@ -19,9 +19,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import truncateText from '../utils/truncateText';
 import { HiOutlineX } from 'react-icons/hi';
 import useEditBook from '../features/booskList/useEditBook';
-import useFilteredBook from '../features/booskList/useGetFilteredBook';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { getBooks } from '../services/bookService';
+import { useQuery } from '@tanstack/react-query';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -36,11 +37,21 @@ const NavBar = () => {
 
   const { data, isLoading } = useUser();
   const userProfile = data?.data?.data;
-
   const { isPending, logout } = useLogout();
-  const queryClient = useQueryClient();
 
-  const { filteredBook: fetchBooks } = useFilteredBook();
+  const queryClient = useQueryClient();
+  const { data: fetchBooks } = useQuery({
+    queryKey: ['get-filtered-book'],
+    queryFn: () => getBooks(),
+    retry: false,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['get-filtered-book'],
+      });
+    },
+  });
+
   const filteredBooks =
     fetchBooks?.length > 0 && fetchBooks?.filter((book) => book.is_favorite === true);
 
@@ -220,10 +231,10 @@ function FavoriteBox({
                 <HiOutlineX className="w-5 h-5 text-error" />
               </button>
 
-              <div className="h-[10rem]">
+              <div>
                 <LazyLoadImage
                   effect="blur"
-                  className="h-full w-full object-cover bg-cover"
+                  className="h-[10rem] w-full object-cover bg-cover"
                   src={book.image_url ? book.image_url : '/images/book-default.png'}
                   alt={book.title}
                 />
