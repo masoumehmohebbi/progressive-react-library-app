@@ -9,6 +9,8 @@ import useFilteredBook from './useGetFilteredBook';
 import Loading from '../../ui/Loading';
 import { usePage } from './PageContext';
 import { toPersianNumbers } from '../../utils/toPersianNumbers';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const BooksListSection = () => {
   const { filteredBook, isLoading } = useFilteredBook();
@@ -48,10 +50,12 @@ const BooksListSection = () => {
                 key={book.id}
                 className="p-3 gap-y-2 rounded-md border cursor-pointer hover:shadow-lg shadow-md shadow-primary-300 flex flex-col items-center"
               >
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="w-full h-[15rem] bg-cover object-contain"
                   src={book.image_url ? book.image_url : '/images/book-default.png'}
                   alt={book.title}
+                  visibleByDefault={book.image_url === '/images/book-default.png'}
                 />
                 <h1 className="font-bold text-lg">{truncateText(book.title, 9)}</h1>
                 <p>نویسنده: {truncateText(book.author, 9)}</p>

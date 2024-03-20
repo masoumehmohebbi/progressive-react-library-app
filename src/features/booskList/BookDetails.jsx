@@ -8,6 +8,8 @@ import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import useRemoveBook from './useRemoveBook';
 import AddBook from './AddBook';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const BookDetails = () => {
   const { isLoading, book } = useBook();
@@ -29,7 +31,8 @@ const BookDetails = () => {
         <HiArrowRight className="w-6 h-6 text-secondary-500" />
       </button>
       <div className="flex flex-col gap-y-14 md:gap-y-0 md:flex-row items-center md:items-start gap-x-2 justify-evenly">
-        <img
+        <LazyLoadImage
+          effect="blur"
           className="object-cover rounded-md max-w-60 max-h-80"
           src={book.image_url ? book.image_url : '/images/book-default.png'}
           alt={book.title}

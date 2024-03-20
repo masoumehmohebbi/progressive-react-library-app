@@ -20,6 +20,8 @@ import truncateText from '../utils/truncateText';
 import { HiOutlineX } from 'react-icons/hi';
 import useEditBook from '../features/booskList/useEditBook';
 import useFilteredBook from '../features/booskList/useGetFilteredBook';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Links = [
   { name: 'خانه', link: '#' },
@@ -219,7 +221,8 @@ function FavoriteBox({
               </button>
 
               <div className="h-[10rem]">
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="h-full w-full object-cover bg-cover"
                   src={book.image_url ? book.image_url : '/images/book-default.png'}
                   alt={book.title}
