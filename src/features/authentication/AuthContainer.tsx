@@ -20,6 +20,8 @@ const AuthContainer = () => {
   });
 
   const sendOtpHandler = async (data) => {
+    console.log(data);
+
     try {
       const dt = await mutateAsync(data);
       console.log(dt);

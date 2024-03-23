@@ -35,6 +35,7 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
 
   const { data } = useCategories();
   const category = data?.data?.data;
+
   const queryClient = useQueryClient();
   const {
     register,

@@ -1,30 +1,53 @@
 import http from './httpService';
 
+type AddBookProps = {
+  title: string;
+  author: string;
+  image_url: string;
+  is_favorite: boolean;
+  category: string;
+  is_read: boolean;
+};
+
+type EditBookProps = {
+  id: number;
+  newBook: {
+    title?: string;
+    author?: string;
+    image_url?: string;
+    is_favorite?: boolean;
+    category?: string;
+    is_read?: boolean;
+  };
+};
+
+type GetFilteredBookProps = {
+  page?: number;
+  limit?: number;
+  category?: string;
+  is_read?: boolean;
+};
+
 export function getBooks() {
   return http.get('/book/').then(({ data }) => data.data);
 }
 
-export function getOneBook(id) {
+export function getOneBook(id: number) {
   return http.get(`/book/${id}/`).then(({ data }) => data.data);
 }
 
-export function addBook(data) {
+export function addBook(data: AddBookProps) {
   return http.post('/book/', data);
 }
 
-export function removeBookApi(id) {
+export function removeBookApi(id: number) {
   return http.delete(`/book/${id}/`).then(({ data }) => data.data);
 }
 
-export function editBookApi({ id, newBook }) {
-  console.log(id, newBook);
+export function editBookApi({ id, newBook }: EditBookProps) {
   return http.patch(`/book/${id}/`, newBook);
 }
 
-export function getFilteredBook(data) {
-  // console.log(page, limit);
+export function getFilteredBook(data: GetFilteredBookProps) {
   return http.get(`/book/${data}`).then(({ data }) => data.data);
 }
-// return http
-// .get(`/book/${data}&page=${page}&limit=${limit}`)
-// .then(({ data }) => data.data);

@@ -1,4 +1,4 @@
-export default function truncateText(str, length) {
-  if (str.length < length) return str;
-  return str.slice(0, length) + "...";
+export default function truncateText(str: string, length: number) {
+  if (str?.length < length) return str;
+  return str?.slice(0, length) + '...';
 }
