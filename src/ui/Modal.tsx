@@ -1,7 +1,14 @@
 import { HiOutlineX } from 'react-icons/hi';
 import useOutsideClick from '../hooks/useOutsideClick';
 
-const Modal = ({ open, onClose, title, children }) => {
+type ModalProps = {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+};
+
+const Modal = ({ open, onClose, title, children }: ModalProps) => {
   const ref = useOutsideClick(onClose);
   return (
     open && (
