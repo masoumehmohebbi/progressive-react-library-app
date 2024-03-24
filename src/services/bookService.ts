@@ -1,3 +1,4 @@
+import { EditBookProps } from '../types/BooksList';
 import http from './httpService';
 
 type AddBookProps = {
@@ -7,18 +8,6 @@ type AddBookProps = {
   is_favorite: boolean;
   category: string;
   is_read: boolean;
-};
-
-type EditBookProps = {
-  id: number;
-  newBook: {
-    title?: string;
-    author?: string;
-    image_url?: string;
-    is_favorite?: boolean;
-    category?: string;
-    is_read?: boolean;
-  };
 };
 
 type GetFilteredBookProps = {
@@ -32,7 +21,7 @@ export function getBooks() {
   return http.get('/book/').then(({ data }) => data.data);
 }
 
-export function getOneBook(id: number) {
+export function getOneBook(id: string | undefined) {
   return http.get(`/book/${id}/`).then(({ data }) => data.data);
 }
 

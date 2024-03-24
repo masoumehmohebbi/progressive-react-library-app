@@ -1,4 +1,4 @@
-import { GetOtpProps, CheckOtpProps } from '../types/Auth';
+import { GetOtpProps } from '../types/Auth';
 import http from './httpService';
 
 type LogOutApiProps = {
@@ -8,6 +8,11 @@ type GetTokenProps = {
   username_or_email?: string;
   password: string;
 };
+type CheckOtpProps = {
+  username: string;
+  otp_code: string;
+};
+
 export function getOtp(data: GetOtpProps) {
   return http.post('/auth/signup/', data);
 }

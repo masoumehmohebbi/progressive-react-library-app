@@ -1,24 +1,30 @@
 import { getFilteredBook } from '../../services/bookService';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { usePage } from './PageContext';
 import { useEffect } from 'react';
+import { AddBookProps } from '../../types/BooksList';
 
-const useFilteredBook = () => {
+interface FilteredBookData {
+  isLoading: boolean;
+  filteredBook: AddBookProps | null;
+}
+
+const useFilteredBook = (): FilteredBookData => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { page, limit } = usePage();
 
   useEffect(() => {
-    searchParams.set('page', page);
-    searchParams.set('limit', limit);
+    searchParams.set('page', page.toString());
+    searchParams.set('limit', limit.toString());
     setSearchParams(searchParams);
   }, []);
   let location = useLocation();
   const value = location.search;
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<AddBookProps[]>({
     queryKey: ['get-filtered-book', value, page, limit],
     queryFn: () => getFilteredBook(value, page, limit),
     retry: false,
@@ -26,7 +32,7 @@ const useFilteredBook = () => {
     onSuccess: () => {
       queryClient.removeQueries(['get-filtered-book']);
     },
-  });
+  } as UseQueryOptions<AddBookProps[]>);
 
   const filteredBook = data || {};
 

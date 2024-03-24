@@ -12,8 +12,16 @@ import { useState } from 'react';
 import { HiTrash } from 'react-icons/hi';
 import useRemoveCategory from './useRemoveCategory';
 import useEditBook from './useEditBook';
+import { AxiosError } from 'axios';
+import { BookToEditType } from '../../types/BooksList';
 
-const AddBook = ({ bookToEdit = {}, onClose }) => {
+function AddBook({
+  bookToEdit = {} as BookToEditType,
+  onClose,
+}: {
+  bookToEdit?: BookToEditType;
+  onClose: () => void;
+}) {
   let editValues = {};
   const { id } = bookToEdit;
   const isEditSession = Boolean(id);
@@ -29,9 +37,8 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
       is_read,
     };
   }
-  // const formDataCover = new FormData();
-  // formDataCover.append('image_url', editValues?.image_url);
-  const [bookCover, setBookCover] = useState('');
+
+  const [bookCover, setBookCover] = useState<File | string>('');
 
   const { data } = useCategories();
   const category = data?.data?.data;
@@ -113,9 +120,14 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
       queryClient.invalidateQueries({
         queryKey: ['get-all-category'],
       });
-    } catch (error) {
-      toast.error(error?.response?.data?.error?.name);
-      console.log(error);
+    } catch (err) {
+      let ErrorMsg = 'Failed to remove Book';
+      if (err instanceof AxiosError) {
+        if (err?.response?.data?.error?.name) {
+          ErrorMsg = err.response.data.error.name;
+        }
+      }
+      toast.error(ErrorMsg);
     }
   };
 
@@ -255,6 +267,6 @@ const AddBook = ({ bookToEdit = {}, onClose }) => {
       )}
     </form>
   );
-};
+}
 
 export default AddBook;

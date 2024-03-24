@@ -9,8 +9,3 @@ export type GetOtpProps = {
 export type ChildrenProps = {
   children: React.ReactNode;
 };
-
-export type CheckOtpProps = {
-  username: string;
-  otp_code: string;
-};

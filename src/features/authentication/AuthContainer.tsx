@@ -12,7 +12,6 @@ const AuthContainer = () => {
   const [step, setStep] = useState(1);
   const {
     handleSubmit,
-    register,
     getValues,
     formState: { errors },
   } = useForm<GetOtpProps>();

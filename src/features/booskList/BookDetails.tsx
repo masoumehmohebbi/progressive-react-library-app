@@ -112,11 +112,7 @@ const BookDetails = () => {
         open={isEditOpen}
         onClose={() => setIsEditOpen(false)}
       >
-        <AddBook
-          bookToEdit={book}
-          onClose={() => setIsEditOpen(false)}
-          setIsOpen={setIsEditOpen}
-        />
+        <AddBook bookToEdit={book} onClose={() => setIsEditOpen(false)} />
       </Modal>
     </div>
   );

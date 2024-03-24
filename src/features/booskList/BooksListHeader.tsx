@@ -7,6 +7,11 @@ import useCategories from './useCategories';
 import FilterDropDown from '../../ui/FilterDropDown';
 import Modal from '../../ui/Modal';
 
+type CategoryProps = {
+  id: number;
+  name: string;
+};
+
 const statusOptions = [
   {
     label: 'همه',
@@ -26,8 +31,8 @@ const BooksListHeader = () => {
   const { data } = useCategories();
   const category = data?.data?.data;
 
-  let array = [];
-  category?.map((i) => array.push(i));
+  let array: CategoryProps[] = [];
+  category?.map((i: CategoryProps) => array.push(i));
   const newObj = { id: -1, name: 'همه' };
   array = [...array, newObj];
   array.sort((a, b) => a.id - b.id);
@@ -55,7 +60,7 @@ const BooksListHeader = () => {
         <FilterDropDown filterField="category" options={array} />
       </div>
       <Modal title="کتاب خود را ثبت کنید" open={isOpen} onClose={() => setIsOpen(false)}>
-        <AddBook onClose={() => setIsOpen(false)} setIsOpen={setIsOpen} />
+        <AddBook onClose={() => setIsOpen(false)} />
       </Modal>
     </>
   );

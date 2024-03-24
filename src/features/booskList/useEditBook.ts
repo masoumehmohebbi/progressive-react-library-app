@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { editBookApi } from '../../services/bookService';
+import { AxiosError } from 'axios';
 
 export default function useEditBook() {
   const queryClient = useQueryClient();
@@ -16,8 +17,14 @@ export default function useEditBook() {
     },
 
     onError: (err) => {
-      console.log(err);
-      toast.error(err?.response?.data?.error);
+      let ErrorMsg = 'Failed to remove Category';
+      if (err instanceof AxiosError) {
+        if (err?.response?.data?.error) {
+          ErrorMsg = err.response.data.error;
+        }
+      }
+      toast.error(ErrorMsg);
+      // toast.error(err?.response?.data?.error);
     },
   });
 

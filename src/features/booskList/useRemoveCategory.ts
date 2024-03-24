@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { removeCategoryApi } from '../../services/categoryService';
+import { AxiosError } from 'axios';
 
 export default function useRemoveCategory() {
   const queryClient = useQueryClient();
@@ -16,8 +17,13 @@ export default function useRemoveCategory() {
       });
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.error);
-      console.log(err);
+      let ErrorMsg = 'Failed to remove Category';
+      if (err instanceof AxiosError) {
+        if (err?.response?.data?.error) {
+          ErrorMsg = err.response.data.error;
+        }
+      }
+      toast.error(ErrorMsg);
     },
   });
 
