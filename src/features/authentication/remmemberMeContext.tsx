@@ -1,8 +1,17 @@
 import { createContext, useContext, useState } from 'react';
+import { ChildrenProps } from '../../types/Auth';
 
-const RemmemberMeContext = createContext();
+type RemmemberMeContextType = {
+  enabled: boolean;
+  setEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export function RemmemberMeProvider({ children }) {
+const RemmemberMeContext = createContext<RemmemberMeContextType>({
+  enabled: false,
+  setEnabled: () => {},
+});
+
+export const RemmemberMeProvider: React.FC<ChildrenProps> = ({ children }) => {
   const [enabled, setEnabled] = useState(false);
 
   return (
@@ -10,7 +19,7 @@ export function RemmemberMeProvider({ children }) {
       {children}
     </RemmemberMeContext.Provider>
   );
-}
+};
 
 export function useRemmemberMe() {
   const context = useContext(RemmemberMeContext);

@@ -5,6 +5,8 @@ import { getOtp } from '../../services/authService';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { GetOtpProps } from '../../types/Auth';
+import { AxiosError } from 'axios';
 
 const AuthContainer = () => {
   const [step, setStep] = useState(1);
@@ -13,23 +15,25 @@ const AuthContainer = () => {
     register,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm<GetOtpProps>();
 
   const { isPending: isSendingOtp, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
 
-  const sendOtpHandler = async (data) => {
-    console.log(data);
-
+  const sendOtpHandler = async (data: GetOtpProps) => {
     try {
-      const dt = await mutateAsync(data);
-      console.log(dt);
+      await mutateAsync(data);
       setStep(2);
       toast.success('کد با موفقیت برای ' + getValues('email') + ' ارسال شد');
     } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.error);
+      let ErrorMsg = 'Failed to get OTP';
+      if (error instanceof AxiosError) {
+        if (error?.response?.data?.error) {
+          ErrorMsg = error.response.data.error;
+        }
+      }
+      toast.error(ErrorMsg);
     }
   };
 
@@ -39,9 +43,10 @@ const AuthContainer = () => {
         return (
           <SendOTPForm
             errors={errors}
-            register={register}
+            // register={register}
             isSendingOtp={isSendingOtp}
-            onSubmit={handleSubmit(sendOtpHandler)}
+            // onSubmit={handleSubmit(sendOtpHandler)}
+            onSubmit={sendOtpHandler}
           />
         );
       case 2:

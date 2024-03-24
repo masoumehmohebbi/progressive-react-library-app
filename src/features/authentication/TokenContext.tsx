@@ -1,14 +1,24 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
+import { ChildrenProps } from '../../types/Auth';
 
-const TokenContext = createContext();
+type TokenContextType = {
+  token: null;
+  // setToken: () => void;
+  setToken: Dispatch<SetStateAction<null>>;
+};
 
-export function TokenProvider({ children }) {
+const TokenContext = createContext<TokenContextType>({
+  token: null,
+  setToken: () => {},
+});
+
+export const TokenProvider: React.FC<ChildrenProps> = ({ children }) => {
   const [token, setToken] = useState(null);
 
   return (
     <TokenContext.Provider value={{ token, setToken }}>{children}</TokenContext.Provider>
   );
-}
+};
 
 export function useToken() {
   const context = useContext(TokenContext);

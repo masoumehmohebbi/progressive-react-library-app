@@ -4,8 +4,16 @@ import GoogleField from '../../ui/GoogleField';
 import Loading from '../../ui/Loading';
 import { HiArrowRight } from 'react-icons/hi';
 import useMoveBack from '../../hooks/useMoveBack';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { GetOtpProps } from '../../types/Auth';
 
-function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
+type SendOTPFormProps = {
+  onSubmit: SubmitHandler<GetOtpProps>;
+  errors: any;
+  isSendingOtp: boolean;
+};
+function SendOTPForm({ onSubmit, errors, isSendingOtp }: SendOTPFormProps) {
+  const { register, handleSubmit } = useForm<GetOtpProps>();
   const moveBack = useMoveBack();
 
   return (
@@ -19,7 +27,7 @@ function SendOTPForm({ onSubmit, register, errors, isSendingOtp }) {
 
       <GoogleField label="ثبت نام با گوگل" />
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-6">
         <TextField
           validationSchema={{
             required: 'نام ضروری است',

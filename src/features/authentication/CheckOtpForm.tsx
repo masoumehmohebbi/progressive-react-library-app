@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import OTPInput from 'react-otp-input';
 import { HiArrowRight } from 'react-icons/hi';
 import { CiEdit } from 'react-icons/ci';
@@ -9,8 +9,14 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const RESEND_TIME = 90;
+type CheckOTPFormProps = {
+  onBack: () => void;
+  onReSendOtp: () => void;
+  otpResponse: string;
+  username: string;
+};
 
-function CheckOTPForm({ onBack, onReSendOtp, otpResponse, username }) {
+function CheckOTPForm({ onBack, onReSendOtp, otpResponse, username }: CheckOTPFormProps) {
   const [otp, setOtp] = useState('');
   const [time, setTime] = useState(RESEND_TIME);
   const navigate = useNavigate();
@@ -19,7 +25,7 @@ function CheckOTPForm({ onBack, onReSendOtp, otpResponse, username }) {
     mutationFn: checkOtp,
   });
 
-  const checkOtpHandler = async (e) => {
+  const checkOtpHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await mutateAsync({ username: username, otp_code: otp });
@@ -65,7 +71,7 @@ function CheckOTPForm({ onBack, onReSendOtp, otpResponse, username }) {
           onChange={setOtp}
           numInputs={6}
           renderSeparator={<span>-</span>}
-          renderInput={(props) => <input type="text" {...props} />}
+          renderInput={(props) => <input {...props} />}
           containerStyle="flex flex-row-reverse gap-x-2  justify-center"
           inputStyle={{
             width: '2.5rem',

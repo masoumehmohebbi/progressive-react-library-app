@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import TextField from '../../ui/TextField';
-import SwitchRemmemerMe from '../../ui/SwitchRemmemberMe';
 import GoogleField from '../../ui/GoogleField';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
@@ -10,9 +9,16 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { HiArrowRight } from 'react-icons/hi';
 import useMoveBack from '../../hooks/useMoveBack';
+import SwitchRemmemerMe from '../../ui/SwitchRemmemberMe';
 
 // import { GoogleLogin } from '@react-oauth/google';
 // import { jwtDecode } from 'jwt-decode';
+interface LogInHandlerType {
+  username?: string;
+  username_or_email: string;
+  email: string;
+  password: string;
+}
 
 export const LogInForm = () => {
   const moveBack = useMoveBack();
@@ -21,7 +27,7 @@ export const LogInForm = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm<LogInHandlerType>();
 
   const navigate = useNavigate();
 
@@ -29,7 +35,7 @@ export const LogInForm = () => {
     mutationFn: getTokens,
   });
 
-  const logInHandler = async (data) => {
+  const logInHandler = async (data: LogInHandlerType) => {
     try {
       const response = await mutateAsync({
         username_or_email:
