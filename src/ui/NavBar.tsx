@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoExitOutline, IoLibraryOutline } from 'react-icons/io5';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { HiOutlineHeart } from 'react-icons/hi2';
@@ -24,6 +24,20 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { getBooks } from '../services/bookService';
 import { useQuery } from '@tanstack/react-query';
 
+interface BookType {
+  id: number;
+  is_favorite: boolean;
+  image_url: string;
+  title: string;
+  author: string;
+}
+
+interface UserProfile {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
 const Links = [
   { name: 'خانه', link: '#' },
   { name: 'کتاب‌ها', link: '#book_lists' },
@@ -36,7 +50,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const { data, isLoading } = useUser();
-  const userProfile = data?.data?.data;
+  const userProfile: UserProfile = data?.data?.data;
   const { isPending, logout } = useLogout();
 
   const queryClient = useQueryClient();
@@ -45,15 +59,23 @@ const NavBar = () => {
     queryFn: () => getBooks(),
     retry: false,
 
-    onSuccess: () => {
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['get-filtered-book'],
+    //   });
+    // },
+  });
+  useEffect(() => {
+    if (fetchBooks) {
       queryClient.invalidateQueries({
         queryKey: ['get-filtered-book'],
       });
-    },
-  });
+    }
+  }, [fetchBooks, queryClient]);
 
   const filteredBooks =
-    fetchBooks?.length > 0 && fetchBooks?.filter((book) => book.is_favorite === true);
+    fetchBooks?.length > 0 &&
+    fetchBooks?.filter((book: BookType) => book.is_favorite === true);
 
   const logOutHandler = async () => {
     try {
@@ -187,16 +209,27 @@ const NavBar = () => {
 
 export default NavBar;
 
-function FavoriteBox({
+interface FavoriteBoxProps {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  filteredBooks: BookType[] | undefined;
+  navigate: ReturnType<typeof useNavigate>;
+  queryClient: ReturnType<typeof useQueryClient>;
+}
+
+const FavoriteBox: React.FC<FavoriteBoxProps> = ({
   isModalOpen,
   setIsModalOpen,
   filteredBooks,
   navigate,
   queryClient,
-}) {
+}) => {
   const { editBook } = useEditBook();
 
-  const removeFavorite = (e, id) => {
+  const removeFavorite = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: number,
+  ) => {
     const newBook = {
       is_favorite: false,
     };
@@ -220,7 +253,7 @@ function FavoriteBox({
       onClose={() => setIsModalOpen(false)}
     >
       <div className="grid gap-5 grid-cols-2 text-secondary-700 sm:grid-cols-3">
-        {filteredBooks?.length > 0 ? (
+        {filteredBooks?.length ?? 0 > 0 ? (
           filteredBooks?.map((book) => (
             <div
               onClick={() => navigate(`/book/${book.id}`)}
@@ -249,4 +282,4 @@ function FavoriteBox({
       </div>
     </Modal>
   );
-}
+};

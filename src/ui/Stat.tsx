@@ -1,4 +1,12 @@
+import React from 'react';
 import { toPersianNumbers } from '../utils/toPersianNumbers';
+
+interface StatProps {
+  icon: React.ReactNode;
+  value: string | number;
+  title: string;
+  color: keyof typeof colors;
+}
 
 const colors = {
   green: 'bg-green-500 text-white',
@@ -6,7 +14,7 @@ const colors = {
   blue: 'bg-blue-500 text-white',
 };
 
-function Stat({ icon, value, title, color }) {
+function Stat({ icon, value, title, color }: StatProps) {
   return (
     <div className="col-span-6 w-[45%] sm:w-auto mx-auto justify-items-center cursor-pointer sm:col-span-4 hover:shadow-gray-300/50 hover:shadow-lg flex flex-col items-center sm:grid grid-rows-2 grid-cols-[5.4rem_1fr] bg-secondary-0 p-4 rounded-lg gap-x-4">
       <div

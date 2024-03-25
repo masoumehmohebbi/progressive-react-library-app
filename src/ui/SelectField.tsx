@@ -1,4 +1,11 @@
-function SelectField({ options, label }) {
+import { OptionProps } from '../types/BooksList';
+
+interface SelectFieldProps {
+  options: OptionProps[];
+  label: string;
+}
+
+function SelectField({ options, label }: SelectFieldProps) {
   return (
     <div>
       <label className="mb-2 block text-secondary-700 whitespace-nowrap">

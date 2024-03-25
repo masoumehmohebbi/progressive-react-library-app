@@ -1,6 +1,31 @@
 import RadioInput from './RadioInput';
 
-function RadioInputGroup({ register, watch, errors, configs, title }) {
+interface RadioOptionInterface {
+  label: string;
+  value: string;
+}
+
+interface ConfigsInterface {
+  name: string;
+  validationSchema?: Record<string, any>;
+  options: RadioOptionInterface[];
+}
+
+interface RadioInputGroupProps {
+  register: Function;
+  watch: Function;
+  errors?: any;
+  configs: ConfigsInterface;
+  title: string;
+}
+
+function RadioInputGroup({
+  register,
+  watch,
+  errors,
+  configs,
+  title,
+}: RadioInputGroupProps) {
   const { name, validationSchema = {}, options } = configs;
 
   return (
@@ -19,7 +44,7 @@ function RadioInputGroup({ register, watch, errors, configs, title }) {
                 register={register}
                 watch={watch}
                 validationSchema={validationSchema}
-                errors={errors}
+                // errors={errors}
               />
             ))}
           </div>

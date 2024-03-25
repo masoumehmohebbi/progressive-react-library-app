@@ -21,3 +21,8 @@ export type AddBookProps = {
   category: string;
   is_read: boolean;
 };
+
+export interface OptionProps {
+  value: string;
+  label: string;
+}

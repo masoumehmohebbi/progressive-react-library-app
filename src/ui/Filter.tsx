@@ -1,11 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
+import { OptionProps } from '../types/BooksList';
 
-function Filter({ filterField, options }) {
+interface FilterProps {
+  filterField: string;
+  options: OptionProps[];
+}
+
+function Filter({ filterField, options }: FilterProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentFilter = searchParams.get(filterField) || options.at(0).value;
+  // const currentFilter = searchParams.get(filterField) || options.at(0).value;
+  const currentFilter = searchParams.get(filterField) || options[0].value;
 
-  function handleClick(value) {
+  function handleClick(value: string) {
     if (value !== '') {
       searchParams.set(filterField, value);
       setSearchParams(searchParams);
@@ -13,7 +20,7 @@ function Filter({ filterField, options }) {
       searchParams.delete(filterField);
       setSearchParams(searchParams);
     }
-    if (searchParams.get('page')) searchParams.set('page', 1);
+    if (searchParams.get('page')) searchParams.set('page', '1');
   }
 
   return (

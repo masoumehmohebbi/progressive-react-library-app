@@ -1,11 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
 import Select from './Select';
-
-const FilterDropDown = ({ options, filterField }) => {
+interface OptionsType {
+  id: string | number;
+  name: string;
+}
+interface FilterDropDownProps {
+  options: OptionsType[];
+  filterField: string;
+}
+const FilterDropDown = ({ options, filterField }: FilterDropDownProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const value = searchParams.get(filterField) || '';
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     searchParams.set(filterField, e.target.value);
     setSearchParams(searchParams);
 

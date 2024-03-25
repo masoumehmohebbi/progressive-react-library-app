@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
 
-const SearchField = ({ filterField }) => {
+const SearchField = ({ filterField }: { filterField: string }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const value = searchParams.get(filterField) || '';
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     searchParams.set(filterField, e.target.value);
     setSearchParams(searchParams);
 

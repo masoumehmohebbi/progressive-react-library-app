@@ -1,4 +1,14 @@
-function Select({ value, onChange, options }) {
+export interface OptionProps {
+  id: string | number;
+  name: string;
+}
+interface SelectProps {
+  value: string | number;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: OptionProps[];
+}
+
+function Select({ value, onChange, options }: SelectProps) {
   return (
     <select
       value={value}

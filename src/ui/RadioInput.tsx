@@ -1,4 +1,22 @@
-function RadioInput({ label, value, register, name, id, validationSchema = {}, watch }) {
+type RadioInputProps = {
+  label: string;
+  value: string;
+  register: Function;
+  name: string;
+  id: string;
+  validationSchema?: Record<string, any>;
+  watch: Function;
+};
+
+function RadioInput({
+  label,
+  value,
+  register,
+  name,
+  id,
+  validationSchema = {},
+  watch,
+}: RadioInputProps) {
   return (
     <div className="flex items-center gap-x-2 text-secondary-600">
       <label htmlFor={id}>{label}</label>

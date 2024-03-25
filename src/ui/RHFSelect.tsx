@@ -1,4 +1,26 @@
-function RHFSelect({ label, name, register, options, required, children, errors }) {
+interface OptionInterface {
+  id: string;
+  name: string;
+}
+
+interface RHFSelectProps {
+  label: string;
+  name: string;
+  register: Function;
+  options: OptionInterface[];
+  required?: boolean;
+  children?: React.ReactNode;
+  errors?: Record<string, any>;
+}
+function RHFSelect({
+  label,
+  name,
+  register,
+  options,
+  required,
+  children,
+  errors,
+}: RHFSelectProps) {
   return (
     <div className="col-span-3">
       <label htmlFor={name} className="mb-2 block text-secondary-700">
