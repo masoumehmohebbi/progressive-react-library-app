@@ -1,4 +1,3 @@
-
 # Progressive library app 🏛️💻📖
 The library-App is for registering books. Which makes it easier to manage your books to know what books you have read, what books you are going to read, how many books you have and even search your books.
 
