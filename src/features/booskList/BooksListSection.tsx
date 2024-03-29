@@ -11,8 +11,9 @@ import { usePage } from './PageContext';
 import { toPersianNumbers } from '../../utils/toPersianNumbers';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useEffect } from 'react';
 
-const BooksListSection = () => {
+const BooksListSection: React.FC = () => {
   const { filteredBook, isLoading } = useFilteredBook();
   const queryClient = useQueryClient();
 
@@ -22,11 +23,12 @@ const BooksListSection = () => {
     mutationFn: editBookApi,
   });
 
-  const favouriteHandler = async (e, id) => {
+  const favouriteHandler = async (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.stopPropagation();
 
+    let newBook = { is_favorite: false };
     try {
-      await mutateAsync({ id: Number(id) }, { is_favorite: false });
+      await mutateAsync({ id, newBook });
       queryClient.invalidateQueries({
         queryKey: ['get-all-books'],
       });
@@ -70,7 +72,7 @@ const BooksListSection = () => {
                 </div>
                 <div className="flex justify-between items-center w-full pt-4">
                   <HiOutlineEye className="w-5 h-5 drop-shadow-md text-primary-900" />
-                  <button onClick={(e) => favouriteHandler(e, book.id)}>
+                  <button onClick={(e) => book.id && favouriteHandler(e, book.id)}>
                     {book.is_favorite ? (
                       <HiHeart className="w-5 h-5 drop-shadow-md text-error" />
                     ) : (
@@ -91,22 +93,24 @@ const BooksListSection = () => {
           </h1>
         )}
       </div>
-      <Pagination data={filteredBook} />
+      <Pagination />
     </>
   );
 };
 
 export default BooksListSection;
 
-function Pagination() {
+interface PaginationProps {}
+
+const Pagination: React.FC<PaginationProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleClick(i) {
+  function handleClick(i: number) {
     setPage(i);
-    searchParams.set('page', i);
-    searchParams.set('limit', limit);
+    searchParams.set('page', i.toString());
+    searchParams.set('limit', limit.toString());
     setSearchParams(searchParams);
-    if (searchParams.get('page')) searchParams.set('page', 1);
+    if (searchParams.get('page')) searchParams.set('page', '1');
   }
 
   const { page, setPage, limit } = usePage();
@@ -116,13 +120,20 @@ function Pagination() {
     queryFn: () => getBooks(),
     retry: false,
 
-    onSuccess: () => {
-      // queryClient.removeQueries(['get-filtered-book']);
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['get-filtered-book'],
+    //   });
+    // },
+  });
+  useEffect(() => {
+    if (booksWithoutLimit) {
       queryClient.invalidateQueries({
         queryKey: ['get-filtered-book'],
       });
-    },
-  });
+    }
+  }, [booksWithoutLimit, queryClient]);
+
   const totalPages = Math.ceil((booksWithoutLimit?.length || 0) / limit);
 
   const getPageButtons = () => {
@@ -143,13 +154,15 @@ function Pagination() {
   };
   const nextPage = () => {
     setPage((prevPage) => prevPage + 1);
-    searchParams.set('page', page + 1);
+    // searchParams.set('page', page + 1);
+    searchParams.set('page', (page + 1).toString());
     setSearchParams(searchParams);
   };
 
   const prevPage = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
-    searchParams.set('page', page - 1);
+    // searchParams.set('page', page - 1);
+    searchParams.set('page', (page - 1).toString());
     setSearchParams(searchParams);
   };
   return (
@@ -171,4 +184,4 @@ function Pagination() {
       </button>
     </div>
   );
-}
+};

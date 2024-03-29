@@ -1,4 +1,4 @@
-interface OptionInterface {
+export interface OptionInterface {
   id: string;
   name: string;
 }
@@ -11,6 +11,7 @@ interface RHFSelectProps {
   required?: boolean;
   children?: React.ReactNode;
   errors?: Record<string, any>;
+  validationSchema?: Record<string, any>;
 }
 function RHFSelect({
   label,

@@ -7,7 +7,7 @@ import { AddBookProps } from '../../types/BooksList';
 
 interface FilteredBookData {
   isLoading: boolean;
-  filteredBook: AddBookProps | null;
+  filteredBook: AddBookProps[] | null;
 }
 
 const useFilteredBook = (): FilteredBookData => {
@@ -26,15 +26,19 @@ const useFilteredBook = (): FilteredBookData => {
 
   const { data, isLoading } = useQuery<AddBookProps[]>({
     queryKey: ['get-filtered-book', value, page, limit],
-    queryFn: () => getFilteredBook(value, page, limit),
+
+    queryFn: () => getFilteredBook(value),
+    // queryFn: () => getFilteredBook(value, page, limit),
     retry: false,
 
     onSuccess: () => {
-      queryClient.removeQueries(['get-filtered-book']);
+      // queryClient.removeQueries(['get-filtered-book']);
+      queryClient.removeQueries({ queryKey: ['get-filtered-book'] });
     },
-  } as UseQueryOptions<AddBookProps[]>);
+  } as UseQueryOptions<AddBookProps[], Error>);
 
-  const filteredBook = data || {};
+  // const filteredBook = data || {};
+  const filteredBook = data || null;
 
   return { isLoading, filteredBook };
 };

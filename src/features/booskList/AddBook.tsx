@@ -1,7 +1,7 @@
 import TextField from '../../ui/TextField';
 import RadioInputGroup from '../../ui/RadioInputGroup';
 import { useForm } from 'react-hook-form';
-import RHFSelect from '../../ui/RHFSelect';
+import RHFSelect, { OptionInterface } from '../../ui/RHFSelect';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Loading from '../../ui/Loading';
 import { addBook } from '../../services/bookService';
@@ -13,15 +13,14 @@ import { HiTrash } from 'react-icons/hi';
 import useRemoveCategory from './useRemoveCategory';
 import useEditBook from './useEditBook';
 import { AxiosError } from 'axios';
-import { BookToEditType } from '../../types/BooksList';
+import { AddBookProps, BookToEditType, FormDataType } from '../../types/BooksList';
 
-function AddBook({
-  bookToEdit = {} as BookToEditType,
-  onClose,
-}: {
+interface Props {
   bookToEdit?: BookToEditType;
   onClose: () => void;
-}) {
+}
+
+function AddBook({ bookToEdit = {}, onClose }: Props) {
   let editValues = {};
   const { id } = bookToEdit;
   const isEditSession = Boolean(id);
@@ -41,7 +40,8 @@ function AddBook({
   const [bookCover, setBookCover] = useState<File | string>('');
 
   const { data } = useCategories();
-  const category = data?.data?.data;
+  // const category = data?.data?.data;
+  const category = data?.data?.data as { id: number; name: string }[] | undefined;
 
   const queryClient = useQueryClient();
   const {
@@ -67,17 +67,25 @@ function AddBook({
   const addBookHandler = async () => {
     try {
       const formData = new FormData();
-      formData.append('title', getValues('title'));
-      formData.append('author', getValues('author'));
+      formData.append('title', getValues('title' as never));
+      formData.append('author', getValues('author' as never));
       formData.append('image_url', bookCover);
-      formData.append('category_name', getValues('category_name'));
-      formData.append('is_read', getValues('is_read'));
-      formData.append('is_favorite', getValues('is_favorite'));
+      formData.append('category_name', getValues('category_name' as never));
+      formData.append('is_read', getValues('is_read' as never));
+      formData.append('is_favorite', getValues('is_favorite' as never));
 
-      const newBook = formData;
+      const newBook: FormDataType = {
+        title: formData.get('title') as string,
+        author: formData.get('author') as string,
+        image_url: bookCover,
+        category_name: formData.get('category_name') as string,
+        is_read: formData.get('is_read') as string,
+        is_favorite: formData.get('is_favorite') as string,
+      };
+      const bookID = Number(id);
       if (isEditSession) {
         editBook(
-          { id, newBook },
+          { id: bookID, newBook },
           {
             onSuccess: () => {
               queryClient.removeQueries();
@@ -94,7 +102,16 @@ function AddBook({
           },
         );
       } else {
-        await mutateAddBook(formData);
+        const AddnewBook: AddBookProps = {
+          title: formData.get('title') as string,
+          author: formData.get('author') as string,
+          image_url: bookCover,
+          category_name: formData.get('category_name') as string,
+          is_read: formData.get('is_read') as string,
+          is_favorite: formData.get('is_favorite') as string,
+        };
+        await mutateAddBook(AddnewBook);
+        // await mutateAddBook(formData);
 
         queryClient.invalidateQueries({
           queryKey: ['get-filtered-book'],
@@ -105,16 +122,22 @@ function AddBook({
         reset();
       }
     } catch (error) {
-      const err = error?.response?.data?.error?.error;
-      Object.keys(err).map((key) => {
-        toast.error(err[key]), console.log(err[key]);
+      // const err = error?.response?.data?.error?.error;
+      let err = 'Failed to add book';
+      if (error instanceof AxiosError) {
+        if (error?.response?.data?.error?.error) {
+          err = error.response.data.error.error;
+        }
+      }
+      Object.keys(err).map((key: any) => {
+        toast.error(err[key]);
       });
     }
   };
 
   const addCategoryHandler = async () => {
     try {
-      await createCat({ name: getValues('category_choose') });
+      await createCat({ name: getValues('category_choose' as never) });
       toast.success(' دسته بندی جدید با موفقیت اضافه شد');
 
       queryClient.invalidateQueries({
@@ -133,12 +156,19 @@ function AddBook({
 
   const removeCategoryHandler = async () => {
     const filteredCat = category?.filter(
-      (item) => item.name === getValues('category_name'),
+      (item) => item.name === getValues('category_name' as never),
     );
-    console.log(filteredCat[0]?.id);
-    const d = await removeCategory(filteredCat[0]?.id);
-    console.log(d);
+
+    if (filteredCat && filteredCat.length > 0) {
+      await removeCategory(filteredCat[0]?.id);
+    }
   };
+
+  const transformedCategories: OptionInterface[] =
+    category?.map((cat) => ({
+      id: cat.id.toString(),
+      name: cat.name,
+    })) ?? [];
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(addBookHandler)}>
@@ -196,7 +226,7 @@ function AddBook({
           }}
           name="category_name"
           register={register}
-          options={category}
+          options={transformedCategories}
           errors={errors}
         >
           {isDeleting ? (
@@ -219,8 +249,14 @@ function AddBook({
         type="file"
         register={register}
         accept=".png, .jpg, .jpeg"
+        // onChange={(e) => {
+        //   setBookCover(e.target.files[0]);
+        // }}
         onChange={(e) => {
-          setBookCover(e.target.files[0]);
+          const files = e.target.files;
+          if (files && files.length > 0) {
+            setBookCover(files[0]);
+          }
         }}
       />
 
