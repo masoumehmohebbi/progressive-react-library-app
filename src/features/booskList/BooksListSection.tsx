@@ -55,7 +55,12 @@ const BooksListSection: React.FC = () => {
                 <LazyLoadImage
                   effect="blur"
                   className="w-full h-[15rem] bg-cover object-contain"
-                  src={book.image_url ? book.image_url : '/images/book-default.png'}
+                  // src={book.image_url ? book.image_url : '/images/book-default.png'}
+                  src={
+                    typeof book.image_url === 'string' && book.image_url
+                      ? book.image_url
+                      : '/images/book-default.png'
+                  }
                   alt={book.title}
                   visibleByDefault={book.image_url === '/images/book-default.png'}
                 />

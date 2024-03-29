@@ -20,7 +20,8 @@ export interface FormDataType {
 export type EditBookProps = {
   id: number;
   // newBook: Partial<BookToEditType>;
-  newBook: Partial<FormDataType>;
+  // newBook: Partial<FormDataType>;
+  newBook: FormData;
 };
 
 export interface AddBookProps {

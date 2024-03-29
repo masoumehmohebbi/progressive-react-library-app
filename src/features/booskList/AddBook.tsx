@@ -13,7 +13,7 @@ import { HiTrash } from 'react-icons/hi';
 import useRemoveCategory from './useRemoveCategory';
 import useEditBook from './useEditBook';
 import { AxiosError } from 'axios';
-import { AddBookProps, BookToEditType, FormDataType } from '../../types/BooksList';
+import { BookToEditType } from '../../types/BooksList';
 
 interface Props {
   bookToEdit?: BookToEditType;
@@ -74,14 +74,15 @@ function AddBook({ bookToEdit = {}, onClose }: Props) {
       formData.append('is_read', getValues('is_read' as never));
       formData.append('is_favorite', getValues('is_favorite' as never));
 
-      const newBook: FormDataType = {
-        title: formData.get('title') as string,
-        author: formData.get('author') as string,
-        image_url: bookCover,
-        category_name: formData.get('category_name') as string,
-        is_read: formData.get('is_read') as string,
-        is_favorite: formData.get('is_favorite') as string,
-      };
+      // const newBook: FormDataType = {
+      //   title: formData.get('title') as string,
+      //   author: formData.get('author') as string,
+      //   image_url: bookCover,
+      //   category_name: formData.get('category_name') as string,
+      //   is_read: formData.get('is_read') as string,
+      //   is_favorite: formData.get('is_favorite') as string,
+      // };
+      const newBook = formData;
       const bookID = Number(id);
       if (isEditSession) {
         editBook(
@@ -102,16 +103,16 @@ function AddBook({ bookToEdit = {}, onClose }: Props) {
           },
         );
       } else {
-        const AddnewBook: AddBookProps = {
-          title: formData.get('title') as string,
-          author: formData.get('author') as string,
-          image_url: bookCover,
-          category_name: formData.get('category_name') as string,
-          is_read: formData.get('is_read') as string,
-          is_favorite: formData.get('is_favorite') as string,
-        };
-        await mutateAddBook(AddnewBook);
-        // await mutateAddBook(formData);
+        // const AddnewBook: AddBookProps = {
+        //   title: formData.get('title') as string,
+        //   author: formData.get('author') as string,
+        //   image_url: bookCover,
+        //   category_name: formData.get('category_name') as string,
+        //   is_read: formData.get('is_read') as string,
+        //   is_favorite: formData.get('is_favorite') as string,
+        // };
+        // await mutateAddBook(AddnewBook);
+        await mutateAddBook(formData);
 
         queryClient.invalidateQueries({
           queryKey: ['get-filtered-book'],

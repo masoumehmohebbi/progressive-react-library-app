@@ -1,4 +1,3 @@
-import { AddBookProps, EditBookProps } from '../types/BooksList';
 import http from './httpService';
 
 // export interface AddBookProps {
@@ -25,7 +24,8 @@ export function getOneBook(id: string | undefined) {
   return http.get(`/book/${id}/`).then(({ data }) => data.data);
 }
 
-export function addBook(data: AddBookProps) {
+export function addBook(data: any) {
+  // export function addBook(data: AddBookProps) {
   return http.post('/book/', data);
 }
 
@@ -33,7 +33,8 @@ export function removeBookApi(id: number) {
   return http.delete(`/book/${id}/`).then(({ data }) => data.data);
 }
 
-export function editBookApi({ id, newBook }: EditBookProps) {
+export function editBookApi({ id, newBook }: any) {
+  // export function editBookApi({ id, newBook }: EditBookProps) {
   return http.patch(`/book/${id}/`, newBook);
 }
 
