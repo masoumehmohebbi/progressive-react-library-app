@@ -26,7 +26,6 @@ The library-App is for registering books. Which makes it easier to manage your b
       <li>react-otp-input</li>
       <li>universal-cookie</li>
    </ul>
-
    
 
 <h2>⛓ Links </h2>
