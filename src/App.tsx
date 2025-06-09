@@ -12,10 +12,26 @@ import Layout from './features/booskList/Layout';
 import NotFound from './pages/NotFound';
 import Provider from './ui/Provider';
 import { clarity } from 'react-microsoft-clarity';
+import { useEffect } from 'react';
 
 const App = () => {
   const queryClient = new QueryClient();
   clarity.init('rwpygc4klf');
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const clarityTag = target.getAttribute('data-clarity');
+      if (clarityTag) {
+        // clarity('set', clarityTag, true);
+        (window as any).clarity('set', 'test_click', true);
+        console.log('Clarity tag sent:', clarityTag);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
   return (
     <>
       <Provider>
