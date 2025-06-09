@@ -11,9 +11,11 @@ import BookDetails from './features/booskList/BookDetails';
 import Layout from './features/booskList/Layout';
 import NotFound from './pages/NotFound';
 import Provider from './ui/Provider';
+import { clarity } from 'react-microsoft-clarity';
 
 const App = () => {
   const queryClient = new QueryClient();
+  clarity.init('rwpygc4klf');
   return (
     <>
       <Provider>
