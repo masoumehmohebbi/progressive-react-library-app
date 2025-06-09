@@ -48,9 +48,8 @@ const Banner = () => {
               کدوما رو خوندید و کدومارو قراره که بخونید
             </p>
             <div
-              className={`mt-8 text-xs md:text-lg font-semibold text-secondary-500  ${
-                isLoading ? 'blur-sm opacity-50' : ''
-              }`}
+              className={`mt-8 text-xs md:text-lg font-semibold text-secondary-500  ${isLoading ? 'blur-sm opacity-50' : ''
+                }`}
             >
               {userProfile ? (
                 <p>
@@ -60,6 +59,7 @@ const Banner = () => {
                 <span className="flex gap-x-2 items-center justify-center sm:justify-start">
                   برای شروع روی دکمه ورود کلیک کنید
                   <button
+                    data-clarity="login"
                     onClick={() => navigate('/login')}
                     className="font-sans btn text-sm py-[9px] sm:py-2 sm:text-base btn--primary flex items-center gap-x-1"
                   >
